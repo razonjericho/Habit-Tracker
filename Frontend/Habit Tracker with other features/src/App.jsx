@@ -5,6 +5,18 @@ import HabitInput from './components/HabitInput';
 
 function App() {
 const [habits, setHabit] = useState([]);
+
+  async function addHabit(inputText){
+      try {
+        const response = await axios.post('http://localhost:3000/habits', {addHabit: inputText});
+        const newHabit = response.data;
+        setHabit((prevHabits) => {
+          return [...prevHabits, newHabit]
+        })
+      } catch (err) {
+        console.error('Error, unable to post new habit:', err);
+      }
+    }
   
   useEffect(() => {
     const fetchHabits = async () => {
@@ -26,6 +38,7 @@ const [habits, setHabit] = useState([]);
           <li key={habit.id}>{habit.habit}</li>
         ))}
       </ul>
+      <HabitInput onAdd={addHabit} />
     </div>
   )
 }

@@ -8,12 +8,16 @@ function HabitInput(props) {
         setInputText(newValue);
     }
 
-    
 
     return (
         <div className="form">
             <input onChange={handleChange} type="text" value={inputText} />
-            <button>
+            <button
+            onClick={() => {
+                props.onAdd(inputText);
+                setInputText("");
+            }}
+            >
                 <span>Add Habit</span>
             </button>
         </div>
