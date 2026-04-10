@@ -20,6 +20,24 @@ const [habits, setHabit] = useState([]);
       }
     }
 
+  async function editHabit(id, newText){
+    try {
+      const response = await axios.patch(`${API_URL}/habits/${id}`, {editHabit: newText})
+      const updatedHabit = response.data.updatedHabit;
+      setHabit(prevHabits => {
+        return prevHabits.map(habit => {
+          if (habit.id === id) {
+            return updatedHabit;
+          } else {
+            return habit;
+          }
+        })
+      })
+    } catch (err) {
+      console.error('Error, unable to edit a habit', err);
+    }
+  }
+
   async function deleteHabit(id){
     try {
       await axios.delete(`${API_URL}/habits/${id}`)
@@ -48,7 +66,7 @@ const [habits, setHabit] = useState([]);
       <h1>My Habits</h1>
       <ul>
         {habits.map(habit => (
-          <HabitItem key={habit.id} id={habit.id} text={habit.habit} onDelete={deleteHabit} />
+          <HabitItem key={habit.id} id={habit.id} text={habit.habit} onDelete={deleteHabit} onEdit={editHabit} />
         ))}
       </ul>
       <HabitInput onAdd={addHabit} />
