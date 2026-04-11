@@ -2,11 +2,17 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import dotenv from "dotenv";
+import cors from "cors";
+
 
 dotenv.config();
 
 const app = express();
 const port = 3000;
+
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 
 const db = new pg.Client({
     user: process.env.DB_USER,
