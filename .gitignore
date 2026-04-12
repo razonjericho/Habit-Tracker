@@ -2,3 +2,5 @@
 
 # DB password
 .env
+
+queries.sql
