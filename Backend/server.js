@@ -84,7 +84,7 @@ app.patch("/habits/:id", async (req, res) => {
     try {
         const result = await db.query("UPDATE habits SET habit = ($1) WHERE id = ($2) RETURNING *;", [editHabit, id])
         const updatedHabit = result.rows[0];
-        res.json({ message: "Habit updated successfully", updatedHabit: updatedHabit });
+        res.json({ message: "Habit updated successfully", updateHabit: updatedHabit });
     } catch (err) {
         console.log(err);
     }

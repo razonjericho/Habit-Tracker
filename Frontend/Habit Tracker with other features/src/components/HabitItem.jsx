@@ -19,6 +19,13 @@ function HabitItem(props){
                 >
                     Edit Habit
                 </button>
+                <button
+                    onClick= {() => {
+                        props.onDone(props.id)
+                    }}
+                >
+                    Done
+                </button>
             </li>
     )
 }
