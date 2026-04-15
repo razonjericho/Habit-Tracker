@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css'
 import HabitInput from './components/HabitInput';
 import HabitItem from './components/HabitItem';
+import HomePage from './pages/Home';
 
 function App() {
 const API_URL = "http://localhost:3000";
@@ -88,13 +89,7 @@ const [habits, setHabit] = useState([]);
 
   return (
     <div className="App">
-      <h1>My Habits</h1>
-      <ul>
-        {habits.map(habit => (
-          <HabitItem key={habit.id} id={habit.id} text={habit.habit} onDelete={deleteHabit} onEdit={editHabit} onDone={habitDone} />
-        ))}
-      </ul>
-      <HabitInput onAdd={addHabit} />
+      <HomePage habits={habits} onDone={habitDone} />
     </div>
   )
 }
