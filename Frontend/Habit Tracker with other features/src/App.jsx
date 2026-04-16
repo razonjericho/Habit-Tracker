@@ -44,7 +44,13 @@ const [habits, setHabit] = useState([]);
   async function deleteHabit(id){
     try {
       await axios.delete(`${API_URL}/habits/${id}`)
+
+       console.log("BEFORE SETSTATE");
+
       setHabit(prevHabits => {
+        console.log("STATE IDS:", prevHabits.map(h => h.id));
+  console.log("DELETE ID:", id);
+
         return prevHabits.filter(habit => habit.id !== id)
       })
     } catch (err) {
@@ -95,7 +101,7 @@ const [habits, setHabit] = useState([]);
       <Header />
       <Routes>
         <Route path="/" element={<HomePage onDone={habitDone} habits={habits} />} />
-        <Route path="/edit" element={<EditPage  />} />
+        <Route path="/edit" element={<EditPage onAdd={addHabit} onEdit={editHabit} onDelete={deleteHabit} habits={habits} />} />
       </Routes>
       </BrowserRouter>
     </div>

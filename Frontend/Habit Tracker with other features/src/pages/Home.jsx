@@ -5,7 +5,7 @@ function HomePage(props){
     return (
         <div>
             <h1>My Habits</h1>
-        <HabitList onDone={props.onDone} showDoneOnly={true} habits={props.habits}  />
+        <HabitList onDone={props.onDone} showDoneButton={true} habits={props.habits}  />
         </div> 
     )
 }

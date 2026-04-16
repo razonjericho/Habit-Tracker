@@ -5,7 +5,7 @@ function HabitItem(props){
             <li>
                 {props.text}
                 
-                {props.showDoneOnly ? 
+                {props.showDoneButton ? 
                     (
                         <button
                         onClick= {() => {
@@ -18,9 +18,9 @@ function HabitItem(props){
                 : 
                     <div>
                         <button 
-                        onClick = {() => {
-                            props.onDelete(props.id);
-                        }}
+                            onClick = {() => {
+                                props.onDelete(props.id);
+                            }}
                         >
                             Remove Habit
                         </button>

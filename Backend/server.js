@@ -35,7 +35,7 @@ let habits = [
 
 app.get("/habits", async (req, res) => {
     try {
-        const result = await db.query("SELECT * FROM habits");
+        const result = await db.query("SELECT * FROM habits WHERE active = true");
         habits = result.rows;
         res.json(habits);
 
@@ -93,7 +93,7 @@ app.patch("/habits/:id", async (req, res) => {
 app.delete("/habits/:id", async (req, res) => {
     const id = req.params.id;
     try {
-        const result = await db.query("DELETE FROM habits WHERE id = $1", [id]);
+        const result = await db.query("UPDATE habits SET active = false WHERE id = $1", [id]);
         const rowCount = result.rowCount;
         if (rowCount === 0) {
             res.status(404).json({ error: "Habit not found" })
