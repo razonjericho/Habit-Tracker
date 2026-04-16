@@ -94,14 +94,10 @@ const [habits, setHabit] = useState([]);
       <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/edit" element={<EditPage />} />
+        <Route path="/" element={<HomePage onDone={habitDone} habits={habits} />} />
+        <Route path="/edit" element={<EditPage  />} />
       </Routes>
       </BrowserRouter>
-      <h1>My Habits</h1>
-      {habits.map(habit => (
-        <HomePage key={habit.id} id={habit.id} text={habit.habit} onDone={habitDone} />
-      ))}
     </div>
   )
 }

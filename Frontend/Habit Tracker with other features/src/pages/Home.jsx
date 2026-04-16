@@ -4,9 +4,9 @@ import HabitList from '../components/HabitList';
 function HomePage(props){
     return (
         <div>
-        <HabitList text={props.text} onDone={props.onDone} showDoneOnly={true}  />
-        </div>
-        
+            <h1>My Habits</h1>
+        <HabitList onDone={props.onDone} showDoneOnly={true} habits={props.habits}  />
+        </div> 
     )
 }
 
