@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
 import HabitInput from './components/HabitInput';
-import HabitItem from './components/HabitItem';
 import HomePage from './pages/Home';
 
 function App() {
@@ -89,7 +88,10 @@ const [habits, setHabit] = useState([]);
 
   return (
     <div className="App">
-      <HomePage habits={habits} onDone={habitDone} />
+      <h1>My Habits</h1>
+      {habits.map(habit => (
+        <HomePage key={habit.id} id={habit.id} text={habit.habit} onDone={habitDone} />
+      ))}
     </div>
   )
 }
