@@ -3,6 +3,9 @@ import axios from 'axios'
 import './App.css'
 import HabitInput from './components/HabitInput';
 import HomePage from './pages/Home';
+import EditPage from './pages/Edit';
+import Header from './components/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 const API_URL = "http://localhost:3000";
@@ -66,7 +69,7 @@ const [habits, setHabit] = useState([]);
           } else {
             return habit;
           }
-        }) 
+        })
       })
       return habitFinished;
     } catch (err) {
@@ -88,6 +91,13 @@ const [habits, setHabit] = useState([]);
 
   return (
     <div className="App">
+      <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/edit" element={<EditPage />} />
+      </Routes>
+      </BrowserRouter>
       <h1>My Habits</h1>
       {habits.map(habit => (
         <HomePage key={habit.id} id={habit.id} text={habit.habit} onDone={habitDone} />
