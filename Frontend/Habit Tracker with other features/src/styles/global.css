@@ -1,0 +1,141 @@
+/*Design Tokens/Variables*/
+:root{
+/*Colours*/
+    /* Backgrounds */
+    --color-bg-main: #f4f6f9;
+    --color-bg-surface: #ffffff;
+
+    /* Primary Brand Color (Dark Blue) */
+    --color-primary: #0a3d62;
+    --color-primary-hover: #082c46;
+
+    /* Text */
+    --color-text-primary: #1c1c1c;
+    --color-text-secondary: #5a5a5a;
+    /* Borders */
+    --color-border: #e2e8f0;
+
+/*Typography*/
+    /* Font family */
+    --font-family-base: Arial, Helvetica, sans-serif;
+
+    /* Font sizes */
+    --font-size-base: 16px;       /* body text */
+    --font-size-lg: 20px;         /* paragraph large / small headings */
+    --font-size-xl: 32px;         /* h2 */
+    --font-size-xxl: 42px;        /* h1 */
+
+    /* Font weights */
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+
+    /* Line heights */
+    --line-height-base: 1.6;
+    --line-height-heading: 1.2;
+
+/*Spacing Scale*/
+    --space-sm: 8px;    /* small gaps / padding */
+    --space-md: 16px;   /* medium gaps / padding */
+    --space-lg: 32px;   /* large gaps / section spacing */
+    --space-xl: 64px;   /* extra-large spacing for big sections */
+/*Radius Scale*/
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+}
+
+
+/*For reset*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*All-page*/
+
+body{
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
+
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base); 
+     
+}
+
+main {
+    padding: var(--space-xl) var(--space-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-md);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/*nav-bar*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--color-bg-surface);
+    border-bottom: 1px solid var(--color-border);
+
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+}
+
+.hamburger {
+    display: none;
+}
+
+.logo a {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;            /* remove bullets */
+    display: flex;               /* horizontal list */
+    gap: var(--space-lg);        /* spacing between menu items */
+}
+
+nav a {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    transition: color 0.3s ease; /* smooth hover effect */
+}
+
+nav a:hover {
+    color: var(--color-primary);
+}
+

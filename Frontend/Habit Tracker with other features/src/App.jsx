@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
-import HabitInput from './components/HabitInput';
+import HabitInput from './components/HabitInput/HabitInput';
 import HomePage from './pages/Home';
 import EditPage from './pages/Edit';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {

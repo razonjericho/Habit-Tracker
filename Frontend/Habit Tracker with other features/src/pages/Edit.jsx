@@ -1,6 +1,6 @@
 import React from 'react'
-import HabitList from '../components/HabitList';
-import HabitInput from '../components/HabitInput';
+import HabitList from '../components/HabitList/HabitList';
+import HabitInput from '../components/HabitInput/HabitInput';
 
 function EditPage(props) {
     return (

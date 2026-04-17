@@ -1,5 +1,5 @@
 import React from 'react'
-import HabitItem from './HabitItem';
+import HabitItem from '../HabitItem/HabitItem';
 
 function HabitList(props){
     return (
