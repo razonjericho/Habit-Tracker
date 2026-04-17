@@ -6,7 +6,8 @@ function EditPage(props) {
     return (
         <div>
             <h1>Edit Habits</h1>
-            <HabitList onAdd={props.onAdd} onEdit={props.onEdit} onDelete={props.onDelete} showDoneButton={false} habits={props.habits} />
+            <HabitList onEdit={props.onEdit} onDelete={props.onDelete} showDoneButton={false} habits={props.habits} />
+            <HabitInput onAdd={props.onAdd} />
         </div>
     )
     
