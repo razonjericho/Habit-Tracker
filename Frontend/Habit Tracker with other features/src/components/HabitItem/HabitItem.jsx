@@ -1,4 +1,5 @@
 import React from 'react';
+import "./HabitItem.css"
 
 function HabitItem(props){
     return (

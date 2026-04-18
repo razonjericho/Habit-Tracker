@@ -2,18 +2,23 @@
 :root{
 /*Colours*/
     /* Backgrounds */
-    --color-bg-main: #f4f6f9;
+    --color-bg-main: #f7f9fc;
     --color-bg-surface: #ffffff;
+    --color-header-bg: #bfdbfe;
 
     /* Primary Brand Color (Dark Blue) */
-    --color-primary: #0a3d62;
-    --color-primary-hover: #082c46;
+    --color-primary: #3b82f6; 
+    --color-primary-hover: #2563eb;
+
+    --color-accent: #93c5fd;
+
+    --color-success: #22c55e;
 
     /* Text */
-    --color-text-primary: #1c1c1c;
-    --color-text-secondary: #5a5a5a;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
     /* Borders */
-    --color-border: #e2e8f0;
+    --color-border: #e5e7eb;
 
 /*Typography*/
     /* Font family */
