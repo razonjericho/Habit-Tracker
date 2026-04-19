@@ -6,7 +6,7 @@
     --color-bg-surface: #ffffff;
     --color-header-bg: #bfdbfe;
 
-    /* Primary Brand Color (Dark Blue) */
+    /* Primary Brand Color */
     --color-primary: #3b82f6; 
     --color-primary-hover: #2563eb;
 
@@ -16,13 +16,13 @@
 
     /* Text */
     --color-text-primary: #111827;
-    --color-text-secondary: #6b7280;
+    --color-text-secondary: #4b5563;
     /* Borders */
     --color-border: #e5e7eb;
 
 /*Typography*/
     /* Font family */
-    --font-family-base: Arial, Helvetica, sans-serif;
+    --font-family-base: "Poppins", system-ui, sans-serif;
 
     /* Font sizes */
     --font-size-base: 16px;       /* body text */

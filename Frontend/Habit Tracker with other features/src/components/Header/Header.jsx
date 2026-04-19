@@ -5,13 +5,16 @@ import './Header.css'
 function Header() {
     return (
         <header>
-            <h1>Habit Tracker</h1>
-
-            <nav>
-                <Link to="/">Home</Link>
-                <Link to="/edit">Edit</Link>
+                <h1>Habit Tracker</h1>
+            <nav className="header-nav">
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/edit">Edit</Link></li>
+                </ul>      
             </nav>
         </header>
+        
+        
     );
 }   
 

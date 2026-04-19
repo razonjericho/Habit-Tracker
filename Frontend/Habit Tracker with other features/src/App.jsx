@@ -5,6 +5,7 @@ import HabitInput from './components/HabitInput/HabitInput';
 import HomePage from './pages/Home';
 import EditPage from './pages/Edit';
 import Header from './components/Header/Header';
+import BottomNav from './components/BottomNav/BottomNav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -103,6 +104,7 @@ const [habits, setHabit] = useState([]);
         <Route path="/" element={<HomePage onDone={habitDone} habits={habits} />} />
         <Route path="/edit" element={<EditPage onAdd={addHabit} onEdit={editHabit} onDelete={deleteHabit} habits={habits} />} />
       </Routes>
+      <BottomNav />
       </BrowserRouter>
     </div>
   )
