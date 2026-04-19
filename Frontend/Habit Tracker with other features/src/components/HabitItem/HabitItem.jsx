@@ -6,7 +6,7 @@ function HabitItem(props){
             <li>
                 {props.text}
                 
-                {props.showDoneButton ? 
+                {props.mode === "home" ? 
                     (
                     <span>
                         <button
