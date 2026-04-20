@@ -65,10 +65,11 @@ const [habits, setHabit] = useState([]);
       const habitFinished = response.data;
       setHabit(prevHabits => {
         return prevHabits.map(habit => {
-          if (habit.id === habitFinished.habit_id) {
+          if (habit.id === habitFinished.id) {
             const updatedHabit = {
-              ...habit,
-              completed: habitFinished.completed,
+              id: habit.id,
+              habit: habit.habit,
+              isCompleted: habitFinished.iscompleted,
               date: habitFinished.date
             };
             console.log(updatedHabit);
