@@ -1,11 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
-import dotenv from "dotenv";
 import cors from "cors";
-
-
-dotenv.config();
+import db from "./db.js"
 
 const app = express();
 const port = 3000;
@@ -13,16 +9,6 @@ const port = 3000;
 app.use(cors({
     origin: "http://localhost:5173"
 }));
-
-const db = new pg.Client({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-});
-
-db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -39,7 +25,6 @@ app.get("/habits", async (req, res) => {
         const result = await db.query("SELECT habits.id AS id, habits.habit AS habit, COALESCE(completions.completed, false) AS \"isCompleted\" FROM habits LEFT JOIN completions ON habits.id = completions.habit_id AND completions.date = ($1) WHERE active = true", [date]);
         habits = result.rows;
         res.json(habits);
-
     } catch (err) {
         console.log(err)
     }
@@ -54,7 +39,6 @@ app.post("/habits", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-
 });
 
 app.post("/habits/:id/completed", async (req, res) => {
