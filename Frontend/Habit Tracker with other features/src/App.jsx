@@ -65,7 +65,7 @@ const [isCompleted, setIsCompleted] = useState(true);
             const updatedHabit = {
               id: habit.id,
               habit: habit.habit,
-              isCompleted: habitFinished.iscompleted, //isCompleted converted to iscompleted because of SQL
+              isCompleted: habitFinished.isCompleted,
               date: habitFinished.date
             };
             console.log(updatedHabit);
@@ -75,7 +75,6 @@ const [isCompleted, setIsCompleted] = useState(true);
           }
         })
       })
-      return habitFinished;
     } catch (err) {
       console.error(err);
     }

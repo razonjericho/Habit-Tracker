@@ -2,8 +2,8 @@ import React from 'react';
 import HabitList from '../components/HabitList/HabitList';
 
 function HomePage(props){
-    const todoHabits = props.habits.filter(habit => habit.iscompleted === false);
-    const doneHabits = props.habits.filter(habit => habit.iscompleted === true);
+    const todoHabits = props.habits.filter(habit => habit.isCompleted === false);
+    const doneHabits = props.habits.filter(habit => habit.isCompleted === true);
 
     return (
         <div>
