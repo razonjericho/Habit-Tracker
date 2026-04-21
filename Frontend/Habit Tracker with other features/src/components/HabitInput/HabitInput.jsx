@@ -11,7 +11,7 @@ function HabitInput(props) {
 
     return (
         <div className="form">
-            <input onChange={handleChange} type="text" value={inputText} />
+            <input id="habit-input" name="habit" type="text" onChange={handleChange} value={inputText} />
             <button
             onClick={() => {
                 props.onAdd(inputText);

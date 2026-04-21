@@ -7,6 +7,7 @@ import EditPage from './pages/Edit';
 import Header from './components/Header/Header';
 import BottomNav from './components/BottomNav/BottomNav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HabitList from './components/HabitList/HabitList';
 
 function App() {
 const API_URL = "http://localhost:3000";
@@ -75,14 +76,6 @@ const [isCompleted, setIsCompleted] = useState(true);
           }
         })
       })
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async function undoHabit(){
-    try {
-      
     } catch (err) {
       console.error(err);
     }

@@ -14,19 +14,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
 
-let habits = [
-    {id: 1, habit: "Wake up"},
-    {id: 2, habit: "Pray"},
-];
-
 app.get("/habits", async (req, res) => {
     const date = new Date().toISOString().split("T")[0];
     try {
         const result = await db.query("SELECT habits.id AS id, habits.habit AS habit, COALESCE(completions.completed, false) AS \"isCompleted\" FROM habits LEFT JOIN completions ON habits.id = completions.habit_id AND completions.date = ($1) WHERE active = true", [date]);
-        habits = result.rows;
+        let habits = result.rows;
         res.json(habits);
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        res.status(500).json({ error: "Failed to fetch habits" });
     }
 });
 
@@ -42,25 +38,26 @@ app.post("/habits", async (req, res) => {
 });
 
 app.post("/habits/:id/completed", async (req, res) => {
-    const habit_id = req.params.id;
-    const date = new Date().toISOString().split("T")[0];
-    try {
-        const result = await db.query("SELECT * FROM completions WHERE habit_id = ($1) AND date = ($2)", [habit_id, date]);
-        const data = result.rows.length;
-        if (data === 0) {
-            const newResult = await db.query("INSERT INTO completions (habit_id, date, completed) VALUES ($1, $2, $3) RETURNING habit_id AS id, date, completed AS \"isCompleted\"", [habit_id, date, true]);
-            const habitToday = newResult.rows[0];
-            res.json(habitToday);
-        } else {
-            const completed = result.rows[0].completed
-         
-            const updateResult = await db.query("UPDATE completions SET completed = ($1) WHERE habit_id = ($2) AND date = ($3) RETURNING completed AS \"isCompleted\", habit_id AS id, date", [!completed, habit_id, date]);
-            const updateHabitToday = updateResult.rows[0];
-            res.json(updateHabitToday)
-        }
-    } catch (err) {
-        console.error(err)
-    }
+  const habit_id = req.params.id;
+  const date = new Date().toISOString().split("T")[0];
+
+  try {
+    const result = await db.query(
+      `
+      INSERT INTO completions (habit_id, date, completed)
+      VALUES ($1, $2, true)
+      ON CONFLICT (habit_id, date)
+      DO UPDATE SET completed = NOT completions.completed
+      RETURNING habit_id AS id, date, completed AS "isCompleted";
+      `,
+      [habit_id, date]
+    );
+    const habitToday = result.rows[0]
+    res.json(habitToday);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to toggle completion" });
+  }
 });
 
 app.patch("/habits/:id", async (req, res) => {
