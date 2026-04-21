@@ -2,25 +2,16 @@ import React from 'react';
 import "./HabitItem.css"
 
 function HabitItem(props){
+
+    const isTodo = props.mode === "todo";
+    const isEdit = props.mode === "edit";
     return (
             <li>
                 {props.text}
                 
-                {props.mode === "home" ? 
-                    (
-                    <span>
-                        <button
-                                onClick= {() => {
-                                    props.onDone(props.id)
-                                }}
-                        >
-                        Done
-                        </button>
-                    </span>
-                        
-                    ) 
-                : 
-                    <span>
+                {isEdit ? 
+                    (   
+                     <span>
                         <button
                             onClick = {() => {
                                 const newText = prompt("Rename Habit:", props.text);
@@ -35,6 +26,18 @@ function HabitItem(props){
                             }}
                         >
                             Remove Habit
+                        </button>
+                    </span>
+                        
+                    ) 
+                : 
+                   <span>
+                        <button
+                                onClick= {() => {
+                                    props.onDone(props.id)
+                                }}
+                        >
+                        {isTodo ? "Done" : "Undo"}
                         </button>
                     </span>
                 

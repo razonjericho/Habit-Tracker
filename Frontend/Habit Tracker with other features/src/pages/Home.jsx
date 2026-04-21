@@ -2,25 +2,22 @@ import React from 'react';
 import HabitList from '../components/HabitList/HabitList';
 
 function HomePage(props){
-    const mode = "home";
+    const todoHabits = props.habits.filter(habit => habit.iscompleted === false);
+    const doneHabits = props.habits.filter(habit => habit.iscompleted === true);
 
     return (
         <div>
-            <h1>To Do</h1>
+            <h2>To Do</h2>
             <HabitList 
-                habits={props.habits}
+                habits={todoHabits}
                 onDone={props.onDone}
-                onEdit={props.onEdit}
-                onDelete={props.onDelete}
-                mode={mode}  
+                mode="todo"  
             />
             <h2>Done</h2>
             <HabitList 
-                habits={props.habits}
+                habits={doneHabits}
                 onDone={props.onDone}
-                onEdit={props.onEdit}
-                onDelete={props.onDelete}
-                mode={mode}
+                mode="done"
             />
         </div> 
     )

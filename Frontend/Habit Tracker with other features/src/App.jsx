@@ -11,6 +11,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
 const API_URL = "http://localhost:3000";
 const [habits, setHabit] = useState([]);
+const [isCompleted, setIsCompleted] = useState(true);
 
   async function addHabit(inputText){
       try {
@@ -45,13 +46,8 @@ const [habits, setHabit] = useState([]);
   async function deleteHabit(id){
     try {
       await axios.delete(`${API_URL}/habits/${id}`)
-
-       console.log("BEFORE SETSTATE");
-
       setHabit(prevHabits => {
-        console.log("STATE IDS:", prevHabits.map(h => h.id));
-  console.log("DELETE ID:", id);
-
+      console.log("DELETE ID:", id);
         return prevHabits.filter(habit => habit.id !== id)
       })
     } catch (err) {
@@ -69,7 +65,7 @@ const [habits, setHabit] = useState([]);
             const updatedHabit = {
               id: habit.id,
               habit: habit.habit,
-              isCompleted: habitFinished.iscompleted,
+              isCompleted: habitFinished.iscompleted, //isCompleted converted to iscompleted because of SQL
               date: habitFinished.date
             };
             console.log(updatedHabit);
@@ -81,7 +77,15 @@ const [habits, setHabit] = useState([]);
       })
       return habitFinished;
     } catch (err) {
-      console.error(err)
+      console.error(err);
+    }
+  }
+
+  async function undoHabit(){
+    try {
+      
+    } catch (err) {
+      console.error(err);
     }
   }
   

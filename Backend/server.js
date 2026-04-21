@@ -79,6 +79,16 @@ app.post("/habits/:id/completed", async (req, res) => {
     }
 });
 
+app.post("/habits/:id/completed/undo", async (req, res) => {
+    const habit_id = req.params.id;
+    const date = new Date().toISOString().split("T")[0];
+    try {
+        const result = await db.query("UPDATE completions SET completed = ($1) WHERE habit_id = ($2) AND date = ($3) ")
+    } catch (err) {
+        console.error(err);
+    }
+})
+
 app.patch("/habits/:id", async (req, res) => {
     const editHabit = req.body.editHabit;
     const id = req.params.id;

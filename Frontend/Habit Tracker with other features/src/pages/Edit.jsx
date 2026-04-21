@@ -3,7 +3,6 @@ import HabitList from '../components/HabitList/HabitList';
 import HabitInput from '../components/HabitInput/HabitInput';
 
 function EditPage(props) {
-    const mode = "edit";
 
     return (
         <div>
@@ -12,7 +11,7 @@ function EditPage(props) {
                 onEdit={props.onEdit} 
                 onDelete={props.onDelete} 
                 habits={props.habits} 
-                mode={mode} 
+                mode="edit"
             />
             <HabitInput onAdd={props.onAdd} />
         </div>
