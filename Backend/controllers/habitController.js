@@ -1,7 +1,7 @@
 import db from "../db.js"
 
 const getHabits = async (req, res) => {
-    const date = new Date().toISOString().split("T")[0];
+    const date = new Date().toLocaleDateString();
     try {
         const result = await db.query(
             `
@@ -37,7 +37,7 @@ const createHabit = async (req, res) => {
 
 const completeHabit = async (req, res) => {
     const habit_id = req.params.id;
-    const date = new Date().toISOString().split("T")[0];
+    const date = new Date().toLocaleDateString();
 
     try {
         const result = await db.query(
