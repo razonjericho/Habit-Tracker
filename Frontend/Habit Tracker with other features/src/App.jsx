@@ -29,7 +29,7 @@ const [isCompleted, setIsCompleted] = useState(true);
   async function editHabit(id, newText){
     try {
       const response = await axios.patch(`${API_URL}/habits/${id}`, {editHabit: newText})
-      const updatedHabit = response.data.updateHabit;
+      const updatedHabit = response.data;
       setHabit(prevHabits => {
         return prevHabits.map(habit => {
           if (habit.id === id) {

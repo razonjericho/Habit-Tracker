@@ -1,7 +1,7 @@
 import db from "../db.js"
 
 const getHabits = async (req, res) => {
-    const date = new Date().toLocaleDateString();
+    const date = new Date().toISOString().split("T")[0];
     try {
         const result = await db.query(
             `
@@ -37,7 +37,7 @@ const createHabit = async (req, res) => {
 
 const completeHabit = async (req, res) => {
     const habit_id = req.params.id;
-    const date = new Date().toLocaleDateString();
+    const date = new Date().toISOString().split("T")[0];
 
     try {
         const result = await db.query(
@@ -52,6 +52,7 @@ const completeHabit = async (req, res) => {
         );
         const habitToday = result.rows[0]
         res.json(habitToday);
+        console.log("ISO date:", date);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to toggle completion" });
@@ -64,7 +65,7 @@ const editHabit = async (req, res) => {
     try {
         const result = await db.query("UPDATE habits SET habit = ($1) WHERE id = ($2) RETURNING *;", [updatedText, id])
         const updatedHabit = result.rows[0];
-        res.json({ message: "Habit updated successfully", updateHabit: updatedHabit });
+        res.json(updatedHabit);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to update habit" });
