@@ -6,6 +6,7 @@ const calculateStreak = (dates) => {
     const dataSet = new Set(dates);
 
     let current = new Date();
+    current.setHours(0, 0, 0, 0);
 
     while (true) {
         const stringDate = current.toISOString().split("T")[0];
@@ -13,7 +14,7 @@ const calculateStreak = (dates) => {
         if (dataSet.has(stringDate)) {
             streak++;
 
-            current.setDate(current.getDate() -1);
+            current.setDate(current.getDate() - 1);
         } else {
             break;
         }
@@ -21,3 +22,5 @@ const calculateStreak = (dates) => {
 
     return streak;
 }
+
+export default calculateStreak;

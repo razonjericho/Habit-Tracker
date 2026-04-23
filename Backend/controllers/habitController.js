@@ -1,4 +1,5 @@
 import db from "../db.js"
+import calculateStreak from "../services/habitService.js";
 
 const getHabits = async (req, res) => {
     const date = new Date().toISOString().split("T")[0];
@@ -20,6 +21,31 @@ const getHabits = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to fetch habits" });
+    }
+}
+
+const getHabitStreak = async (req, res) => {
+    const habit_id = req.params.id
+    try {
+        const result = await db.query(
+            `
+            SELECT completions.date
+            FROM completions
+            WHERE completions.habit_id = ($1)
+            AND completions.completed = true
+            ORDER BY completions.date DESC;
+            `,
+            [habit_id]
+        );
+
+        const dates = result.rows.map(row => row.date);
+
+        const streak = calculateStreak(dates);
+
+        res.json({habit_id, streak});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: "Failed to fetch habit streak"})
     }
 }
 
@@ -88,4 +114,4 @@ const deleteHabit = async (req, res) => {
     }
 }
 
-export { getHabits, createHabit, completeHabit, editHabit, deleteHabit };
+export { getHabits, getHabitStreak, createHabit, completeHabit, editHabit, deleteHabit };
