@@ -61,20 +61,10 @@ const [habits, setHabit] = useState([]);
       const response = await axios.post(`${API_URL}/habits/${id}/completed`)
       const habitFinished = response.data;
       setHabit(prevHabits => {
-        return prevHabits.map(habit => {
-          if (habit.id === habitFinished.id) {
-            const updatedHabit = {
-              id: habit.id,
-              habit: habit.habit,
-              isCompleted: habitFinished.isCompleted,
-              date: habitFinished.date
-            };
-            console.log(updatedHabit);
-            return updatedHabit;
-          } else {
-            return habit;
-          }
-        })
+        console.log(habitFinished)
+        return prevHabits.map(habit =>      
+            habit.id === habitFinished.id ? {...habit, isCompleted: habitFinished.isCompleted, date: habitFinished.date} : habit
+        )
       })
     } catch (err) {
       console.error(err);

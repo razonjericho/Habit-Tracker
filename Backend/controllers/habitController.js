@@ -72,7 +72,7 @@ const completeHabit = async (req, res) => {
         VALUES ($1, $2, true)
         ON CONFLICT (habit_id, date)
         DO UPDATE SET completed = NOT completions.completed
-        RETURNING habit_id AS id, date, completed AS "isCompleted"
+        RETURNING habit_id AS id, date, completed AS \"isCompleted\"
         `,
         [habit_id, date]
         );
