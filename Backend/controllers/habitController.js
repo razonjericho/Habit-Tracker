@@ -52,7 +52,7 @@ const getHabitStreak = async (req, res) => {
 const createHabit = async (req, res) => {
     const addHabit = req.body.addHabit;
     try {
-        const result = await db.query("INSERT INTO habits (habit) VALUES ($1) RETURNING *;", [addHabit]);
+        const result = await db.query(`INSERT INTO habits (habit) VALUES ($1) RETURNING *;`, [addHabit]);
         const newHabit = result.rows[0];
         res.json(newHabit)
     } catch (err) {
@@ -89,7 +89,7 @@ const editHabit = async (req, res) => {
     const updatedText = req.body.editHabit;
     const id = req.params.id;
     try {
-        const result = await db.query("UPDATE habits SET habit = ($1) WHERE id = ($2) RETURNING *;", [updatedText, id])
+        const result = await db.query(`UPDATE habits SET habit = ($1) WHERE id = ($2) RETURNING *;`, [updatedText, id])
         const updatedHabit = result.rows[0];
         res.json(updatedHabit);
     } catch (err) {
@@ -101,7 +101,7 @@ const editHabit = async (req, res) => {
 const deleteHabit = async (req, res) => {
     const id = req.params.id;
     try {
-        const result = await db.query("UPDATE habits SET active = false WHERE id = $1", [id]);
+        const result = await db.query(`UPDATE habits SET active = false WHERE id = $1`, [id]);
         const rowCount = result.rowCount;
         if (rowCount === 0) {
             res.status(404).json({ error: "Habit not found" })

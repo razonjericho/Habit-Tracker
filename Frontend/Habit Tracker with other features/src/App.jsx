@@ -4,6 +4,7 @@ import './App.css'
 import HabitInput from './components/HabitInput/HabitInput';
 import HomePage from './pages/Home';
 import EditPage from './pages/Edit';
+import ProgressPage from './pages/Progress'
 import Header from './components/Header/Header';
 import BottomNav from './components/BottomNav/BottomNav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -12,7 +13,6 @@ import HabitList from './components/HabitList/HabitList';
 function App() {
 const API_URL = "http://localhost:3000";
 const [habits, setHabit] = useState([]);
-const [isCompleted, setIsCompleted] = useState(true);
 
   async function addHabit(inputText){
       try {
@@ -100,6 +100,7 @@ const [isCompleted, setIsCompleted] = useState(true);
       <Routes>
         <Route path="/" element={<HomePage onDone={habitDone} habits={habits} />} />
         <Route path="/edit" element={<EditPage onAdd={addHabit} onEdit={editHabit} onDelete={deleteHabit} habits={habits} />} />
+        <Route path="/progress" element={<ProgressPage />} />
       </Routes>
       <BottomNav />
       </BrowserRouter>

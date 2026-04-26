@@ -6,7 +6,8 @@ function BottomNav() {
     return (
             <nav className="bottom-nav">
                 <Link to="/" className="nav-item">Home</Link>
-                <Link to="/edit" className="nav-item">Edit</Link>   
+                <Link to="/progress" className="nav-item">Progress</Link>   
+                <Link to="/edit" className="nav-item">Edit</Link>
             </nav>
     )
 }
