@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import HabitItem from '../HabitItem/HabitItem';
 
 function HabitList(props){
@@ -7,13 +7,11 @@ function HabitList(props){
             {props.habits.map(habit => (
             <HabitItem 
                 key={habit.id} 
-                id={habit.id} 
-                text={habit.habit} 
+                id={habit.id}
+                text={habit.habit}
                 onDone={props.onDone} 
-                onAdd={props.onAdd} 
                 onEdit={props.onEdit} 
-                onDelete={props.onDelete} 
-                mode={props.mode} 
+                onDelete={props.onDelete}
             />  
              ))}
         </ul>

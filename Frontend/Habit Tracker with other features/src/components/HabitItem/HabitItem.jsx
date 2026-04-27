@@ -3,45 +3,33 @@ import "./HabitItem.css"
 
 function HabitItem(props){
 
-    const isTodo = props.mode === "todo";
-    const isEdit = props.mode === "edit";
     return (
             <li>
                 {props.text}
-                
-                {isEdit ? 
-                    (   
-                     <span>
-                        <button
-                            onClick = {() => {
-                                const newText = prompt("Rename Habit:", props.text);
-                                props.onEdit(props.id, newText);
-                            }}
-                        >
-                            Rename Habit
-                        </button>
-                        <button 
-                            onClick = {() => {
-                                props.onDelete(props.id);
-                            }}
-                        >
-                            Remove Habit
-                        </button>
-                    </span>
-                        
-                    ) 
-                : 
-                   <span>
-                        <button
-                                onClick= {() => {
-                                    props.onDone(props.id)
+                     {props.onEdit && (
+                        <span>
+                            <button
+                                onClick = {() => {
+                                    const newText = prompt("Rename Habit:", props.text);
+                                    props.onEdit(props.id, newText);
                                 }}
-                        >
-                        {isTodo ? "Done" : "Undo"}
-                        </button>
-                    </span>
-                
-                }
+                            >
+                                Rename Habit
+                            </button>
+                            <button onClick = {() => {props.onDelete(props.id);}}>
+                                Remove Habit
+                            </button>
+                        </span>
+                     )}  
+                     
+                    {props.onDone && (
+                        <span>
+                            <button onClick= {() => {props.onDone(props.id)}}>
+                                {props.isCompleted ? "Undo" : "Done"}
+                            </button>
+                        </span> 
+                    )}  
+                   
             </li>
     )
 }
