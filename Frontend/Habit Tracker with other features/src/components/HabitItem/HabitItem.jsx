@@ -2,10 +2,11 @@ import React from 'react';
 import "./HabitItem.css"
 
 function HabitItem(props){
+    const streak = props.streaks ? props.streaks[props.id] : undefined;
 
     return (
             <li>
-                {props.text}
+                {props.text} {streak}
                      {props.onEdit && (
                         <span>
                             <button

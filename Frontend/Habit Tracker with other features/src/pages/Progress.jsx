@@ -15,7 +15,7 @@ function ProgressPage() {
          const fetchStreak = async () => {
                 try {
                    const requests = habits.map(habit => 
-                     axios.get(`${API_URL}/progress/${habit.id}`)
+                     axios.get(`${API_URL}/habits/progress/${habit.id}`)
                 );
 
                 const responses = await Promise.all(requests);

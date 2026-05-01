@@ -26,6 +26,7 @@ const getHabits = async (req, res) => {
 
 const getHabitStreak = async (req, res) => {
     const habit_id = req.params.id
+    console.log("Incoming habit_id:", req.params.id);
     try {
         const result = await db.query(
             `
@@ -37,10 +38,13 @@ const getHabitStreak = async (req, res) => {
             `,
             [habit_id]
         );
+        console.log("DB result rows:", result.rows);
 
         const dates = result.rows.map(row => row.date);
+        console.log("Dates array:", dates);
 
         const streak = calculateStreak(dates);
+        console.log("Calculated streak:", streak);
 
         res.json({habit_id, streak});
     } catch (err) {

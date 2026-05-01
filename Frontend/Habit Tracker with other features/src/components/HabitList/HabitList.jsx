@@ -12,6 +12,7 @@ function HabitList(props){
                 onDone={props.onDone} 
                 onEdit={props.onEdit} 
                 onDelete={props.onDelete}
+                streaks={props.streaks}
             />  
              ))}
         </ul>
