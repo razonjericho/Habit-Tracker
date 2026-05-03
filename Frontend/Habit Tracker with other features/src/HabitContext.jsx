@@ -19,15 +19,6 @@ function HabitProvider({ children }) {
     fetchHabits();
     }, []);
 
-    const getHabitStreak = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/progress/:id`);
-        const newHabit = response.data;
-      } catch (err) {
-        console.error('Error, unable to get habit streak:', err);
-      }
-    }
-
     const addHabit = async (inputText) => {
       try {
         const response = await axios.post(`${API_URL}/habits`, {addHabit: inputText});

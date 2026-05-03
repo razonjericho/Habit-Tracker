@@ -1,17 +1,31 @@
 
 
 const calculateStreak = (dates) => {
-    let streak = 0;
+    if (!dates || dates.length === 0) return 0;
     
-    const dataSet = new Set(dates);
+    const dateSet = new Set(dates);
 
-    let current = new Date();
+    const latestDate = new Date(dates[0]).toLocaleDateString("en-CA");
+
+    const today = new Date().toLocaleDateString("en-CA");
+
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const yesterday = yesterdayDate.toLocaleDateString("en-CA");
+
+      if (latestDate !== today && latestDate !== yesterday){
+                return 0;
+            }
+
+    let current = new Date(dates[0]);
     current.setHours(0, 0, 0, 0);
 
-    while (true) {
-        const stringDate = current.toISOString().split("T")[0];
+    let streak = 0;
 
-        if (dataSet.has(stringDate)) {
+    while (true) {
+        const stringDate = current.toLocaleDateString("en-CA");
+
+        if (dateSet.has(stringDate)) {
             streak++;
 
             current.setDate(current.getDate() - 1);
@@ -21,6 +35,6 @@ const calculateStreak = (dates) => {
     }
 
     return streak;
-}
+} 
 
 export default calculateStreak;
