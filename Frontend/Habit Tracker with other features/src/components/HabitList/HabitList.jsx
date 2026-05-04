@@ -12,6 +12,7 @@ function HabitList(props){
                 onDone={props.onDone} 
                 onEdit={props.onEdit} 
                 onDelete={props.onDelete}
+                onViewDetails={props.onViewDetails}
                 streaks={props.streaks}
                 isCompleted={habit.isCompleted}
             />  

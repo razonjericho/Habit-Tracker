@@ -6,6 +6,7 @@ import ProgressPage from './pages/Progress'
 import Header from './components/Header/Header';
 import BottomNav from './components/BottomNav/BottomNav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HabitDetailsPage from './pages/HabitDetails';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/edit" element={<EditPage />} />
         <Route path="/progress" element={<ProgressPage />} />
+        <Route path="/progress/:id" element={<HabitDetailsPage />} />
       </Routes>
       <BottomNav />
       </BrowserRouter>

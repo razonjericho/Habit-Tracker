@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", getHabits);
 router.get("/progress/:id", getHabitStreak);
-router.get("/progress", getHabitStreak)
+router.get("/progress", getHabitStreak);
 router.post("/", createHabit);
 router.post("/:id/completed", completeHabit);
 router.patch("/:id", editHabit);

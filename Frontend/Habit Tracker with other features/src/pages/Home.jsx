@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import HabitList from '../components/HabitList/HabitList';
 import { HabitContext } from '../HabitContext';
+import { Link } from 'react-router-dom'
 
 function HomePage(){
     const context = useContext(HabitContext);

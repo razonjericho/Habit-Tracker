@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../components/HabitList/HabitList"
 import { HabitContext } from '../HabitContext';
+import { useNavigate } from 'react-router-dom'
 
 function ProgressPage() {
     const API_URL = "http://localhost:3000";
@@ -35,17 +36,27 @@ function ProgressPage() {
                 fetchStreak();
     }, [habits]);
 
+    const navigate = useNavigate();
+
+    function viewHabitDetails(id) {
+        navigate(`/progress/${id}`);
+    }
+
    
     return (
         <div>
             <h2>Progress</h2>
             <HabitList
                 habits={habits}
-                streaks={streaks}            
+                streaks={streaks}
+                onViewDetails={viewHabitDetails}            
             />
             
         </div>
     )
 }
+
+
+
 
 export default ProgressPage;

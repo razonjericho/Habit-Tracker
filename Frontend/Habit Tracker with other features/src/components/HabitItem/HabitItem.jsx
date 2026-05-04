@@ -29,6 +29,14 @@ function HabitItem(props){
                                 {props.isCompleted ? "Undo" : "Done"}
                             </button>
                         </span> 
+                    )}
+
+                    {props.onViewDetails && (
+                        <span>
+                             <button onClick={() => {props.onViewDetails(props.id)}}>
+                                Details
+                            </button>
+                        </span>
                     )}  
                    
             </li>
