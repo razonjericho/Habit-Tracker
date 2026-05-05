@@ -1,5 +1,3 @@
-
-
 const calculateStreak = (dates) => {
     if (!dates || dates.length === 0) return 0;
     
@@ -36,5 +34,34 @@ const calculateStreak = (dates) => {
 
     return streak;
 } 
+
+const calculateLongestStreak = (dates) => {
+    if (!dates || dates.length === 0) return 0;
+
+    const sortedDate = [...dates].sort((a, b) => new Date(a) - new Date(b));
+
+    let currentStreak = 1;
+    let longestStreak = 1;
+
+    for(let i = 1; i < sortedDate.length; i++){
+        const previousDate = new Date(sortedDate[i - 1]);
+        const afterDate = new Date(sortedDate[i]); //after previous date
+
+        const dateAfterPrevious = new Date(previousDate)
+        dateAfterPrevious.setDate(previousDate.getDate() + 1); //also after previous date
+
+        if (dateAfterPrevious.toLocaleDateString("en-CA") === afterDate.toLocaleDateString("en-CA")){
+            currentStreak++;
+        } else {
+            currentStreak = 1;
+        }
+
+        if (currentStreak > longestStreak) {
+            longestStreak = currentStreak;
+        }
+    }
+
+    return longestStreak;
+}
 
 export default calculateStreak;

@@ -39,7 +39,9 @@ function HabitDetailsPage(){
     return (
         <div>
             <h1>Habit Details</h1>
-            <p>Habit: {selectedHabit.habit} {streaks.streak} </p>          
+            <p>Habit: {selectedHabit.habit}</p>
+            <p>Current Streak: {streaks.streak}</p>
+            <p>Longest Streak: </p>          
         </div>
     )
 }
