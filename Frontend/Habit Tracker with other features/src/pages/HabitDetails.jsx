@@ -15,7 +15,7 @@ function HabitDetailsPage(){
     useEffect(() => {
          const fetchStreak = async () => {
                 try {
-                   const response = await axios.get(`${API_URL}/habits/progress/${id}`);
+                   const response = await axios.get(`${API_URL}/habits/progress/${id}/details`);
 
                 setStreak(response.data);
 
@@ -41,7 +41,7 @@ function HabitDetailsPage(){
             <h1>Habit Details</h1>
             <p>Habit: {selectedHabit.habit}</p>
             <p>Current Streak: {streaks.streak}</p>
-            <p>Longest Streak: </p>          
+            <p>Longest Streak: {streaks.longestStreak}</p>
         </div>
     )
 }

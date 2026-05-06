@@ -89,4 +89,4 @@ function HabitProvider({ children }) {
   )
 }
 
-export {HabitContext, HabitProvider};
+export { HabitContext, HabitProvider };

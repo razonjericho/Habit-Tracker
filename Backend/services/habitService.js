@@ -64,4 +64,4 @@ const calculateLongestStreak = (dates) => {
     return longestStreak;
 }
 
-export default calculateStreak;
+export {calculateStreak, calculateLongestStreak};
