@@ -71,7 +71,7 @@ const getHabitLongestStreak = async (req, res) => {
 
         const longestStreak = calculateLongestStreak(dates);
         
-        res.json({habit_id, streak, longestStreak});
+        res.json({habit_id, streak, longestStreak, dates});
     } catch (err) {
         console.error(err)
         res.status(500).json({error: "Failed to fetch habit streak"})
