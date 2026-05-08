@@ -88,11 +88,27 @@ function HabitDetailsPage(){
         weeks.push(week);
     }
 
-    console.log(weeks);
+    {weeks.map(week => (
+        <div>
+            {week.map(day => (
+                <div>{day}</div>
+            ))}
+        </div>
+    ))}
 
     return (
         <div>
             <h1>Habit Details</h1>
+            <header>May</header>
+            <div>
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
             <p>Habit: {selectedHabit.habit}</p>
             <p>Current Streak: {streaks.streak}</p>
             <p>Longest Streak: {streaks.longestStreak}</p>
