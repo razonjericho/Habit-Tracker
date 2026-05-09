@@ -36,7 +36,7 @@ function HabitDetailsPage(){
         return <p>Habit not found</p>;
     }
 
-    const dates = streaks?.dates || [];
+    const dates = streaks ? streaks.dates : [];
 
     const completedDates = new Set(dates);
 
@@ -88,13 +88,6 @@ function HabitDetailsPage(){
         weeks.push(week);
     }
 
-    {weeks.map(week => (
-        <div>
-            {week.map(day => (
-                <div>{day}</div>
-            ))}
-        </div>
-    ))}
 
     return (
         <div>
@@ -109,6 +102,13 @@ function HabitDetailsPage(){
                 <span>Fri</span>
                 <span>Sat</span>
             </div>
+             {weeks.map((week, weekIndex) => (
+                <div key={weekIndex} >
+                    {week.map((day, dayIndex) => (
+                        <div key={dayIndex} >{day ? new Date(day.date).getDate() : null}</div>
+                    ))}
+                </div>
+            ))}
             <p>Habit: {selectedHabit.habit}</p>
             <p>Current Streak: {streaks.streak}</p>
             <p>Longest Streak: {streaks.longestStreak}</p>
