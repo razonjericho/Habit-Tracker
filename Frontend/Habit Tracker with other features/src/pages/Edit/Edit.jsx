@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import HabitList from '../components/HabitList/HabitList';
-import HabitInput from '../components/HabitInput/HabitInput';
-import { HabitContext } from '../HabitContext';
+import HabitList from '../../components/HabitList/HabitList';
+import HabitInput from '../../components/HabitInput/HabitInput';
+import { HabitContext } from '../../HabitContext';
 
 function EditPage() {
     const context = useContext(HabitContext);

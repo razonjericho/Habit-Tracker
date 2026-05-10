@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import HabitList from '../components/HabitList/HabitList';
-import { HabitContext } from '../HabitContext';
+import HabitList from '../../components/HabitList/HabitList';
+import { HabitContext } from '../../HabitContext';
 
 function HomePage(){
     const context = useContext(HabitContext);

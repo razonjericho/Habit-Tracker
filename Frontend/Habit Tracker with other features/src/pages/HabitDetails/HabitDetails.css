@@ -1,0 +1,19 @@
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+.weekly-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    text-align: center;
+}
+
+.week {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    text-align: center;
+}

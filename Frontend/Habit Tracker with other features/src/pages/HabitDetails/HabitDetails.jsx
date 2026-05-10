@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import HabitList from "../components/HabitList/HabitList"
+import HabitList from "../../components/HabitList/HabitList"
 import { useParams } from 'react-router-dom';
-import { HabitContext } from '../HabitContext';
+import { HabitContext } from '../../HabitContext';
+import './HabitDetails.css'
 
 function HabitDetailsPage(){
     const params = useParams();
@@ -93,7 +94,7 @@ function HabitDetailsPage(){
         <div>
             <h1>Habit Details</h1>
             <header>May</header>
-            <div>
+            <div className="weekly-header" >
                 <span>Sun</span>
                 <span>Mon</span>
                 <span>Tue</span>
@@ -103,9 +104,9 @@ function HabitDetailsPage(){
                 <span>Sat</span>
             </div>
              {weeks.map((week, weekIndex) => (
-                <div key={weekIndex} >
+                <div className="week" key={weekIndex} >
                     {week.map((day, dayIndex) => (
-                        <div key={dayIndex} >{day ? new Date(day.date).getDate() : null}</div>
+                        <div className="day" key={dayIndex} >{day ? new Date(day.date).getDate() : null}</div>
                     ))}
                 </div>
             ))}

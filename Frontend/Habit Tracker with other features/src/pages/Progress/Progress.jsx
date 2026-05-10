@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import HabitList from "../components/HabitList/HabitList"
-import { HabitContext } from '../HabitContext';
+import HabitList from "../../components/HabitList/HabitList"
+import { HabitContext } from '../../HabitContext';
 import { useNavigate } from 'react-router-dom'
 
 function ProgressPage() {
