@@ -103,13 +103,29 @@ function HabitDetailsPage(){
                 <span>Fri</span>
                 <span>Sat</span>
             </div>
-             {weeks.map((week, weekIndex) => (
+            <div className="calendar" >
+                {weeks.map((week, weekIndex) => (
                 <div className="week" key={weekIndex} >
                     {week.map((day, dayIndex) => (
-                        <div className="day" key={dayIndex} >{day ? new Date(day.date).getDate() : null}</div>
+                        <div className="day" key={dayIndex} >
+                            {day ? (
+                                day.completed ? (
+                                    <div className="completed" >
+                                        {new Date(day.date).getDate()}
+                                    </div> 
+                                    ) : (
+                                        <div className="not-completed" >
+                                           {new Date(day.date).getDate()}
+                                        </div>
+                                        
+                                        )
+                                        ) : null}
+                            </div>
                     ))}
                 </div>
             ))}
+            </div>
+             
             <p>Habit: {selectedHabit.habit}</p>
             <p>Current Streak: {streaks.streak}</p>
             <p>Longest Streak: {streaks.longestStreak}</p>
