@@ -76,7 +76,7 @@ function HabitDetailsPage(){
         })
     }
 
-     const calendarCells = [
+    const calendarCells = [
         ...beforeFirstDay,
         ...result
     ];

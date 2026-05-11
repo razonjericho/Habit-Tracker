@@ -1,0 +1,41 @@
+
+
+function calendarGenerator(year, month) {
+    const startDate = new Date(year, month, 1);
+    const firstDayIndex = startDate.getDay();
+    const beforeFirstDay = [];
+
+    for (let i = 0; i < firstDayIndex; i++) {
+        beforeFirstDay.push(null);
+    }
+
+    const endDate = new Date(year, month + 1, 0);
+
+    const calendarDays = [];
+
+    let current = new Date(startDate);
+
+    while (current <= endDate) {
+        const formatted = current.toLocaleDateString("en-CA");
+        calendarDays.push(formatted);
+
+        current.setDate(current.getDate() + 1);
+    }
+
+    const calendarCells = [
+        ...beforeFirstDay,
+        ...calendarDays
+    ];
+
+    const weekSize = 7;
+    const weeks = [];
+
+    for (let i = 0; i < calendarCells.length; i += weekSize) {
+        const week = calendarCells.slice(i, i + weekSize)
+        weeks.push(week);
+    }
+
+    return weeks;
+}
+
+export default calendarGenerator;
