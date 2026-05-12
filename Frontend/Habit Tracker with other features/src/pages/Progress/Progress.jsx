@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../../components/HabitList/HabitList"
+import Calendar from '../../services/Calendar/Calendar';
 import { HabitContext } from '../../HabitContext';
 import { useNavigate } from 'react-router-dom'
 
-function ProgressPage() {
+function ProgressPage(props) {
     const API_URL = "http://localhost:3000";
     const context = useContext(HabitContext);
     const { habits } = context;
@@ -46,6 +47,10 @@ function ProgressPage() {
     return (
         <div>
             <h2>Progress</h2>
+            <Calendar
+                month={props.month}
+                year={props.year}
+            />
             <HabitList
                 habits={habits}
                 streaks={streaks}
