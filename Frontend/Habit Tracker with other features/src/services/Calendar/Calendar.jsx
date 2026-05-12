@@ -1,53 +1,23 @@
 import React from 'react';
+import calendarGenerator from './calendarGenerator';
 
-const dates = streaks ? streaks.dates : [];
-
-    const completedDates = new Set(dates);
-
-    const year = 2026
-    const month = 4;
-
-    const startDate = new Date(year, month, 1);
-    const firstDayIndex = startDate.getDay();
-    const beforeFirstDay = [];
-
-    for (let i = 0; i < firstDayIndex; i++) {
-        beforeFirstDay.push(null);
-    }
-
-    const endDate = new Date(year, month + 1, 0);
-
-    const calendarDays = [];
-
-    let current = new Date(startDate);
-
-    const result = [];
-
-    while (current <= endDate) {
-        const formatted = current.toLocaleDateString("en-CA");
-        calendarDays.push(formatted);
-
-        current.setDate(current.getDate() + 1);
-    }
+function Calendar(props) {
     
-    for(let day of calendarDays) {
-        const isCompleted = completedDates.has(day);
+    const weeks = calendarGenerator(props.year, props.month);
 
-        result.push({
-            date: day,
-            completed: isCompleted
-        })
-    }
+    return (
+        <div className="calendar" >
+            {weeks.map((week, weekIndex) => (
+                <div className="week" key={weekIndex} >
+                    {week.map((day, dayIndex) => (
+                        <div className="day" key={dayIndex} >
+                            {day ? new Date(day).getDate() : null}
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    )
+}
 
-    const calendarCells = [
-        ...beforeFirstDay,
-        ...result
-    ];
-
-    const weekSize = 7;
-    const weeks = [];
-
-    for(let i = 0; i < calendarCells.length; i += weekSize){
-        const week = calendarCells.slice(i, i + weekSize);
-        weeks.push(week);
-    }
+export default Calendar;
