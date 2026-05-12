@@ -9,11 +9,28 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HabitDetailsPage from './pages/HabitDetails/HabitDetails.jsx';
 
 function App() {
-
   const today = new Date();
 
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
+
+  function nextMonth(){
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
+    }
+  }
+
+  function prevMonth(){
+    if (month === 0) {
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
+    }
+  }
 
   return (
     <div className="App">
@@ -22,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/edit" element={<EditPage />} />
-        <Route path="/progress" element={<ProgressPage month={month} year={year} />} />
+        <Route path="/progress" element={<ProgressPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
         <Route path="/progress/:id" element={<HabitDetailsPage />} />
       </Routes>
       <BottomNav />

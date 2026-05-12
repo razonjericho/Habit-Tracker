@@ -43,10 +43,15 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
    
     return (
         <div>
             <h2>Progress</h2>
+            <button onClick= {props.previous} > Previous </button>
+            <h2>{months[props.month]} {props.year} </h2>
+            <button onClick= {props.next} > Next </button>
             <Calendar
                 month={props.month}
                 year={props.year}
