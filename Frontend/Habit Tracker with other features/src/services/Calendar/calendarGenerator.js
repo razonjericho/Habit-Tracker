@@ -1,8 +1,9 @@
 
 
-function calendarGenerator(year, month) {
+function calendarGenerator(year, month, completedDates = new Set()) {
     const startDate = new Date(year, month, 1);
     const firstDayIndex = startDate.getDay();
+
     const beforeFirstDay = [];
 
     for (let i = 0; i < firstDayIndex; i++) {
@@ -16,8 +17,14 @@ function calendarGenerator(year, month) {
     let current = new Date(startDate);
 
     while (current <= endDate) {
-        const formatted = current.toLocaleDateString("en-CA");
-        calendarDays.push(formatted);
+        const day = current.toLocaleDateString("en-CA");
+
+        const isCompleted = completedDates.has(day)
+
+        calendarDays.push({
+            day: day,
+            completed: isCompleted
+        });
 
         current.setDate(current.getDate() + 1);
     }

@@ -4,8 +4,9 @@ import HabitList from "../../components/HabitList/HabitList"
 import { useParams } from 'react-router-dom';
 import { HabitContext } from '../../HabitContext';
 import './HabitDetails.css'
+import Calendar from '../../services/Calendar/Calendar';
 
-function HabitDetailsPage(){
+function HabitDetailsPage(props){
     const params = useParams();
     const id = Number(params.id);
     const context = useContext(HabitContext);
@@ -41,54 +42,10 @@ function HabitDetailsPage(){
 
     const completedDates = new Set(dates);
 
-    const year = 2026
-    const month = 4;
+    const today = new Date();
 
-    const startDate = new Date(year, month, 1);
-    const firstDayIndex = startDate.getDay();
-    const beforeFirstDay = [];
-
-    for (let i = 0; i < firstDayIndex; i++) {
-        beforeFirstDay.push(null);
-    }
-
-    const endDate = new Date(year, month + 1, 0);
-
-    const calendarDays = [];
-
-    let current = new Date(startDate);
-
-    const result = [];
-
-    while (current <= endDate) {
-        const formatted = current.toLocaleDateString("en-CA");
-        calendarDays.push(formatted);
-
-        current.setDate(current.getDate() + 1);
-    }
-    
-    for(let day of calendarDays) {
-        const isCompleted = completedDates.has(day);
-
-        result.push({
-            date: day,
-            completed: isCompleted
-        })
-    }
-
-    const calendarCells = [
-        ...beforeFirstDay,
-        ...result
-    ];
-
-    const weekSize = 7;
-    const weeks = [];
-
-    for(let i = 0; i < calendarCells.length; i += weekSize){
-        const week = calendarCells.slice(i, i + weekSize);
-        weeks.push(week);
-    }
-
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
 
     return (
         <div>
@@ -103,29 +60,11 @@ function HabitDetailsPage(){
                 <span>Fri</span>
                 <span>Sat</span>
             </div>
-            <div className="calendar" >
-                {weeks.map((week, weekIndex) => (
-                <div className="week" key={weekIndex} >
-                    {week.map((day, dayIndex) => (
-                        <div className="day" key={dayIndex} >
-                            {day ? (
-                                day.completed ? (
-                                    <div className="completed" >
-                                        {new Date(day.date).getDate()}
-                                    </div> 
-                                    ) : (
-                                        <div className="not-completed" >
-                                           {new Date(day.date).getDate()}
-                                        </div>
-                                        
-                                        )
-                                        ) : null}
-                            </div>
-                    ))}
-                </div>
-            ))}
-            </div>
-             
+            <Calendar 
+                year={currentYear} 
+                month={currentMonth} 
+                completedDates={completedDates} 
+            />
             <p>Habit: {selectedHabit.habit}</p>
             <p>Current Streak: {streaks.streak}</p>
             <p>Longest Streak: {streaks.longestStreak}</p>
