@@ -2,7 +2,7 @@ import db from "../db.js"
 import { calculateStreak, calculateLongestStreak } from "../services/habitService.js"
 
 const getHabits = async (req, res) => {
-    const date = new Date().toISOString().split("T")[0];
+    const date = new Date().toLocaleDateString("en-CA");
     try {
         const result = await db.query(
             `
@@ -81,7 +81,7 @@ const getHabitLongestStreak = async (req, res) => {
 const createHabit = async (req, res) => {
     const addHabit = req.body.addHabit;
     try {
-        const result = await db.query(`INSERT INTO habits (habit) VALUES ($1) RETURNING *;`, [addHabit]);
+        const result = await db.query(`INSERT INTO habits (habit) VALUES ($1) RETURNING id, habit, false AS \"isCompleted\";`, [addHabit]);
         const newHabit = result.rows[0];
         res.json(newHabit)
     } catch (err) {
@@ -115,10 +115,26 @@ const completeHabit = async (req, res) => {
 }
 
 const editHabit = async (req, res) => {
+    const date = new Date().toLocaleDateString("en-CA");
     const updatedText = req.body.editHabit;
     const id = req.params.id;
     try {
-        const result = await db.query(`UPDATE habits SET habit = ($1) WHERE id = ($2) RETURNING *;`, [updatedText, id])
+        const result = await db.query(
+            `WITH updated AS (
+            UPDATE habits
+            SET habit = ($1)
+            WHERE id = ($2)
+            RETURNING id, habit, active
+            )
+            SELECT
+                updated.id,
+                updated.habit,
+                COALESCE(completions.completed, false) AS \"isCompleted\"
+            FROM updated
+            LEFT JOIN completions
+                ON updated.id = completions.habit_id
+                AND completions.date = ($3)
+            `, [updatedText, id, date])
         const updatedHabit = result.rows[0];
         res.json(updatedHabit);
     } catch (err) {
