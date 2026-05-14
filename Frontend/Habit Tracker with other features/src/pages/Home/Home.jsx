@@ -10,6 +10,7 @@ function HomePage(){
 
     return (
         <div>
+            <h1>Home</h1>
             <h2>To Do</h2>
             <HabitList 
                 habits={todoHabits}

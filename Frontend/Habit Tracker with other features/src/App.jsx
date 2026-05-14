@@ -40,7 +40,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/edit" element={<EditPage />} />
         <Route path="/progress" element={<ProgressPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
-        <Route path="/progress/:id" element={<HabitDetailsPage />} />
+        <Route path="/progress/:id" element={<HabitDetailsPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
       </Routes>
       <BottomNav />
       </BrowserRouter>

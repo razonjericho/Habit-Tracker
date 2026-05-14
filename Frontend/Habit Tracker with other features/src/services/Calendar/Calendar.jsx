@@ -7,7 +7,17 @@ function Calendar(props) {
     const weeks = calendarGenerator(props.year, props.month, props.completedDates);
 
     return (
-        <div className="calendar" >
+        <div>
+            <div className="weekly-header" >
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+            <div className="calendar" >
             {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="week" >
                     {week.map((day, dayIndex) => (
@@ -18,6 +28,8 @@ function Calendar(props) {
                 </div>
             ))}
         </div>
+        </div>
+        
     )
 }
 

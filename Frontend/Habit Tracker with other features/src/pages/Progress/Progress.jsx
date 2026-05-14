@@ -48,7 +48,7 @@ function ProgressPage(props) {
    
     return (
         <div>
-            <h2>Progress</h2>
+            <h1>Progress</h1>
             <button onClick= {props.previous} > Previous </button>
             <h2>{months[props.month]} {props.year} </h2>
             <button onClick= {props.next} > Next </button>

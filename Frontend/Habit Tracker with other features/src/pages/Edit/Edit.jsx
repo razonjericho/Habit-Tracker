@@ -9,7 +9,7 @@ function EditPage() {
 
     return (
         <div>
-            <h2>Edit Habits</h2>
+            <h1>Edit Habits</h1>
             <HabitList habits={habits} onEdit={editHabit} onDelete={deleteHabit} />
             <HabitInput onAdd={addHabit} />
         </div>

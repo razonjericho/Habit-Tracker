@@ -40,29 +40,23 @@ function HabitDetailsPage(props){
 
     const dates = streaks ? streaks.dates : [];
 
-    const completedDates = new Set(dates);
+    const completedDates = new Set(
+        dates.map(date =>
+            new Date(date).toLocaleDateString("en-CA")
+        )
+    );
 
-    const today = new Date();
-
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     return (
         <div>
             <h1>Habit Details</h1>
-            <header>May</header>
-            <div className="weekly-header" >
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-            </div>
+            <button onClick={props.previous}>Previous</button>
+            <h2>{months[props.month]} {props.year}</h2>
+            <button onClick={props.next}>Next</button>
             <Calendar 
-                year={currentYear} 
-                month={currentMonth} 
+                year={props.year} 
+                month={props.month} 
                 completedDates={completedDates} 
             />
             <p>Habit: {selectedHabit.habit}</p>
