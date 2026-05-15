@@ -33,7 +33,7 @@ function HabitProvider({ children }) {
 
     const editHabit = async (id, newText) => {
         try {
-            const response = await axios.patch(`${API_URL}/habits/${id}`, {editHabit: newText})
+            const response = await axios.patch(`${API_URL}/habits/edit/rename/${id}`, {editHabit: newText})
             const updatedHabit = response.data;
             setHabit(prevHabits => {
                 return prevHabits.map(habit => {
@@ -51,7 +51,7 @@ function HabitProvider({ children }) {
 
     const archiveHabit = async (id) => {
         try {
-            await axios.delete(`${API_URL}/habits/${id}`)
+            await axios.patch(`${API_URL}/habits/edit/archive/${id}`)
             setHabit(prevHabits => {
             console.log("ARCHIVED ID:", id);
                 return prevHabits.filter(habit => habit.id !== id)

@@ -4,11 +4,13 @@ import { getHabits, getArchivedHabits, getHabitStreak, getHabitLongestStreak, cr
 const router = express.Router();
 
 router.get("/", getHabits);
+router.get("/edit/archive/:id", getArchivedHabits);
 router.get("/progress/:id", getHabitStreak);
 router.get("/progress/:id/details", getHabitLongestStreak);
 router.post("/", createHabit);
 router.post("/:id/completed", completeHabit);
-router.patch("/:id", editHabit);
-router.delete("/:id", archiveHabit);
+router.patch("/edit/rename/:id", editHabit);
+router.patch("/edit/archive/:id", archiveHabit);
+router.patch("/edit/archive/:id", restoreHabit);
 
 export default router;
