@@ -49,11 +49,11 @@ function HabitProvider({ children }) {
             }
       }
 
-    const deleteHabit = async (id) => {
+    const archiveHabit = async (id) => {
         try {
             await axios.delete(`${API_URL}/habits/${id}`)
             setHabit(prevHabits => {
-            console.log("DELETE ID:", id);
+            console.log("ARCHIVED ID:", id);
                 return prevHabits.filter(habit => habit.id !== id)
             })
             } catch (err) {
@@ -81,7 +81,7 @@ function HabitProvider({ children }) {
       habits,
       addHabit,
       editHabit,
-      deleteHabit,
+      archiveHabit,
       habitDone
     }}>
       {children}

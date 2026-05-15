@@ -17,8 +17,8 @@ function HabitItem(props){
                             >
                                 Rename Habit
                             </button>
-                            <button onClick = {() => {props.onDelete(props.id);}}>
-                                Remove Habit
+                            <button onClick = {() => {props.onArchive(props.id);}}>
+                                Archive Habit
                             </button>
                         </span>
                      )}  

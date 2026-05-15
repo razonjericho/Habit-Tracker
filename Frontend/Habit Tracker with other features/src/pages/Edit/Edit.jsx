@@ -5,12 +5,12 @@ import { HabitContext } from '../../HabitContext';
 
 function EditPage() {
     const context = useContext(HabitContext);
-    const {habits, addHabit, editHabit, deleteHabit} = context;
+    const {habits, addHabit, editHabit, archiveHabit} = context;
 
     return (
         <div>
             <h1>Edit Habits</h1>
-            <HabitList habits={habits} onEdit={editHabit} onDelete={deleteHabit} />
+            <HabitList habits={habits} onEdit={editHabit} onArchive={archiveHabit} />
             <HabitInput onAdd={addHabit} />
         </div>
     )

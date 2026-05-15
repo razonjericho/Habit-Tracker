@@ -154,7 +154,7 @@ const editHabit = async (req, res) => {
     }
 }
 
-const deleteHabit = async (req, res) => {
+const archiveHabit = async (req, res) => {
     const id = req.params.id;
     try {
         const result = await db.query(`UPDATE habits SET active = false WHERE id = $1`, [id]);
@@ -162,7 +162,7 @@ const deleteHabit = async (req, res) => {
         if (rowCount === 0) {
             res.status(404).json({ error: "Habit not found" })
         } else if (rowCount !== 0) {
-            res.json({ message: "Habit deleted successfully", id: id });
+            res.json({ message: "Habit archived successfully", id: id });
         }
     } catch (err) {
         console.error(err);
@@ -170,4 +170,20 @@ const deleteHabit = async (req, res) => {
     }
 }
 
-export { getHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, deleteHabit };
+const restoreHabit = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const result = await db.query(`UPDATE habits SET active = true WHERE id = $1`, [id]);
+        const rowCount = result.rowCount;
+        if (rowCount === 0) {
+            res.status(404).json({ error: "Habit not found" })
+        } else if (rowCount !== 0) {
+            res.json({ message: "Habit restored successfully", id: id });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to restore a habit" })
+    }
+}
+
+export { getHabits, getArchivedHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit };

@@ -11,7 +11,7 @@ function HabitList(props){
                 text={habit.habit}
                 onDone={props.onDone} 
                 onEdit={props.onEdit} 
-                onDelete={props.onDelete}
+                onArchive={props.onArchive}
                 onViewDetails={props.onViewDetails}
                 streaks={props.streaks}
                 isCompleted={habit.isCompleted}
