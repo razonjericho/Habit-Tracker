@@ -24,6 +24,17 @@ const getHabits = async (req, res) => {
     }
 }
 
+const getArchivedHabits = async (req, res) => {
+    try {
+        const result = await db.query(`SELECT habit FROM habits WHERE active = false`)
+        const archivedHabits = result.rows;
+        res.json(archivedHabits);
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: "Failed to fetch archived habits" });
+    }
+}
+
 const getHabitStreak = async (req, res) => {
     const habit_id = req.params.id;
     try {
@@ -92,7 +103,7 @@ const createHabit = async (req, res) => {
 
 const completeHabit = async (req, res) => {
     const habit_id = req.params.id;
-    const date = new Date().toISOString().split("T")[0];
+    const date = new Date().toLocaleDateString("en-CA");
 
     try {
         const result = await db.query(
