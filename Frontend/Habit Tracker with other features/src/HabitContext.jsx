@@ -6,6 +6,7 @@ const HabitContext = createContext();
 function HabitProvider({ children }) {
     const API_URL = "http://localhost:3000";
     const [habits, setHabit] = useState([]);
+    const [archivedHabits, setArchivedHabit] = useState([]);
 
     useEffect(() => {
     const fetchHabits = async () => {
@@ -18,6 +19,16 @@ function HabitProvider({ children }) {
     };
     fetchHabits();
     }, []);
+
+    const getArchivedHabits = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/habits/edit/archive`);
+        const archivedHabits = response.data;
+        setArchivedHabit(archivedHabits);
+      } catch (err) {
+        console.error('Error, unable to fetch archived habits', err);
+      }
+    }
 
     const addHabit = async (inputText) => {
       try {
@@ -79,6 +90,7 @@ function HabitProvider({ children }) {
   return (
     <HabitContext.Provider value={{
       habits,
+      getArchivedHabits,
       addHabit,
       editHabit,
       archiveHabit,

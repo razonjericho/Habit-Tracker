@@ -4,7 +4,7 @@ import { getHabits, getArchivedHabits, getHabitStreak, getHabitLongestStreak, cr
 const router = express.Router();
 
 router.get("/", getHabits);
-router.get("/edit/archive/:id", getArchivedHabits);
+router.get("/edit/archive", getArchivedHabits);
 router.get("/progress/:id", getHabitStreak);
 router.get("/progress/:id/details", getHabitLongestStreak);
 router.post("/", createHabit);

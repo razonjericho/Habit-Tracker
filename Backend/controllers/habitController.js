@@ -26,7 +26,7 @@ const getHabits = async (req, res) => {
 
 const getArchivedHabits = async (req, res) => {
     try {
-        const result = await db.query(`SELECT habit FROM habits WHERE active = false`)
+        const result = await db.query(`SELECT id, habit, active FROM habits WHERE active = false`)
         const archivedHabits = result.rows;
         res.json(archivedHabits);
     } catch (err) {
