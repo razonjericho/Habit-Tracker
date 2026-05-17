@@ -96,7 +96,17 @@ function HabitProvider({ children }) {
         console.error('Error, unable to restore a habit', err);
       }
     }
-    
+
+    const deleteHabit = async (id) => {
+      try {
+        const response = await axios.delete(`${API_URL}/habits/edit/archive/delete/${id}`);
+        const deleteHabit = response.data;
+        setArchivedHabit(deleteHabit);
+      } catch {
+        console.error(err)
+      }
+    }
+
   return (
     <HabitContext.Provider value={{
       habits,
@@ -105,6 +115,7 @@ function HabitProvider({ children }) {
       editHabit,
       archiveHabit,
       restoreHabit,
+      deleteHabit,
       habitDone
     }}>
       {children}

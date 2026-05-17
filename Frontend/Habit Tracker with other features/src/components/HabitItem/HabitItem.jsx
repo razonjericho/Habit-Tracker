@@ -46,6 +46,14 @@ function HabitItem(props){
                             </button>
                         </span>
                     )} 
+
+                    {props.onDelete && (
+                        <span>
+                            <button onClick={() => {props.onDelete(props.id)} } >
+                                Delete Habit
+                            </button>
+                        </span>
+                    )}
                    
             </li>
     )
