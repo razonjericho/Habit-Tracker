@@ -37,7 +37,15 @@ function HabitItem(props){
                                 Details
                             </button>
                         </span>
-                    )}  
+                    )}
+
+                    {props.onRestore && (
+                        <span>
+                             <button onClick={() => {props.onRestore(props.id)}}>
+                                Restore Habit
+                            </button>
+                        </span>
+                    )} 
                    
             </li>
     )

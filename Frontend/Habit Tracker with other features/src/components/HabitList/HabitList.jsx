@@ -15,6 +15,7 @@ function HabitList(props){
                 onViewDetails={props.onViewDetails}
                 streaks={props.streaks}
                 isCompleted={habit.isCompleted}
+                onRestore={props.onRestore}
             />  
              ))}
         </ul>

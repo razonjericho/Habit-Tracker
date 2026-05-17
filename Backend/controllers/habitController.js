@@ -166,7 +166,7 @@ const archiveHabit = async (req, res) => {
         }
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Failed to delete a habit" });
+        res.status(500).json({ error: "Failed to arhive a habit" });
     }
 }
 
@@ -183,6 +183,16 @@ const restoreHabit = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to restore a habit" })
+    }
+}
+
+const deleteHabit = async (req, res) => {
+    const id = req.params.id;
+    try {
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to delete a habit" })
     }
 }
 

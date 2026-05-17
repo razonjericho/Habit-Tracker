@@ -6,7 +6,7 @@ import { HabitContext } from '../../HabitContext';
 
 function EditPage() {
     const context = useContext(HabitContext);
-    const {habits, addHabit, editHabit, archiveHabit} = context;
+    const {habits, addHabit, editHabit, archiveHabit, restoreHabit} = context;
     const [archivedHabit, setArchivedHabits] = useState([]);
     const API_URL = "http://localhost:3000";
 
@@ -26,7 +26,7 @@ function EditPage() {
             <HabitList habits={habits} onEdit={editHabit} onArchive={archiveHabit} />
             <HabitInput onAdd={addHabit} />
             <h2>Archived Habits</h2>
-            <HabitList habits={archivedHabit} />
+            <HabitList habits={archivedHabit} onRestore={restoreHabit} />
         </div>
     )
     
