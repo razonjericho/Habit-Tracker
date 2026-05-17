@@ -89,14 +89,14 @@ function HabitProvider({ children }) {
 
     const restoreHabit = async (id) => {
       try {
-        const response = await axios.patch(`${API_URL}/habits/edit/archive/${id}`);
+        const response = await axios.patch(`${API_URL}/habits/edit/archive/restore/${id}`);
         const restoreHabit = response.data;
         setArchivedHabit(restoreHabit);
       } catch (err) {
         console.error('Error, unable to restore a habit', err);
       }
-    } 
-
+    }
+    
   return (
     <HabitContext.Provider value={{
       habits,

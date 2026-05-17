@@ -1,5 +1,5 @@
 import express from "express";
-import { getHabits, getArchivedHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit } from "../controllers/habitController.js";
+import { getHabits, getArchivedHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit } from "../controllers/habitController.js";
 
 const router = express.Router();
 
@@ -11,6 +11,7 @@ router.post("/", createHabit);
 router.post("/:id/completed", completeHabit);
 router.patch("/edit/rename/:id", editHabit);
 router.patch("/edit/archive/:id", archiveHabit);
-router.patch("/edit/archive/:id", restoreHabit);
+router.patch("/edit/archive/restore/:id", restoreHabit);
+router.delete("/edit/archive/delete/:id", deleteHabit);
 
 export default router;
