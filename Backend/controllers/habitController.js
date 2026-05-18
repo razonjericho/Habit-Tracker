@@ -6,13 +6,12 @@ const getHabits = async (req, res) => {
     try {
         const result = await db.query(
             `
-            SELECT habits.id AS id, habits.habit AS habit, 
+            SELECT habits.id AS id, habits.habit AS habit, habits.active AS active, 
             COALESCE(completions.completed, false) AS \"isCompleted\" 
             FROM habits 
             LEFT JOIN completions 
             ON habits.id = completions.habit_id 
             AND completions.date = ($1) 
-            WHERE active = true
             `, 
             [date]
         );
@@ -21,17 +20,6 @@ const getHabits = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to fetch habits" });
-    }
-}
-
-const getArchivedHabits = async (req, res) => {
-    try {
-        const result = await db.query(`SELECT id, habit, active FROM habits WHERE active = false`)
-        const archivedHabits = result.rows;
-        res.json(archivedHabits);
-    } catch (err) {
-        console.error(err)
-        res.status(500).json({ error: "Failed to fetch archived habits" });
     }
 }
 
@@ -207,4 +195,4 @@ const deleteHabit = async (req, res) => {
     }
 }
 
-export { getHabits, getArchivedHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit };
+export { getHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit };
