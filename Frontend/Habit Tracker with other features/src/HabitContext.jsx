@@ -101,7 +101,7 @@ function HabitProvider({ children }) {
         setHabit(prevHabits => {
           console.log(deleteHabit);
           return prevHabits.filter((habit) => {
-            return habit.id !== deleteHabit.id;
+            return habit.id !== Number(deleteHabit.id);
           })
         });
       } catch (err) {

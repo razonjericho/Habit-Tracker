@@ -179,19 +179,19 @@ const restoreHabit = async (req, res) => {
 }
 
 const deleteHabit = async (req, res) => {
-    const deleteHabit = req.params.id;
+    const id = req.params.id;
     try {
         await db.query(
             `DELETE FROM completions WHERE habit_id = $1`,
-            [deleteHabit]
+            [id]
         );
 
-        const result = await db.query(`DELETE FROM habits WHERE id = ($1)`, [deleteHabit]);
+        const result = await db.query(`DELETE FROM habits WHERE id = ($1)`, [id]);
         const rowCount = result.rowCount;
         if (rowCount === 0) {
             res.status(404).json({ error: "Habit not found" })
         } else if (rowCount !== 0) {
-            res.json({ message: "Habit permanently deleted", id: deleteHabit })
+            res.json({ message: "Habit permanently deleted", id: id })
         }
     } catch (err) {
         console.error(err);
