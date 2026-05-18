@@ -80,7 +80,12 @@ function HabitProvider({ children }) {
       try {
         const response = await axios.patch(`${API_URL}/habits/edit/archive/restore/${id}`);
         const restoreHabit = response.data;
-        setArchivedHabit(restoreHabit);
+        setHabit(prevHabits => {
+          console.log(restoreHabit);
+          return prevHabits.map(habit =>
+            habit.id === restoreHabit.id ? restoreHabit : habit
+          )
+        });
       } catch (err) {
         console.error('Error, unable to restore a habit', err);
       }

@@ -10,6 +10,7 @@ function ProgressPage(props) {
     const context = useContext(HabitContext);
     const { habits } = context;
     const [ streaks, setStreak ] = useState({});
+    const activeHabits = habits.filter(habit => habit.active);
 
     useEffect(() => {
         if (habits.length === 0) return;
@@ -57,7 +58,7 @@ function ProgressPage(props) {
                 year={props.year}
             />
             <HabitList
-                habits={habits}
+                habits={activeHabits}
                 streaks={streaks}
                 onViewDetails={viewHabitDetails}            
             />
