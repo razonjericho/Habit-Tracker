@@ -145,13 +145,15 @@ const editHabit = async (req, res) => {
 const archiveHabit = async (req, res) => {
     const id = req.params.id;
     try {
-        const result = await db.query(`UPDATE habits SET active = false WHERE id = $1`, [id]);
-        const rowCount = result.rowCount;
-        if (rowCount === 0) {
-            res.status(404).json({ error: "Habit not found" })
-        } else if (rowCount !== 0) {
-            res.json({ message: "Habit archived successfully", id: id });
+        const result = await db.query(`UPDATE habits SET active = false WHERE id = $1 RETURNING *`, [id]);
+        const archivedHabit = result.rows[0];
+
+        if (!archivedHabit) {
+            return res.status(404).json({ error: "Habit is not found" });
         }
+
+        res.json(archivedHabit);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to arhive a habit" });

@@ -51,10 +51,13 @@ function HabitProvider({ children }) {
 
     const archiveHabit = async (id) => {
         try {
-            await axios.patch(`${API_URL}/habits/edit/archive/${id}`)
+            const response = await axios.patch(`${API_URL}/habits/edit/archive/${id}`);
+            const archiveHabit = response.data;
             setHabit(prevHabits => {
             console.log("ARCHIVED ID:", id);
-                return prevHabits.filter(habit => habit.id !== id)
+                return prevHabits.map(habit => 
+                  habit.id === archiveHabit.id ? archiveHabit : habit
+                )
             })
             } catch (err) {
             console.error('Error, unable to archive a habit:', err);
@@ -95,8 +98,13 @@ function HabitProvider({ children }) {
       try {
         const response = await axios.delete(`${API_URL}/habits/edit/archive/delete/${id}`);
         const deleteHabit = response.data;
-        setArchivedHabit(deleteHabit);
-      } catch {
+        setHabit(prevHabits => {
+          console.log(deleteHabit);
+          return prevHabits.filter((habit) => {
+            return habit.id !== deleteHabit.id;
+          })
+        });
+      } catch (err) {
         console.error('Error, unable to delete a habit:', err)
       }
     } 
