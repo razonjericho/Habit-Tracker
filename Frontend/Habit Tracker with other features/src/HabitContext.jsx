@@ -71,7 +71,7 @@ function HabitProvider({ children }) {
           setHabit(prevHabits => {
             console.log(habitFinished)
             return prevHabits.map(habit =>      
-                habit.id === habitFinished.id ? {...habit, isCompleted: habitFinished.isCompleted, date: habitFinished.date} : habit
+                habit.id === habitFinished.id ? habitFinished : habit
             )
           })
         } catch (err) {

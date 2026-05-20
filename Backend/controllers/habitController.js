@@ -80,7 +80,23 @@ const getHabitLongestStreak = async (req, res) => {
 const createHabit = async (req, res) => {
     const addHabit = req.body.addHabit;
     try {
-        const result = await db.query(`INSERT INTO habits (habit) VALUES ($1) RETURNING id, habit, active;`, [addHabit]);
+        const result = await db.query(
+            `
+            WITH added AS (
+                INSERT INTO habits (habit) 
+                VALUES ($1) 
+                RETURNING id, habit, active
+            )
+            SELECT
+                added.id AS id,
+                added.habit AS habit,
+                added.active AS active,
+                COALESCE(completions.completed, false) AS \"isCompleted\"
+            FROM added
+            LEFT JOIN completions
+                ON added.id = completions.habit_id
+            `, 
+            [addHabit]);
         const newHabit = result.rows[0];
         res.json(newHabit)
     } catch (err) {
@@ -111,7 +127,7 @@ const completeHabit = async (req, res) => {
             FROM habits
             LEFT JOIN upsert
                 ON habits.id = upsert.habit_id
-            WHERE habits.id = $1
+            WHERE habits.id = ($1)
         `,
         [habit_id, date]
         );
