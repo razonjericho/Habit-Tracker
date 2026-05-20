@@ -80,7 +80,7 @@ const getHabitLongestStreak = async (req, res) => {
 const createHabit = async (req, res) => {
     const addHabit = req.body.addHabit;
     try {
-        const result = await db.query(`INSERT INTO habits (habit) VALUES ($1) RETURNING id, habit, false AS \"isCompleted\";`, [addHabit]);
+        const result = await db.query(`INSERT INTO habits (habit) VALUES ($1) RETURNING id, habit, active;`, [addHabit]);
         const newHabit = result.rows[0];
         res.json(newHabit)
     } catch (err) {
@@ -96,11 +96,22 @@ const completeHabit = async (req, res) => {
     try {
         const result = await db.query(
         `
-        INSERT INTO completions (habit_id, date, completed)
-        VALUES ($1, $2, true)
-        ON CONFLICT (habit_id, date)
-        DO UPDATE SET completed = NOT completions.completed
-        RETURNING habit_id AS id, date, completed AS \"isCompleted\"
+            WITH upsert AS (
+                INSERT INTO completions (habit_id, date, completed)
+                VALUES ($1, $2, true)
+                ON CONFLICT (habit_id, date)
+                DO UPDATE SET completed = NOT completions.completed
+                RETURNING habit_id, date, completed
+            )
+            SELECT 
+                habits.id AS id,
+                habits.habit AS habit,
+                habits.active AS active,
+                COALESCE(upsert.completed, false) AS "isCompleted"
+            FROM habits
+            LEFT JOIN upsert
+                ON habits.id = upsert.habit_id
+            WHERE habits.id = $1
         `,
         [habit_id, date]
         );
@@ -119,21 +130,24 @@ const editHabit = async (req, res) => {
     const id = req.params.id;
     try {
         const result = await db.query(
-            `WITH updated AS (
-            UPDATE habits
-            SET habit = ($1)
-            WHERE id = ($2)
-            RETURNING id, habit, active
+            `
+            WITH updated AS (
+                UPDATE habits
+                SET habit = ($1)
+                WHERE id = ($2)
+                RETURNING id, habit, active
             )
             SELECT
                 updated.id,
                 updated.habit,
+                updated.active,
                 COALESCE(completions.completed, false) AS \"isCompleted\"
             FROM updated
             LEFT JOIN completions
                 ON updated.id = completions.habit_id
                 AND completions.date = ($3)
-            `, [updatedText, id, date])
+            `, 
+            [updatedText, id, date])
         const updatedHabit = result.rows[0];
         res.json(updatedHabit);
     } catch (err) {
@@ -144,8 +158,27 @@ const editHabit = async (req, res) => {
 
 const archiveHabit = async (req, res) => {
     const id = req.params.id;
+    const date = new Date().toLocaleDateString("en-CA");
     try {
-        const result = await db.query(`UPDATE habits SET active = false WHERE id = $1 RETURNING *`, [id]);
+        const result = await db.query(
+            `
+            WITH archived AS (
+                UPDATE habits 
+                SET active = false 
+                WHERE id = ($1) 
+                RETURNING id, habit, active
+            )
+            SELECT
+                archived.id,
+                archived.habit,
+                archived.active,
+                COALESCE(completions.completed, false) AS \"isCompleted\"
+            FROM archived
+            LEFT JOIN completions 
+                ON archived.id = completions.habit_id
+                AND completions.date = ($2)
+            `, 
+            [id, date]);
         const archivedHabit = result.rows[0];
 
         if (!archivedHabit) {
@@ -161,9 +194,28 @@ const archiveHabit = async (req, res) => {
 }
 
 const restoreHabit = async (req, res) => {
+    const date = new Date().toLocaleDateString("en-CA");
     const id = req.params.id;
     try {
-        const result = await db.query(`UPDATE habits SET active = true WHERE id = $1 RETURNING *`, [id]);
+        const result = await db.query(
+            `
+            WITH restored AS (
+                UPDATE habits 
+                SET active = true
+                WHERE id = ($1) 
+                RETURNING id, habit, active
+            )
+            SELECT
+                restored.id,
+                restored.habit,
+                restored.active,
+                COALESCE(completions.completed, false) AS \"isCompleted\"
+            FROM restored
+            LEFT JOIN completions 
+                ON restored.id = completions.habit_id
+                AND completions.date = ($2)
+            `, 
+            [id, date]);
         const restoredHabit = result.rows[0];
 
         if (!restoredHabit) {
