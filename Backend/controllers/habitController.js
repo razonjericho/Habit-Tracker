@@ -23,60 +23,6 @@ const getHabits = async (req, res) => {
     }
 }
 
-const getHabitStreak = async (req, res) => {
-    const habit_id = req.params.id;
-    try {
-        const result = await db.query(
-            `
-            SELECT completions.date
-            FROM completions
-            WHERE completions.habit_id = ($1)
-            AND completions.completed = true
-            ORDER BY completions.date DESC;
-            `,
-            [habit_id]
-        );
-        const dates = result.rows.map(row => 
-            new Date(row.date).toLocaleDateString("en-CA")
-        );
-
-        const streak = calculateStreak(dates);
-
-        res.json({habit_id, streak});
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({error: "Failed to fetch habit streak"})
-    }
-}
-
-const getHabitLongestStreak = async (req, res) => {
-    const habit_id = req.params.id;
-    try {
-        const result = await db.query(
-            `
-            SELECT completions.date
-            FROM completions
-            WHERE completions.habit_id = ($1)
-            AND completions.completed = true
-            ORDER BY completions.date DESC;
-            `,
-            [habit_id]
-        );
-        const dates = result.rows.map(row =>
-            new Date(row.date).toLocaleDateString("en-CA")
-        );
-
-        const streak = calculateStreak(dates);
-
-        const longestStreak = calculateLongestStreak(dates);
-        
-        res.json({habit_id, streak, longestStreak, dates});
-    } catch (err) {
-        console.error(err)
-        res.status(500).json({error: "Failed to fetch habit streak"})
-    }
-}
-
 const createHabit = async (req, res) => {
     const addHabit = req.body.addHabit;
     try {
@@ -133,7 +79,6 @@ const completeHabit = async (req, res) => {
         );
         const habitToday = result.rows[0]
         res.json(habitToday);
-        console.log("ISO date:", date);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to toggle completion" });
@@ -267,4 +212,81 @@ const deleteHabit = async (req, res) => {
     }
 }
 
-export { getHabits, getHabitStreak, getHabitLongestStreak, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit };
+const getHabitStreak = async (req, res) => {
+    const habit_id = req.params.id;
+    try {
+        const result = await db.query(
+            `
+            SELECT completions.date
+            FROM completions
+            WHERE completions.habit_id = ($1)
+            AND completions.completed = true
+            ORDER BY completions.date DESC;
+            `,
+            [habit_id]
+        );
+        const dates = result.rows.map(row => 
+            new Date(row.date).toLocaleDateString("en-CA")
+        );
+
+        const streak = calculateStreak(dates);
+
+        res.json({habit_id, streak});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: "Failed to fetch habit streak"})
+    }
+}
+
+const getHabitLongestStreak = async (req, res) => {
+    const habit_id = req.params.id;
+    try {
+        const result = await db.query(
+            `
+            SELECT completions.date
+            FROM completions
+            WHERE completions.habit_id = ($1)
+            AND completions.completed = true
+            ORDER BY completions.date DESC;
+            `,
+            [habit_id]
+        );
+        const dates = result.rows.map(row =>
+            new Date(row.date).toLocaleDateString("en-CA")
+        );
+
+        const streak = calculateStreak(dates);
+
+        const longestStreak = calculateLongestStreak(dates);
+        
+        res.json({habit_id, streak, longestStreak, dates});
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({error: "Failed to fetch habit streak"})
+    }
+}
+
+const getTotalCompletedHabits = async (req, res) => {
+    try {
+        const result = await db.query(
+            `
+            SELECT completions.date, COUNT(*) AS count
+            FROM completions
+            WHERE completions.completed = true
+            GROUP BY completions.date
+            `
+        )
+        const completionCount = {};
+
+        result.rows.forEach(row => {
+            completionCount[row.date] = Number(row.count);
+        });
+
+        res.json(completionCount);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: "Failed to load total number of completed habits"});
+    }
+}
+
+export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getTotalCompletedHabits };
