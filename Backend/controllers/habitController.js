@@ -276,13 +276,13 @@ const getTotalCompletedHabits = async (req, res) => {
             GROUP BY completions.date
             `
         )
-        const completionCount = {};
+        const completionCounts = {};
 
         result.rows.forEach(row => {
-            completionCount[row.date] = Number(row.count);
+            completionCounts[row.date] = Number(row.count);
         });
 
-        res.json(completionCount);
+        res.json(completionCounts);
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Failed to load total number of completed habits"});

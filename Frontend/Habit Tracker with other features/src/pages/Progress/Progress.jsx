@@ -10,7 +10,9 @@ function ProgressPage(props) {
     const context = useContext(HabitContext);
     const { habits } = context;
     const [ streaks, setStreak ] = useState({});
+    const [ completionCounts, setCompletionCounts ] = useState({});
     const activeHabits = habits.filter(habit => habit.active);
+    const total = activeHabits.length;
 
     useEffect(() => {
         if (habits.length === 0) return;
@@ -38,6 +40,20 @@ function ProgressPage(props) {
                 fetchStreak();
     }, [habits]);
 
+    useEffect(() => {
+        const fetchCompletionCounts = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/habits/progress`);
+
+                setCompletionCounts(response.data);
+            } catch (err) {
+                console.error('Error, unable to fetch completion count', err);
+            }
+        }
+
+        fetchCompletionCounts();
+    }, [])
+
     const navigate = useNavigate();
 
     function viewHabitDetails(id) {
@@ -56,6 +72,7 @@ function ProgressPage(props) {
             <Calendar
                 month={props.month}
                 year={props.year}
+                completionCounts={completionCounts}
             />
             <HabitList
                 habits={activeHabits}
