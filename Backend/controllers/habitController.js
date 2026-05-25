@@ -276,27 +276,45 @@ const getHabitLongestStreak = async (req, res) => {
     }
 }
 
-const getTotalCompletedHabits = async (req, res) => {
+const getHabitHeatMap = async (req, res) => {
     try {
         const result = await db.query(
             `
-            SELECT completions.date, COUNT(*) AS count
+            SELECT 
+                completions.date, 
+                COUNT(*) AS completed,
+                (
+                    SELECT COUNT(*)
+                    FROM habits
+                    WHERE habits.created_at <= completions.date
+                    AND (archived_at IS NULL OR archived_at > completions.date)
+                ) AS total_habits
+
             FROM completions
             WHERE completions.completed = true
             GROUP BY completions.date
             `
         )
-        const completionCounts = {};
+        
+        const heatMap = {};
 
         result.rows.forEach(row => {
-            completionCounts[row.date] = Number(row.count);
+            heatMap[row.date] = {
+            completed: Number(row.completed),
+            totalHabits: Number(row.total_habits),
+            intensity:
+                row.total_habits === 0
+                ? 0 : Number(row.completed) / Number(row.total_habits)
+        };
         });
 
-        res.json(completionCounts);
+        
+
+        res.json(heatMap);
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Failed to load total number of completed habits"});
     }
 }
 
-export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getTotalCompletedHabits };
+export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getHabitHeatMap };
