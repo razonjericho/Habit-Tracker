@@ -98,12 +98,14 @@ const editHabit = async (req, res) => {
                 UPDATE habits
                 SET habit = ($1)
                 WHERE id = ($2)
-                RETURNING id, habit, active
+                RETURNING id, habit, active, created_at, archived_at
             )
             SELECT
                 updated.id,
                 updated.habit,
                 updated.active,
+                updated.created_at,
+                updated.archived_at,
                 COALESCE(completions.completed, false) AS \"isCompleted\"
             FROM updated
             LEFT JOIN completions
