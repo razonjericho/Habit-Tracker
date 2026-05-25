@@ -29,14 +29,16 @@ const createHabit = async (req, res) => {
         const result = await db.query(
             `
             WITH added AS (
-                INSERT INTO habits (habit) 
-                VALUES ($1) 
-                RETURNING id, habit, active
+                INSERT INTO habits (habit, created_at) 
+                VALUES ($1, CURRENT_TIMESTAMP) 
+                RETURNING id, habit, active, created_at, archived_at
             )
             SELECT
                 added.id AS id,
                 added.habit AS habit,
                 added.active AS active,
+                added.created_at AS created_at,
+                added.archived_at AS archived_at,
                 COALESCE(completions.completed, false) AS \"isCompleted\"
             FROM added
             LEFT JOIN completions
@@ -125,14 +127,18 @@ const archiveHabit = async (req, res) => {
             `
             WITH archived AS (
                 UPDATE habits 
-                SET active = false 
+                SET 
+                    active = false,
+                    archived_at = CURRENT_TIMESTAMP 
                 WHERE id = ($1) 
-                RETURNING id, habit, active
+                RETURNING id, habit, active, created_at, archived_at
             )
             SELECT
                 archived.id,
                 archived.habit,
                 archived.active,
+                archived.created_at,
+                archived.archived_at,
                 COALESCE(completions.completed, false) AS \"isCompleted\"
             FROM archived
             LEFT JOIN completions 
@@ -150,7 +156,7 @@ const archiveHabit = async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Failed to arhive a habit" });
+        res.status(500).json({ error: "Failed to archive a habit" });
     }
 }
 
