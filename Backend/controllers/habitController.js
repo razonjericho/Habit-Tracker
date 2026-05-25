@@ -6,7 +6,7 @@ const getHabits = async (req, res) => {
     try {
         const result = await db.query(
             `
-            SELECT habits.id AS id, habits.habit AS habit, habits.active AS active, 
+            SELECT habits.id AS id, habits.habit AS habit, habits.active AS active, habits.created_at AS created_at, habits.archived_at AS archived_at, 
             COALESCE(completions.completed, false) AS \"isCompleted\" 
             FROM habits 
             LEFT JOIN completions 
