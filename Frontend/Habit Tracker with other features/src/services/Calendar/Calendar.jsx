@@ -4,7 +4,7 @@ import './Calendar.css'
 
 function Calendar(props) {
     
-    const weeks = calendarGenerator(props.year, props.month, props.completedDates, props.completionCounts);
+    const weeks = calendarGenerator(props.year, props.month, props.completedDates, props.heatMap);
 
     return (
         <div>
