@@ -31,7 +31,7 @@ function calendarGenerator(year, month, completedDates = new Set(), heatMap = {}
 
         const heat = heatMap[day];
 
-        const level = heatLevel(heat?.intensity ?? 0);
+        const level = heat ? heatLevel(heat.intensity) : 0;
 
         calendarDays.push({
             day: day,

@@ -30,3 +30,38 @@
     border: 2px solid white;
     border-radius: 20px;
 }
+
+.heat-0 { 
+    background-color: #f3f4f6;
+    color: white; 
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.heat-1 { 
+    background-color: #e9d5ff;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px; 
+}
+
+.heat-2 { 
+    background-color: #c084fc;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px; 
+}
+
+.heat-3 { 
+    background-color: #a855f7;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px; 
+}
+
+.heat-4 { 
+    background-color: #8B5CF6;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px; 
+}

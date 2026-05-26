@@ -4,7 +4,12 @@ import './Calendar.css'
 
 function Calendar(props) {
     
-    const weeks = calendarGenerator(props.year, props.month, props.completedDates, props.heatMap);
+    const weeks = calendarGenerator(
+        props.year, 
+        props.month, 
+        props.completedDates, 
+        props.heatMap
+    );
 
     return (
         <div>
@@ -21,7 +26,13 @@ function Calendar(props) {
             {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="week" >
                     {week.map((day, dayIndex) => (
-                        <div key={dayIndex} className={day ? (day.isCompleted ? "completed" : "not-completed") : "empty"} >
+                        <div key={dayIndex} className={
+                            day 
+                            ? day.level > 0 
+                                ? `heat-${day.level}` 
+                                : (day.isCompleted ? "completed" : "not-completed") 
+                            : "empty"} 
+                        >
                             {day ? new Date(day.day).getDate() : null}
                         </div>
                     ))}

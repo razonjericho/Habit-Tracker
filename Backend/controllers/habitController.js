@@ -299,16 +299,16 @@ const getHabitHeatMap = async (req, res) => {
         const heatMap = {};
 
         result.rows.forEach(row => {
-            heatMap[row.date] = {
+            const date = new Date(row.date).toLocaleDateString("en-CA");
+            heatMap[date] = {
             completed: Number(row.completed),
             totalHabits: Number(row.total_habits),
             intensity:
                 row.total_habits === 0
-                ? 0 : Number(row.completed) / Number(row.total_habits)
+                    ? 0 
+                    : Number(row.completed) / Number(row.total_habits)
         };
         });
-
-        
 
         res.json(heatMap);
     } catch (err) {
@@ -317,4 +317,4 @@ const getHabitHeatMap = async (req, res) => {
     }
 }
 
-export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getHabitHeatMap };
+export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getHabitHeatMap };   

@@ -60,16 +60,6 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
-    function heatLevel (intensity) {
-        const percent = intensity * 100;
-
-        if (percent === 0) return 0;
-        if (percent <= 25) return 1;
-        if (percent <= 50) return 2;
-        if (percent <= 75) return 3;
-        return 4;
-    }
-
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
    
