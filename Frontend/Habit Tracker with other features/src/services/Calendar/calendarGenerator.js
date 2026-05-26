@@ -1,5 +1,13 @@
 
 
+const heatLevel = (intensity) => {
+        if (intensity === 0) return 0;
+        if (intensity <= 0.25) return 1;
+        if (intensity <= 0.50) return 2;
+        if (intensity <= 0.75) return 3;
+        return 4;
+    }
+
 function calendarGenerator(year, month, completedDates = new Set(), heatMap = {}) {
     const startDate = new Date(year, month, 1);
     const firstDayIndex = startDate.getDay();
@@ -21,10 +29,13 @@ function calendarGenerator(year, month, completedDates = new Set(), heatMap = {}
 
         const isCompleted = completedDates.has(day);
 
-        const heat = heatMap[day]; 
+        const heat = heatMap[day];
+
+        const level = heatLevel(heat?.intensity ?? 0);
 
         calendarDays.push({
             day: day,
+            level: level,
             isCompleted: isCompleted,
             completed: heat?.completed || 0,
             totalHabits: heat?.totalHabits || 0,

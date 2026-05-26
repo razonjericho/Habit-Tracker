@@ -10,7 +10,7 @@ function ProgressPage(props) {
     const context = useContext(HabitContext);
     const { habits } = context;
     const [ streaks, setStreak ] = useState({});
-    const [ completionCounts, setCompletionCounts ] = useState({});
+    const [ heatMap, setHeatMap ] = useState({});
     const activeHabits = habits.filter(habit => habit.active);
     const total = activeHabits.length;
 
@@ -41,23 +41,33 @@ function ProgressPage(props) {
     }, [habits]);
 
     useEffect(() => {
-        const fetchCompletionCounts = async () => {
+        const fetchHeatMap = async () => {
             try {
                 const response = await axios.get(`${API_URL}/habits/progress`);
 
-                setCompletionCounts(response.data);
+                setHeatMap(response.data);
             } catch (err) {
                 console.error('Error, unable to fetch completion count', err);
             }
         }
 
-        fetchCompletionCounts();
+        fetchHeatMap();
     }, [])
 
     const navigate = useNavigate();
 
     function viewHabitDetails(id) {
         navigate(`/progress/${id}`);
+    }
+
+    function heatLevel (intensity) {
+        const percent = intensity * 100;
+
+        if (percent === 0) return 0;
+        if (percent <= 25) return 1;
+        if (percent <= 50) return 2;
+        if (percent <= 75) return 3;
+        return 4;
     }
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -72,7 +82,7 @@ function ProgressPage(props) {
             <Calendar
                 month={props.month}
                 year={props.year}
-                completionCounts={completionCounts}
+                heatMap={heatMap}
             />
             <HabitList
                 habits={activeHabits}

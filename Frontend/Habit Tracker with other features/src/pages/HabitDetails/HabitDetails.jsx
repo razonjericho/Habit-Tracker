@@ -58,7 +58,6 @@ function HabitDetailsPage(props){
                 year={props.year} 
                 month={props.month} 
                 completedDates={completedDates}
-                heatMap={{}}
             />
             <p>Habit: {selectedHabit.habit}</p>
             <p>Current Streak: {streaks.streak}</p>
