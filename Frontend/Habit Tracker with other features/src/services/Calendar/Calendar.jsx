@@ -21,13 +21,13 @@ function Calendar(props) {
             {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="week" >
                     {week.map((day, dayIndex) => (
-                        <div key={dayIndex} className={day ? (day.completed ? "completed" : "not-completed") : "empty"} >
+                        <div key={dayIndex} className={day ? (day.isCompleted ? "completed" : "not-completed") : "empty"} >
                             {day ? new Date(day.day).getDate() : null}
                         </div>
                     ))}
                 </div>
             ))}
-        </div>
+            </div>
         </div>
         
     )

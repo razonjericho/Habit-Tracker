@@ -19,10 +19,13 @@ function calendarGenerator(year, month, completedDates = new Set(), heatMap = {}
     while (current <= endDate) {
         const day = current.toLocaleDateString("en-CA");
 
+        const isCompleted = completedDates.has(day);
+
         const heat = heatMap[day]; 
 
         calendarDays.push({
             day: day,
+            isCompleted: isCompleted,
             completed: heat?.completed || 0,
             totalHabits: heat?.totalHabits || 0,
             intensity: heat?.intensity || 0
