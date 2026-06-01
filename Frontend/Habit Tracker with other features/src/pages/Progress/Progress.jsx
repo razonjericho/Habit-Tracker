@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import HabitList from "../../components/HabitList/HabitList"
+import HabitList from "../../components/HabitList/HabitList";
 import Calendar from '../../services/Calendar/Calendar';
 import { HabitContext } from '../../HabitContext';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import './Progress.css';
 
 function ProgressPage(props) {
     const API_URL = "http://localhost:3000";
@@ -12,8 +13,9 @@ function ProgressPage(props) {
     const [ streaks, setStreak ] = useState({});
     const [ heatMap, setHeatMap ] = useState({});
     const [ selectedDay, setSelectedDay ] = useState(null);
+    const [ tooltipPos, setTooltipPos ] = useState(null);
     const activeHabits = habits.filter(habit => habit.active === true);
-    const total = activeHabits.length;
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     useEffect(() => {
         if (habits.length === 0) return;
@@ -61,11 +63,21 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
-    function handleSelectDay (day) {
+    function handleSelectDay (event, day) {
+        const position = event.currentTarget.getBoundingClientRect();
+
         setSelectedDay(day)
+
+        setTooltipPos({
+            top: position.top,
+            left: position.left + position.width / 2
+        })
     }
 
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    function clearSelectDay () {
+        setSelectedDay(null);
+        setTooltipPos(null);
+    }
 
    
     return (
@@ -79,8 +91,22 @@ function ProgressPage(props) {
                 year={props.year}
                 heatMap={heatMap}
                 onSelectedDay={handleSelectDay}
+                onClearSelectedDay={clearSelectDay}
                 selectedDay={selectedDay}
             />
+
+            {selectedDay && tooltipPos && (
+                <div className="tooltip"
+                    style={{
+                        top: tooltipPos.top,
+                        left: tooltipPos.left,
+                    }}
+                >
+                    <div>{selectedDay.day}</div>
+                    <div>{selectedDay.completed} / {selectedDay.totalHabits} habits completed</div>
+                    <div>{Math.round(selectedDay.intensity * 100)}% complete</div>
+                </div>
+            )}
 
             <HabitList
                 habits={activeHabits}
