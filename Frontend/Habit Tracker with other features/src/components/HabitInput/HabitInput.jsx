@@ -8,7 +8,6 @@ function HabitInput(props) {
         setInputText(newValue);
     }
 
-
     return (
         <div className="form">
             <input id="habit-input" name="habit" type="text" onChange={handleChange} value={inputText} />

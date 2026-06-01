@@ -22,16 +22,31 @@ function Calendar(props) {
                 <span>Fri</span>
                 <span>Sat</span>
             </div>
+            {props.selectedDay && (
+                <div className="tooltip">
+                    <div>{props.selectedDay.day}</div>
+                    <div>
+                        {props.selectedDay.completed} / {props.selectedDay.totalHabits} habits completed
+                    </div>
+                    <div>
+                        {Math.round(props.selectedDay.intensity * 100)}%
+                    </div>
+                </div>
+            )}
             <div className="calendar" >
             {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="week" >
                     {week.map((day, dayIndex) => (
-                        <div key={dayIndex} className={
+                        <div 
+                        key={dayIndex} 
+                        className={
                             day 
                             ? day.level > 0 
                                 ? `heat-${day.level}` 
                                 : (day.isCompleted ? "completed" : "not-completed") 
-                            : "empty"} 
+                            : "empty"}
+                        onMouseEnter={() =>{ day && props.onSelectedDay(day) }}
+                        onClick={()=>{ day && props.onSelectedDay(day) }}
                         >
                             {day ? new Date(day.day).getDate() : null}
                         </div>

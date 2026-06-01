@@ -11,7 +11,8 @@ function ProgressPage(props) {
     const { habits } = context;
     const [ streaks, setStreak ] = useState({});
     const [ heatMap, setHeatMap ] = useState({});
-    const activeHabits = habits.filter(habit => habit.active);
+    const [ selectedDay, setSelectedDay ] = useState(null);
+    const activeHabits = habits.filter(habit => habit.active === true);
     const total = activeHabits.length;
 
     useEffect(() => {
@@ -60,6 +61,10 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
+    function handleSelectDay (day) {
+        setSelectedDay(day)
+    }
+
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
    
@@ -73,7 +78,10 @@ function ProgressPage(props) {
                 month={props.month}
                 year={props.year}
                 heatMap={heatMap}
+                onSelectedDay={handleSelectDay}
+                selectedDay={selectedDay}
             />
+
             <HabitList
                 habits={activeHabits}
                 streaks={streaks}
