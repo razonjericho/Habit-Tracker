@@ -286,8 +286,8 @@ const getHabitHeatMap = async (req, res) => {
                 (
                     SELECT COUNT(*)
                     FROM habits
-                    WHERE habits.created_at <= completions.date
-                    AND (archived_at IS NULL OR archived_at > completions.date)
+                    WHERE DATE(habits.created_at) <= completions.date
+                    AND (archived_at IS NULL OR DATE(archived_at) > completions.date)
                 ) AS total_habits
 
             FROM completions

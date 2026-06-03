@@ -58,13 +58,3 @@
     border: 2px solid white;
     border-radius: 20px; 
 }
-
-.tooltip {
-    position: absolute;
-    top: 50px;
-    left: 100px;
-    background-color: yellow;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 20px;
-}
