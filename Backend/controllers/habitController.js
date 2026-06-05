@@ -142,6 +142,14 @@ const archiveHabit = async (req, res) => {
                     archived_at = CURRENT_TIMESTAMP 
                 WHERE id = ($1) 
                 RETURNING id, habit, active, created_at, archived_at
+            ),
+            event_archived AS (
+                INSERT INTO habit_events (habit_id, event_type, occurred_at)
+                SELECT
+                    archived.id,
+                    'archived',
+                    CURRENT_TIMESTAMP
+                FROM archived
             )
             SELECT
                 archived.id,
