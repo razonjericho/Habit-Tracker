@@ -189,6 +189,14 @@ const restoreHabit = async (req, res) => {
                 SET active = true
                 WHERE id = ($1) 
                 RETURNING id, habit, active, created_at, archived_at
+            ),
+            event_restored AS (
+                INSERT INTO habit_events (habit_id, event_type, occurred_at)
+                SELECT
+                    restored.id,
+                    'restored',
+                    CURRENT_TIMESTAMP
+                FROM restored
             )
             SELECT
                 restored.id,
