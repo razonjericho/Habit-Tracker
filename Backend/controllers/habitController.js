@@ -32,6 +32,14 @@ const createHabit = async (req, res) => {
                 INSERT INTO habits (habit, created_at) 
                 VALUES ($1, CURRENT_TIMESTAMP) 
                 RETURNING id, habit, active, created_at, archived_at
+            ),
+            event_added AS (
+                INSERT INTO habit_events (habit_id, event_type, occurred_at)
+                SELECT
+                    added.id,
+                    'created',
+                    CURRENT_TIMESTAMP
+                FROM added
             )
             SELECT
                 added.id AS id,
