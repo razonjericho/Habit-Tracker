@@ -150,6 +150,13 @@ const archiveHabit = async (req, res) => {
                     'archived',
                     CURRENT_TIMESTAMP
                 FROM archived
+            ),
+            incompleted AS (
+                UPDATE completions
+                SET
+                    completed = false
+                WHERE habit_id = ($1) 
+                AND date = ($2)
             )
             SELECT
                 archived.id,
