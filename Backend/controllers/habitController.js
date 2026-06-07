@@ -308,10 +308,23 @@ const getHabitHeatMap = async (req, res) => {
                 completions.date, 
                 COUNT(*) AS completed,
                 (
-                    SELECT COUNT(*)
-                    FROM habits
-                    WHERE DATE(habits.created_at) <= completions.date
-                    AND (archived_at IS NULL OR DATE(archived_at) > completions.date)
+                    SELECT COUNT (*)
+                        FROM (
+                            SELECT DISTINCT ON (habit_id)
+                                habit_id,
+                                event_type,
+                                occurred_at,
+
+                                CASE
+                                    WHEN event_type IN ('created', 'restored')
+                                        THEN true
+                                    ELSE false
+                                END AS active
+                            FROM habit_events 
+                            WHERE occurred_at < (completions.date + 1)
+                            ORDER BY habit_id, occurred_at DESC
+                        ) latest_events
+                        WHERE active = true
                 ) AS total_habits
 
             FROM completions
