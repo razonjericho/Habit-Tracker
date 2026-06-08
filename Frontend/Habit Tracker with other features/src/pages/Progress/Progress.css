@@ -1,9 +1,5 @@
 
 .tooltip {
-    position: fixed;
-    transform: translate(-50%, -100%);
-    pointer-events: none;
-
     background-color:  #8B5CF6;
     color: white;
     padding: 8px 10px;

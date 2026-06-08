@@ -39,6 +39,9 @@ function Calendar(props) {
                         onMouseEnter={() => {
                             props.onSelectedDay(day)
                         }}
+                        onMouseLeave={() => {
+                            props.onCloseSelectedDay();
+                        }}
                         onClick={() => {
                             props.onSelectedDay(day)
                         }}

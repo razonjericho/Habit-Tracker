@@ -69,6 +69,10 @@ function ProgressPage(props) {
     useEffect(() => {
         console.log(selectedDay);
     }, [selectedDay]);
+
+    function closeSelectedDay(){
+        setSelectedDay(null)
+    }
    
     return (
         <div>
@@ -81,10 +85,11 @@ function ProgressPage(props) {
                 year={props.year}
                 heatMap={heatMap}
                 onSelectedDay={handleSelectDay}
+                onCloseSelectedDay={closeSelectedDay}
             />
 
             {selectedDay && (
-                <div>
+                <div className="tooltip">
                     <p>{selectedDay.day}</p>
                     <p>{selectedDay.completed} / {selectedDay.totalHabits}</p>
                     <p>{Math.round(selectedDay.intensity * 100)}% Complete</p>
