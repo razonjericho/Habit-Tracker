@@ -13,7 +13,6 @@ function ProgressPage(props) {
     const [ streaks, setStreak ] = useState({});
     const [ heatMap, setHeatMap ] = useState({});
     const [ selectedDay, setSelectedDay ] = useState(null);
-    const [ tooltipPos, setTooltipPos ] = useState(null);
     const activeHabits = habits.filter(habit => habit.active === true);
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -63,22 +62,13 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
-    function handleSelectDay (event, day) {
-        const position = event.currentTarget.getBoundingClientRect();
-
-        setSelectedDay(day)
-
-        setTooltipPos({
-            top: position.top,
-            left: position.left + position.width / 2
-        })
+    function handleSelectDay(day){
+        setSelectedDay(day);
     }
 
-    function clearSelectDay () {
-        setSelectedDay(null);
-        setTooltipPos(null);
-    }
-
+    useEffect(() => {
+        console.log(selectedDay);
+    }, [selectedDay]);
    
     return (
         <div>
@@ -91,20 +81,13 @@ function ProgressPage(props) {
                 year={props.year}
                 heatMap={heatMap}
                 onSelectedDay={handleSelectDay}
-                onClearSelectedDay={clearSelectDay}
-                selectedDay={selectedDay}
             />
 
-            {selectedDay && tooltipPos && (
-                <div className="tooltip"
-                    style={{
-                        top: tooltipPos.top,
-                        left: tooltipPos.left,
-                    }}
-                >
-                    <div>{selectedDay.day}</div>
-                    <div>{selectedDay.completed} / {selectedDay.totalHabits} habits completed</div>
-                    <div>{Math.round(selectedDay.intensity * 100)}% complete</div>
+            {selectedDay && (
+                <div>
+                    <p>{selectedDay.day}</p>
+                    <p>{selectedDay.completed} / {selectedDay.totalHabits}</p>
+                    <p>{Math.round(selectedDay.intensity * 100)}% Complete</p>
                 </div>
             )}
 

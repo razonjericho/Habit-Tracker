@@ -36,12 +36,11 @@ function Calendar(props) {
                                 : (day.isCompleted ? "completed" : "not-completed") 
                             : "empty"
                         }
-                        onMouseEnter={(event) =>{  
-                            day ? props.onSelectedDay(event, day) : null; 
+                        onMouseEnter={() => {
+                            props.onSelectedDay(day)
                         }}
-                        onMouseLeave={()=>{ props.onClearSelectedDay() }}
-                        onClick={(event)=>{ 
-                            day ? props.onSelectedDay(event, day) : null; 
+                        onClick={() => {
+                            props.onSelectedDay(day)
                         }}
                         >
                             {day ? new Date(day.day).getDate() : null}
