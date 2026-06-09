@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import HabitList from "../../components/HabitList/HabitList";
 import Calendar from '../../services/Calendar/Calendar';
@@ -14,6 +14,7 @@ function ProgressPage(props) {
     const [ heatMap, setHeatMap ] = useState({});
     const [ selectedDay, setSelectedDay ] = useState(null);
     const [ tooltipPosition, setTooltipPosition ] = useState(null);
+    const [ clampedLeft, setClampedLeft ] = useState(null);
     const activeHabits = habits.filter(habit => habit.active === true);
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -68,14 +69,47 @@ function ProgressPage(props) {
         setTooltipPosition(position);
     }
 
-    useEffect(() => {
-        console.log(tooltipPosition);
-    }, [tooltipPosition]);
-
     function closeSelectedDay(){
         setSelectedDay(null);
         setTooltipPosition(null);
     }
+
+    const tooltipRef = useRef(null);
+   
+
+    useEffect(() => {
+        if (!selectedDay || !tooltipRef.current || !tooltipPosition) return;
+
+        const size = tooltipRef.current.getBoundingClientRect();
+
+        const tooltipWidth = size.width;
+        const viewportWidth = window.innerWidth;
+
+        const centerX =
+            tooltipPosition.left +
+            (tooltipPosition.width / 2);
+
+        const idealLeft =
+            centerX - (tooltipWidth / 2);
+
+        const padding = 8;
+
+        const minLeft = padding;
+
+        const maxLeft =
+            viewportWidth -
+            tooltipWidth -
+            padding;
+
+        const safeLeft =
+            Math.min(
+                Math.max(idealLeft, minLeft),
+                maxLeft
+            );
+
+        setClampedLeft(safeLeft);
+
+    }, [selectedDay, tooltipPosition]);
    
     return (
         <div>
@@ -94,9 +128,10 @@ function ProgressPage(props) {
             {selectedDay && (
                 <div 
                 className="tooltip"
+                ref={tooltipRef}
                 style={{
                     top: tooltipPosition.top - 75,
-                    left: tooltipPosition.left + (tooltipPosition.width / 2)
+                    left: clampedLeft
                 }}
                 >
                     <p>{selectedDay.day}</p>
