@@ -36,14 +36,16 @@ function Calendar(props) {
                                 : (day.isCompleted ? "completed" : "not-completed") 
                             : "empty"
                         }
-                        onMouseEnter={() => {
-                            props.onSelectedDay(day)
+                        onMouseEnter={(event) => {
+                            const position = event.currentTarget.getBoundingClientRect();
+                            props.onSelectedDay(day, position);
                         }}
                         onMouseLeave={() => {
                             props.onCloseSelectedDay();
                         }}
-                        onClick={() => {
-                            props.onSelectedDay(day)
+                        onClick={(event) => {
+                            const position = event.currentTarget.getBoundingClientRect();
+                            props.onSelectedDay(day, position);
                         }}
                         >
                             {day ? new Date(day.day).getDate() : null}

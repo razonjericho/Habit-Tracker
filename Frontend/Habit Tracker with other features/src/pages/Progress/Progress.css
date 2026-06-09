@@ -1,5 +1,8 @@
 
 .tooltip {
+    position: fixed;
+    transform: translateX(-50%);
+
     background-color:  #8B5CF6;
     color: white;
     padding: 8px 10px;

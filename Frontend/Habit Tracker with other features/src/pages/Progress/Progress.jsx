@@ -13,6 +13,7 @@ function ProgressPage(props) {
     const [ streaks, setStreak ] = useState({});
     const [ heatMap, setHeatMap ] = useState({});
     const [ selectedDay, setSelectedDay ] = useState(null);
+    const [ tooltipPosition, setTooltipPosition ] = useState(null);
     const activeHabits = habits.filter(habit => habit.active === true);
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -62,16 +63,18 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
-    function handleSelectDay(day){
+    function handleSelectDay(day, position){
         setSelectedDay(day);
+        setTooltipPosition(position);
     }
 
     useEffect(() => {
-        console.log(selectedDay);
-    }, [selectedDay]);
+        console.log(tooltipPosition);
+    }, [tooltipPosition]);
 
     function closeSelectedDay(){
-        setSelectedDay(null)
+        setSelectedDay(null);
+        setTooltipPosition(null);
     }
    
     return (
@@ -89,7 +92,13 @@ function ProgressPage(props) {
             />
 
             {selectedDay && (
-                <div className="tooltip">
+                <div 
+                className="tooltip"
+                style={{
+                    top: tooltipPosition.top - 75,
+                    left: tooltipPosition.left + (tooltipPosition.width / 2)
+                }}
+                >
                     <p>{selectedDay.day}</p>
                     <p>{selectedDay.completed} / {selectedDay.totalHabits}</p>
                     <p>{Math.round(selectedDay.intensity * 100)}% Complete</p>
