@@ -362,10 +362,24 @@ const getHabitHeatMap = async (req, res) => {
 }
 
 const getDayDetails = async (req, res) => {
-    try {
-        const date = req.params.date;
+    const date = req.params.date;
 
-        res.json({date});
+    try {
+        const result = await db.query(
+            `
+            SELECT habits.id AS id, habits.habit AS habit, habits.active AS active,
+            COALESCE(completions.completed, false) AS \"isCompleted\" 
+            FROM habits
+            LEFT JOIN completions
+            ON habits.id = completions.habit_id
+            AND completions.date = ($1)
+            `, 
+            [date]
+        );
+
+        const dayDetails = result.rows;
+
+        res.json({date, dayDetails});
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Failed to load the details of this date"});

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import HabitList from '../../../components/HabitList/HabitList';
 
 function DayDetails () {
     const { date } = useParams();
     const API_URL = "http://localhost:3000";
-    const [ dayDetails, setDayDetails ]   = useState(null);
+    const [ dayDetails, setDayDetails ]   = useState(null);;
 
     useEffect(() => {
         const fetchDayDetails = async () => {
@@ -20,10 +21,21 @@ function DayDetails () {
             fetchDayDetails();
     }, [date]);
 
+    const habitsForDay = dayDetails?.dayDetails || [];
+
+    const incompletedHabits = habitsForDay.filter(habit => habit.active && !habit.isCompleted === true);
+    const completedHabits = habitsForDay.filter(habit => habit.active && habit.isCompleted === true);
+
     return (
         <div>
             <h1>Day Details</h1>
+            <h2>Date</h2>
             <p>{dayDetails?.date}</p>
+            <h3>Completed Habits</h3>
+                <HabitList habits={completedHabits} />
+            <h3>Not Completed Habits</h3>
+                <HabitList habits={incompletedHabits} />
+            
         </div>
     )
     
