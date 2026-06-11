@@ -64,6 +64,10 @@ function ProgressPage(props) {
         navigate(`/progress/${id}`);
     }
 
+    function viewDayDetails(date) {
+        navigate(`/progress/day/${date}`);
+    }
+
     function handleSelectDay(day, position){
         setSelectedDay(day);
         setTooltipPosition(position);
@@ -85,21 +89,15 @@ function ProgressPage(props) {
         const tooltipWidth = size.width;
         const viewportWidth = window.innerWidth;
 
-        const centerX =
-            tooltipPosition.left +
-            (tooltipPosition.width / 2);
+        const centerX = tooltipPosition.left + (tooltipPosition.width / 2);
 
-        const idealLeft =
-            centerX - (tooltipWidth / 2);
+        const idealLeft = centerX - (tooltipWidth / 2);
 
         const padding = 8;
 
         const minLeft = padding;
 
-        const maxLeft =
-            viewportWidth -
-            tooltipWidth -
-            padding;
+        const maxLeft = viewportWidth - tooltipWidth - padding;
 
         const safeLeft =
             Math.min(
@@ -130,13 +128,17 @@ function ProgressPage(props) {
                 className="tooltip"
                 ref={tooltipRef}
                 style={{
-                    top: tooltipPosition.top - 75,
+                    top: tooltipPosition.top - 95,
                     left: clampedLeft
                 }}
                 >
                     <p>{selectedDay.day}</p>
                     <p>{selectedDay.completed} / {selectedDay.totalHabits}</p>
                     <p>{Math.round(selectedDay.intensity * 100)}% Complete</p>
+
+                        <button onClick={() => {viewDayDetails(selectedDay.day)} }>
+                            View more details
+                        </button>
                 </div>
             )}
 

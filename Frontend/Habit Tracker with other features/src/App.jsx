@@ -6,7 +6,8 @@ import ProgressPage from './pages/Progress/Progress.jsx'
 import Header from './components/Header/Header';
 import BottomNav from './components/BottomNav/BottomNav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HabitDetailsPage from './pages/HabitDetails/HabitDetails.jsx';
+import HabitDetailsPage from './pages/Progress/HabitDetails/HabitDetails.jsx';
+import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
 
 function App() {
   const today = new Date();
@@ -41,6 +42,7 @@ function App() {
         <Route path="/edit" element={<EditPage />} />
         <Route path="/progress" element={<ProgressPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
         <Route path="/progress/:id" element={<HabitDetailsPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
+        <Route path="/progress/day/:date" element={<DayDetails />} />
       </Routes>
       <BottomNav />
       </BrowserRouter>

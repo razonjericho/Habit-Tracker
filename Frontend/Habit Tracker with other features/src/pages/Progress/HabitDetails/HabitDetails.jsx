@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import HabitList from "../../components/HabitList/HabitList"
+import HabitList from "../../../components/HabitList/HabitList"
 import { useParams } from 'react-router-dom';
-import { HabitContext } from '../../HabitContext';
+import { HabitContext } from '../../../HabitContext';
 import './HabitDetails.css'
-import Calendar from '../../services/Calendar/Calendar';
+import Calendar from '../../../services/Calendar/Calendar';
 
 function HabitDetailsPage(props){
     const params = useParams();

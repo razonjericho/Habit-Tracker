@@ -361,4 +361,15 @@ const getHabitHeatMap = async (req, res) => {
     }
 }
 
-export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getHabitHeatMap };   
+const getDayDetails = async (req, res) => {
+    try {
+        const date = req.params.date;
+
+        res.json({date});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: "Failed to load the details of this date"});
+    }
+}
+
+export { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getHabitHeatMap, getDayDetails };   
