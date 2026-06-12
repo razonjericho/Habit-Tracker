@@ -23,8 +23,8 @@ function DayDetails () {
 
     const habitsForDay = dayDetails?.dayDetails || [];
 
-    const incompletedHabits = habitsForDay.filter(habit => habit.active && !habit.isCompleted === true);
-    const completedHabits = habitsForDay.filter(habit => habit.active && habit.isCompleted === true);
+    const incompletedHabits = habitsForDay.filter(habit => !habit.isCompleted);
+    const completedHabits = habitsForDay.filter(habit => habit.isCompleted);
 
     return (
         <div>

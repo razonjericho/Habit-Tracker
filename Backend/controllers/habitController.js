@@ -368,11 +368,21 @@ const getDayDetails = async (req, res) => {
         const result = await db.query(
             `
             SELECT habits.id AS id, habits.habit AS habit, habits.active AS active,
-            COALESCE(completions.completed, false) AS \"isCompleted\" 
+            COALESCE (completions.completed, false) AS \"isCompleted\"
             FROM habits
+            JOIN (
+                SELECT DISTINCT ON (habit_id)
+                    habit_id,
+                    event_type
+                FROM habit_events
+                WHERE occurred_at::date <= ($1)
+                ORDER BY habit_id, occurred_at DESC
+            ) AS latest_event
+            ON habits.id = latest_event.habit_id
             LEFT JOIN completions
             ON habits.id = completions.habit_id
             AND completions.date = ($1)
+            WHERE latest_event.event_type IN ('created', 'restored')
             `, 
             [date]
         );
