@@ -69,8 +69,13 @@ function ProgressPage(props) {
     }
 
     function handleSelectDay(day, position){
-        setSelectedDay(day);
-        setTooltipPosition(position);
+        if (selectedDay && selectedDay.day === day.day) {
+            setSelectedDay(null);
+            setTooltipPosition(null);
+        } else {
+            setSelectedDay(day);
+            setTooltipPosition(position);
+        }
     }
 
     function closeSelectedDay(){
