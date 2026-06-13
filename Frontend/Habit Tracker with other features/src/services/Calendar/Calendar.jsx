@@ -23,7 +23,7 @@ function Calendar(props) {
                 <span>Sat</span>
             </div>
             
-            <div className="calendar" >
+            <div className="calendar">
             {weeks.map((week, weekIndex) => (
                 <div key={weekIndex} className="week" >
                     {week.map((day, dayIndex) => (
@@ -36,13 +36,6 @@ function Calendar(props) {
                                 : (day.isCompleted ? "completed" : "not-completed") 
                             : "empty"
                         }
-                        onMouseEnter={(event) => {
-                            const position = event.currentTarget.getBoundingClientRect();
-                            props.onSelectedDay(day, position);
-                        }}
-                        onMouseLeave={() => {
-                            props.onCloseSelectedDay();
-                        }}
                         onClick={(event) => {
                             const position = event.currentTarget.getBoundingClientRect();
                             props.onSelectedDay(day, position);

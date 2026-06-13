@@ -84,6 +84,7 @@ function ProgressPage(props) {
     }
 
     const tooltipRef = useRef(null);
+    const calendarRef = useRef(null);
    
 
     useEffect(() => {
@@ -113,6 +114,28 @@ function ProgressPage(props) {
         setClampedLeft(safeLeft);
 
     }, [selectedDay, tooltipPosition]);
+
+    useEffect(() => {
+        if (!selectedDay) return;
+
+            function handleDocumentClick(event) {
+                if(tooltipRef.current?.contains(event.target)) {
+                    return;
+                }
+
+                if(calendarRef.current?.contains(event.target)) {
+                    return;
+                }
+                closeSelectedDay();
+            }
+
+        document.addEventListener("click", handleDocumentClick);
+
+        return () => {
+            document.removeEventListener("click", handleDocumentClick);
+        }
+
+    }, [selectedDay]);
    
     return (
         <div>
@@ -120,13 +143,16 @@ function ProgressPage(props) {
             <button onClick= {props.previous} > Previous </button>
             <h2>{months[props.month]} {props.year} </h2>
             <button onClick= {props.next} > Next </button>
-            <Calendar
+            <div ref={calendarRef} >
+                <Calendar
                 month={props.month}
                 year={props.year}
                 heatMap={heatMap}
                 onSelectedDay={handleSelectDay}
                 onCloseSelectedDay={closeSelectedDay}
             />
+            </div>
+            
 
             {selectedDay && (
                 <div 
