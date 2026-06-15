@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../../components/HabitList/HabitList";
-import Calendar from '../../services/Calendar/Calendar';
+import Tooltip from '../../components/Tooltip/Tooltip';
 import { HabitContext } from '../../HabitContext';
 import { useNavigate } from 'react-router-dom';
 import './Progress.css';
@@ -70,15 +70,14 @@ function ProgressPage(props) {
         <div>
             <h1>Progress</h1>
             <button onClick= {props.previous} > Previous </button>
-            <h2>{months[props.month]} {props.year} </h2>
+            <h2> {months[props.month]} {props.year} </h2>
             <button onClick= {props.next} > Next </button>
-            <div>
-                <Calendar
-                    month={props.month}
-                    year={props.year}
-                    heatMap={heatMap}
-                />
-            </div>
+            <Tooltip
+                month={props.month}
+                year={props.year}
+                heatMap={heatMap}
+                onViewDayDetails={viewDayDetails}
+            />
 
             <HabitList
                 habits={activeHabits}

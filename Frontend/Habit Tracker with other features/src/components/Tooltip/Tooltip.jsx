@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Calendar from '../../services/Calendar/Calendar';
 
-function Tooltip () {
+function Tooltip (props) {
     const [ selectedDay, setSelectedDay ] = useState(null);
     const [ tooltipPosition, setTooltipPosition ] = useState(null);
     const [ clampedLeft, setClampedLeft ] = useState(null);
@@ -8,8 +9,22 @@ function Tooltip () {
     
     const tooltipRef = useRef(null);
     const calendarRef = useRef(null);
-       
-    
+
+    function handleSelectDay(day, position){
+        if (selectedDay && selectedDay.day === day.day) {
+            setSelectedDay(null);
+            setTooltipPosition(null);
+        } else {
+            setSelectedDay(day);
+            setTooltipPosition(position);
+        }
+    }
+
+    function closeSelectedDay(){
+        setSelectedDay(null);
+        setTooltipPosition(null);
+    }
+           
     useEffect(() => {
         if (!selectedDay || !tooltipRef.current || !tooltipPosition) return;
 
@@ -38,20 +53,6 @@ function Tooltip () {
 
     }, [selectedDay, tooltipPosition]);
 
-    function handleSelectDay(day, position){
-        if (selectedDay && selectedDay.day === day.day) {
-            setSelectedDay(null);
-            setTooltipPosition(null);
-        } else {
-            setSelectedDay(day);
-            setTooltipPosition(position);
-        }
-    }
-
-    function closeSelectedDay(){
-        setSelectedDay(null);
-        setTooltipPosition(null);
-    }
 
     useEffect(() => {
             if (!selectedDay) return;
@@ -78,6 +79,15 @@ function Tooltip () {
 
     return (
         <div>
+            <div ref={calendarRef} >
+                <Calendar
+                    month={props.month}
+                    year={props.year}
+                    heatMap={props.heatMap}
+                    onSelectedDay={handleSelectDay}
+                />
+            </div>
+            
             {selectedDay && (
                 <div 
                 className="tooltip"
@@ -91,6 +101,9 @@ function Tooltip () {
                     <p>{selectedDay.completed} / {selectedDay.totalHabits}</p>
                     <p>{Math.round(selectedDay.intensity * 100)}% Complete</p>
 
+                        <button onClick={() => {props.onViewDayDetails(selectedDay.day)} }>
+                            View more details
+                        </button>
                 </div>
             )}
         </div>
