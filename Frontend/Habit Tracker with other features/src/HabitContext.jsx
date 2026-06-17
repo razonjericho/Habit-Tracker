@@ -6,8 +6,8 @@ const HabitContext = createContext();
 function HabitProvider({ children }) {
     const API_URL = "http://localhost:3000";
     const [habits, setHabit] = useState([]);
-
-    useEffect(() => {
+    const currentDate = new Date().toLocaleDateString("en-CA");
+    const [storedDate, setStoredDate] = useState(currentDate);
     const fetchHabits = async () => {
       try {
         const response = await axios.get(`${API_URL}/habits`);
@@ -16,8 +16,33 @@ function HabitProvider({ children }) {
         console.error('Error fetching habits:', err);
       }
     };
-    fetchHabits();
+
+    useEffect(() => {
+      fetchHabits();
     }, []);
+
+    const checkDate = () => {
+      const now = new Date().toLocaleDateString("en-CA");
+      try {
+        if (storedDate !== now) {
+          fetchHabits();
+          setStoredDate(now);
+          console.log("Date changed, fetching new habits");
+        }
+      } catch (err) {
+        console.error('Error, unable to check the dates:', err);
+      }
+    }
+
+    useEffect(() => {
+      checkDate();
+
+      const timer = setInterval(checkDate, 60000);
+
+        return () => {
+          clearInterval(timer);
+        }
+    }, [storedDate]);
 
     const addHabit = async (inputText) => {
       try {

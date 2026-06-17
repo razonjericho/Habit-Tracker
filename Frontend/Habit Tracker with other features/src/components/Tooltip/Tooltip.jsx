@@ -5,7 +5,6 @@ function Tooltip (props) {
     const [ selectedDay, setSelectedDay ] = useState(null);
     const [ tooltipPosition, setTooltipPosition ] = useState(null);
     const [ clampedLeft, setClampedLeft ] = useState(null);
-
     
     const tooltipRef = useRef(null);
     const calendarRef = useRef(null);
