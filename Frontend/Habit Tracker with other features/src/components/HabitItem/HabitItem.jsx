@@ -49,7 +49,15 @@ function HabitItem(props){
 
                     {props.onDelete && (
                         <span>
-                            <button onClick={() => {props.onDelete(props.id)} } >
+                            <button 
+                                onClick={() => {
+                                    const confirmDelete = window.confirm( "Are you sure you want to delete this habit? This action cannot be undone and all habit data will be permanently lost.")
+
+                                    if (confirmDelete) {
+                                        props.onDelete(props.id);
+                                    }
+                                    }} 
+                                >
                                 Delete Habit
                             </button>
                         </span>

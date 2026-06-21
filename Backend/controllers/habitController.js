@@ -236,7 +236,12 @@ const deleteHabit = async (req, res) => {
     const id = req.params.id;
     try {
         await db.query(
-            `DELETE FROM completions WHERE habit_id = $1`,
+            `DELETE FROM completions WHERE habit_id = ($1)`,
+            [id]
+        );
+
+        await db.query(
+            `DELETE FROM habit_events WHERE habit_id = ($1)`,
             [id]
         );
 
