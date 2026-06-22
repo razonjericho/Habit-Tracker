@@ -54,7 +54,7 @@ const createHabit = async (req, res) => {
             `, 
             [addHabit]);
         const newHabit = result.rows[0];
-        res.json(newHabit)
+        res.json(newHabit);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Something went wrong" });
@@ -316,9 +316,26 @@ const getHabitHeatMap = async (req, res) => {
     try {
         const result = await db.query(
             `
-            SELECT 
-                completions.date, 
-                COUNT(*) AS completed,
+            WITH dates AS (
+                SELECT generate_series(
+                    (
+                        SELECT MIN(created_at)::date
+                        FROM habits
+                    ),
+                    CURRENT_DATE,
+                    INTERVAL '1 day'
+                )::date AS date
+            )
+
+            SELECT dates.date,
+
+                (
+                SELECT COUNT (*)
+                FROM completions
+                WHERE completions.date = dates.date
+                AND completions.completed = true
+                ) AS completed,
+
                 (
                     SELECT COUNT (*)
                         FROM (
@@ -333,15 +350,14 @@ const getHabitHeatMap = async (req, res) => {
                                     ELSE false
                                 END AS active
                             FROM habit_events 
-                            WHERE occurred_at < (completions.date + 1)
+                            WHERE occurred_at < (dates.date + 1)
                             ORDER BY habit_id, occurred_at DESC
                         ) latest_events
                         WHERE active = true
                 ) AS total_habits
 
-            FROM completions
-            WHERE completions.completed = true
-            GROUP BY completions.date
+            FROM dates
+            ORDER BY dates.date;
             `
         )
         
