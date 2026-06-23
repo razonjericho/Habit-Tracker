@@ -1,5 +1,6 @@
 import db from "../db.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const registerUser = async (req, res) => {
     const { email, password } = req.body;
@@ -47,18 +48,32 @@ const logUser = async (req, res) => {
             return res.status(400).json({ error: "User does not exist" });
         }
 
-        const hashedPassword = existingUser.rows[0].password_hash;
+        const user = existingUser.rows[0];
 
         const isValid = await bcrypt.compare(
             password,
-            hashedPassword
+            user.password_hash
         );
 
-        if (isValid) {
-            res.status(200).json({ message: "Login successful" });
-        } else {
-            res.status(401).json({ message: "Invalid password" })
+        if (!isValid) {
+            return res.status(401).json({ message: "Invalid password" });
         }
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                email: user.email
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1h"
+            }
+        );
+
+        res.status(200).json({ 
+            message: "Login successful", 
+            token }
+        );
 
         
     } catch (err) {
