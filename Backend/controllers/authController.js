@@ -82,4 +82,8 @@ const logUser = async (req, res) => {
     }
 }
 
-export { registerUser, logUser };
+const getProfile = (req, res) => {
+    res.json(req.user);
+}
+
+export { registerUser, logUser, getProfile };
