@@ -3,6 +3,7 @@ import { calculateStreak, calculateLongestStreak } from "../services/habitServic
 
 const getHabits = async (req, res) => {
     const date = new Date().toLocaleDateString("en-CA");
+    const user_id = req.user.id;
     try {
         const result = await db.query(
             `
@@ -11,9 +12,10 @@ const getHabits = async (req, res) => {
             FROM habits 
             LEFT JOIN completions 
             ON habits.id = completions.habit_id 
-            AND completions.date = ($1) 
+            AND completions.date = ($1)
+            WHERE habits.user_id = ($2)
             `, 
-            [date]
+            [date, user_id]
         );
         const habits = result.rows;
         res.json(habits);
@@ -25,12 +27,13 @@ const getHabits = async (req, res) => {
 
 const createHabit = async (req, res) => {
     const addHabit = req.body.addHabit;
+    const user_id = req.user.id;
     try {
         const result = await db.query(
             `
             WITH added AS (
-                INSERT INTO habits (habit, created_at) 
-                VALUES ($1, CURRENT_TIMESTAMP) 
+                INSERT INTO habits (habit, user_id, created_at) 
+                VALUES ($1, $2, CURRENT_TIMESTAMP) 
                 RETURNING id, habit, active, created_at, archived_at
             ),
             event_added AS (
@@ -52,7 +55,7 @@ const createHabit = async (req, res) => {
             LEFT JOIN completions
                 ON added.id = completions.habit_id
             `, 
-            [addHabit]);
+            [addHabit, user_id]);
         const newHabit = result.rows[0];
         res.json(newHabit);
     } catch (err) {
@@ -64,26 +67,46 @@ const createHabit = async (req, res) => {
 const completeHabit = async (req, res) => {
     const habit_id = req.params.id;
     const date = new Date().toLocaleDateString("en-CA");
+    const user_id = req.user.id;
 
     try {
+        const habitResult = await db.query(
+            `
+            SELECT id, user_id
+            FROM habits
+            WHERE id = ($1)  
+            `,
+            [habit_id]
+        );
+
+        if (habitResult.rows.length === 0) {
+            return res.status(404).json({ error: "Habit not found" });
+        }
+
+        const habit = habitResult.rows[0];
+
+        if (habit.user_id !== user_id){
+            return res.status(403).json({ error: "Forbidden" });
+        }
+
         const result = await db.query(
         `
-            WITH upsert AS (
-                INSERT INTO completions (habit_id, date, completed)
-                VALUES ($1, $2, true)
-                ON CONFLICT (habit_id, date)
-                DO UPDATE SET completed = NOT completions.completed
-                RETURNING habit_id, date, completed
-            )
-            SELECT 
-                habits.id AS id,
-                habits.habit AS habit,
-                habits.active AS active,
-                COALESCE(upsert.completed, false) AS "isCompleted"
-            FROM habits
-            LEFT JOIN upsert
-                ON habits.id = upsert.habit_id
-            WHERE habits.id = ($1)
+        WITH upsert AS (
+            INSERT INTO completions (habit_id, date, completed)
+            VALUES ($1, $2, true)
+            ON CONFLICT (habit_id, date)
+            DO UPDATE SET completed = NOT completions.completed
+            RETURNING habit_id, date, completed
+        )
+        SELECT 
+            habits.id AS id,
+            habits.habit AS habit,
+            habits.active AS active,
+            COALESCE(upsert.completed, false) AS "isCompleted"
+        FROM habits
+        LEFT JOIN upsert
+            ON habits.id = upsert.habit_id
+        WHERE habits.id = ($1)
         `,
         [habit_id, date]
         );
@@ -99,6 +122,7 @@ const editHabit = async (req, res) => {
     const date = new Date().toLocaleDateString("en-CA");
     const updatedText = req.body.editHabit;
     const id = req.params.id;
+    const user_id = req.user.id;
     try {
         const result = await db.query(
             `
@@ -106,7 +130,8 @@ const editHabit = async (req, res) => {
                 UPDATE habits
                 SET habit = ($1)
                 WHERE id = ($2)
-                RETURNING id, habit, active, created_at, archived_at
+                AND user_id = ($3)
+                RETURNING id, habit, active, created_at, archived_at, user_id
             )
             SELECT
                 updated.id,
@@ -118,9 +143,9 @@ const editHabit = async (req, res) => {
             FROM updated
             LEFT JOIN completions
                 ON updated.id = completions.habit_id
-                AND completions.date = ($3)
+                AND completions.date = ($4)
             `, 
-            [updatedText, id, date])
+            [updatedText, id, user_id, date])
         const updatedHabit = result.rows[0];
         res.json(updatedHabit);
     } catch (err) {
@@ -132,6 +157,7 @@ const editHabit = async (req, res) => {
 const archiveHabit = async (req, res) => {
     const id = req.params.id;
     const date = new Date().toLocaleDateString("en-CA");
+    const user_id = req.user.id;
     try {
         const result = await db.query(
             `
@@ -141,7 +167,8 @@ const archiveHabit = async (req, res) => {
                     active = false,
                     archived_at = CURRENT_TIMESTAMP 
                 WHERE id = ($1) 
-                RETURNING id, habit, active, created_at, archived_at
+                AND user_id = ($2)
+                RETURNING id, habit, active, created_at, archived_at, user_id
             ),
             event_archived AS (
                 INSERT INTO habit_events (habit_id, event_type, occurred_at)
@@ -156,7 +183,7 @@ const archiveHabit = async (req, res) => {
                 SET
                     completed = false
                 WHERE habit_id = ($1) 
-                AND date = ($2)
+                AND date = ($3)
             )
             SELECT
                 archived.id,
@@ -170,7 +197,7 @@ const archiveHabit = async (req, res) => {
                 ON archived.id = completions.habit_id
                 AND completions.date = ($2)
             `, 
-            [id, date]);
+            [id, user_id, date]);
         const archivedHabit = result.rows[0];
 
         if (!archivedHabit) {
@@ -188,14 +215,16 @@ const archiveHabit = async (req, res) => {
 const restoreHabit = async (req, res) => {
     const date = new Date().toLocaleDateString("en-CA");
     const id = req.params.id;
+    const user_id = req.user.id;
     try {
         const result = await db.query(
             `
             WITH restored AS (
                 UPDATE habits 
                 SET active = true
-                WHERE id = ($1) 
-                RETURNING id, habit, active, created_at, archived_at
+                WHERE id = ($1)
+                AND user_id = ($2) 
+                RETURNING id, habit, active, created_at, archived_at, user_id
             ),
             event_restored AS (
                 INSERT INTO habit_events (habit_id, event_type, occurred_at)
@@ -215,9 +244,9 @@ const restoreHabit = async (req, res) => {
             FROM restored
             LEFT JOIN completions 
                 ON restored.id = completions.habit_id
-                AND completions.date = ($2)
+                AND completions.date = ($3)
             `, 
-            [id, date]);
+            [id, user_id, date]);
         const restoredHabit = result.rows[0];
 
         if (!restoredHabit) {
@@ -234,7 +263,27 @@ const restoreHabit = async (req, res) => {
 
 const deleteHabit = async (req, res) => {
     const id = req.params.id;
+    const user_id = req.user.id;
     try {
+        const habitResult = await db.query(
+            `
+            SELECT id, user_id
+            FROM habits
+            WHERE id = ($1)  
+            `,
+            [id]
+        );
+
+        if (habitResult.rows.length === 0) {
+            return res.status(404).json({ error: "Habit not found" });
+        }
+
+        const habit = habitResult.rows[0];
+
+        if (habit.user_id !== user_id){
+            return res.status(403).json({ error: "Forbidden" });
+        }
+
         await db.query(
             `DELETE FROM completions WHERE habit_id = ($1)`,
             [id]
@@ -245,7 +294,7 @@ const deleteHabit = async (req, res) => {
             [id]
         );
 
-        const result = await db.query(`DELETE FROM habits WHERE id = ($1)`, [id]);
+        const result = await db.query(`DELETE FROM habits WHERE id = ($1) AND user_id = ($2)`, [id, user_id]);
         const rowCount = result.rowCount;
         if (rowCount === 0) {
             res.status(404).json({ error: "Habit not found" })
