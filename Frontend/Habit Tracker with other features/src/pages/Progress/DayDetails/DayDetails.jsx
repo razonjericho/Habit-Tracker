@@ -10,8 +10,14 @@ function DayDetails () {
 
     useEffect(() => {
         const fetchDayDetails = async () => {
+            const token = localStorage.getItem("token");
+            
             try {
-                const response = await axios.get(`${API_URL}/habits/progress/day/${date}`);
+                const response = await axios.get(`${API_URL}/habits/progress/day/${date}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
 
                 setDayDetails(response.data);
             } catch (err) {

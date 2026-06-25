@@ -16,8 +16,14 @@ function HabitDetailsPage(props){
 
     useEffect(() => {
          const fetchStreak = async () => {
+            const token = localStorage.getItem("token");
+
                 try {
-                   const response = await axios.get(`${API_URL}/habits/progress/${id}/details`);
+                   const response = await axios.get(`${API_URL}/habits/progress/${id}/details`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                   });
 
                 setStreak(response.data);
 

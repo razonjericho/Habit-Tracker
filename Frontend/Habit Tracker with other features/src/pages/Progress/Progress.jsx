@@ -19,9 +19,15 @@ function ProgressPage(props) {
         if (habits.length === 0) return;
 
          const fetchStreak = async () => {
+            const token = localStorage.getItem("token");
+
                 try {
                    const requests = habits.map(habit => 
-                     axios.get(`${API_URL}/habits/progress/${habit.id}`)
+                     axios.get(`${API_URL}/habits/progress/${habit.id}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                     })
                 );
 
                 const responses = await Promise.all(requests);
@@ -43,8 +49,14 @@ function ProgressPage(props) {
 
     useEffect(() => {
         const fetchHeatMap = async () => {
+            const token = localStorage.getItem("token");
+            
             try {
-                const response = await axios.get(`${API_URL}/habits/progress`);
+                const response = await axios.get(`${API_URL}/habits/progress`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
 
                 setHeatMap(response.data);
             } catch (err) {

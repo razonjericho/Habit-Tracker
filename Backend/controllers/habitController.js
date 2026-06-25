@@ -195,7 +195,7 @@ const archiveHabit = async (req, res) => {
             FROM archived
             LEFT JOIN completions 
                 ON archived.id = completions.habit_id
-                AND completions.date = ($2)
+                AND completions.date = ($3)
             `, 
             [id, user_id, date]);
         const archivedHabit = result.rows[0];
@@ -309,7 +309,28 @@ const deleteHabit = async (req, res) => {
 
 const getHabitStreak = async (req, res) => {
     const habit_id = req.params.id;
+    const user_id = req.user.id;
+    
     try {
+        const habitResult = await db.query(
+            `
+            SELECT id, user_id
+            FROM habits
+            WHERE id = ($1)  
+            `,
+            [habit_id]
+        );
+
+        if (habitResult.rows.length === 0) {
+            return res.status(404).json({ error: "Habit not found" });
+        }
+
+        const habit = habitResult.rows[0];
+
+        if (habit.user_id !== user_id){
+            return res.status(403).json({ error: "Forbidden" });
+        }
+
         const result = await db.query(
             `
             SELECT completions.date
@@ -335,7 +356,28 @@ const getHabitStreak = async (req, res) => {
 
 const getHabitLongestStreak = async (req, res) => {
     const habit_id = req.params.id;
+    const user_id = req.user.id;
+
     try {
+        const habitResult = await db.query(
+            `
+            SELECT id, user_id
+            FROM habits
+            WHERE id = ($1)  
+            `,
+            [habit_id]
+        );
+
+        if (habitResult.rows.length === 0) {
+            return res.status(404).json({ error: "Habit not found" });
+        }
+
+        const habit = habitResult.rows[0];
+
+        if (habit.user_id !== user_id){
+            return res.status(403).json({ error: "Forbidden" });
+        }
+
         const result = await db.query(
             `
             SELECT completions.date
@@ -362,6 +404,8 @@ const getHabitLongestStreak = async (req, res) => {
 }
 
 const getHabitHeatMap = async (req, res) => {
+    const user_id = req.user.id;
+
     try {
         const result = await db.query(
             `
@@ -370,6 +414,7 @@ const getHabitHeatMap = async (req, res) => {
                     (
                         SELECT MIN(created_at)::date
                         FROM habits
+                        WHERE user_id = ($1)
                     ),
                     CURRENT_DATE,
                     INTERVAL '1 day'
@@ -381,8 +426,11 @@ const getHabitHeatMap = async (req, res) => {
                 (
                 SELECT COUNT (*)
                 FROM completions
+                JOIN habits
+                    ON completions.habit_id = habits.id
                 WHERE completions.date = dates.date
-                AND completions.completed = true
+                    AND completions.completed = true
+                    AND habits.user_id = ($1)
                 ) AS completed,
 
                 (
@@ -399,7 +447,10 @@ const getHabitHeatMap = async (req, res) => {
                                     ELSE false
                                 END AS active
                             FROM habit_events 
+                            JOIN habits
+                                ON habit_events.habit_id = habits.id
                             WHERE occurred_at < (dates.date + 1)
+                                AND habits.user_id = ($1)
                             ORDER BY habit_id, occurred_at DESC
                         ) latest_events
                         WHERE active = true
@@ -407,7 +458,8 @@ const getHabitHeatMap = async (req, res) => {
 
             FROM dates
             ORDER BY dates.date;
-            `
+            `,
+            [user_id]
         )
         
         const heatMap = {};
@@ -433,6 +485,7 @@ const getHabitHeatMap = async (req, res) => {
 
 const getDayDetails = async (req, res) => {
     const date = req.params.date;
+    const user_id = req.user.id;
 
     try {
         const result = await db.query(
@@ -453,8 +506,9 @@ const getDayDetails = async (req, res) => {
             ON habits.id = completions.habit_id
             AND completions.date = ($1)
             WHERE latest_event.event_type IN ('created', 'restored')
+            AND user_id = ($2)
             `, 
-            [date]
+            [date, user_id]
         );
 
         const dayDetails = result.rows;

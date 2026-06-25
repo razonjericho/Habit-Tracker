@@ -12,6 +12,7 @@ function HabitProvider({ children }) {
 
     const fetchHabits = async () => {
       const token = localStorage.getItem("token");
+
       try {
         const response = await axios.get(`${API_URL}/habits`, {
           headers: {
@@ -52,8 +53,14 @@ function HabitProvider({ children }) {
     }, [storedDate]);
 
     const addHabit = async (inputText) => {
+      const token = localStorage.getItem("token");
+
       try {
-        const response = await axios.post(`${API_URL}/habits`, {addHabit: inputText});
+        const response = await axios.post(`${API_URL}/habits`, {addHabit: inputText}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const newHabit = response.data;
         setHabit((prevHabits) => {
           return [...prevHabits, newHabit]
@@ -64,41 +71,59 @@ function HabitProvider({ children }) {
     }
 
     const editHabit = async (id, newText) => {
-        try {
-            const response = await axios.patch(`${API_URL}/habits/edit/rename/${id}`, {editHabit: newText})
-            const updatedHabit = response.data;
-            setHabit(prevHabits => {
-                return prevHabits.map(habit => {
-                if (habit.id === id) {
-                    return updatedHabit;
-                } else {
-                    return habit;
-                }
-                })
-             })
-            } catch (err) {
-            console.error('Error, unable to edit a habit', err);
+      const token = localStorage.getItem("token");
+
+      try {
+          const response = await axios.patch(`${API_URL}/habits/edit/rename/${id}`, {editHabit: newText}, {
+            headers: {
+              Authorization: `Bearer ${token}`
             }
+          })
+          const updatedHabit = response.data;
+          setHabit(prevHabits => {
+              return prevHabits.map(habit => {
+              if (habit.id === id) {
+                  return updatedHabit;
+              } else {
+                  return habit;
+              }
+              })
+            })
+          } catch (err) {
+          console.error('Error, unable to edit a habit', err);
+          }
       }
 
     const archiveHabit = async (id) => {
-        try {
-            const response = await axios.patch(`${API_URL}/habits/edit/archive/${id}`);
-            const archiveHabit = response.data;
-            setHabit(prevHabits => {
-            console.log("ARCHIVED ID:", id);
-                return prevHabits.map(habit => 
-                  habit.id === archiveHabit.id ? archiveHabit : habit
-                )
-            })
-            } catch (err) {
-            console.error('Error, unable to archive a habit:', err);
-        }
+      const token = localStorage.getItem("token");
+
+      try {
+          const response = await axios.patch(`${API_URL}/habits/edit/archive/${id}`, {}, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          const archiveHabit = response.data;
+          setHabit(prevHabits => {
+          console.log("ARCHIVED ID:", id);
+              return prevHabits.map(habit => 
+                habit.id === archiveHabit.id ? archiveHabit : habit
+              )
+          })
+          } catch (err) {
+          console.error('Error, unable to archive a habit:', err);
+          }
       }
 
     const habitDone = async (id) => {
-        try {
-          const response = await axios.post(`${API_URL}/habits/${id}/completed`)
+      const token = localStorage.getItem("token");
+
+      try {
+          const response = await axios.post(`${API_URL}/habits/${id}/completed`, {}, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        })
           const habitFinished = response.data;
           setHabit(prevHabits => {
             console.log(habitFinished)
@@ -112,8 +137,14 @@ function HabitProvider({ children }) {
       }
 
     const restoreHabit = async (id) => {
+      const token = localStorage.getItem("token");
+
       try {
-        const response = await axios.patch(`${API_URL}/habits/edit/archive/restore/${id}`);
+        const response = await axios.patch(`${API_URL}/habits/edit/archive/restore/${id}`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const restoreHabit = response.data;
         setHabit(prevHabits => {
           console.log(restoreHabit);
@@ -127,8 +158,14 @@ function HabitProvider({ children }) {
     }
 
     const deleteHabit = async (id) => {
+      const token = localStorage.getItem("token");
+      
       try {
-        const response = await axios.delete(`${API_URL}/habits/edit/archive/delete/${id}`);
+        const response = await axios.delete(`${API_URL}/habits/edit/archive/delete/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const deleteHabit = response.data;
         setHabit(prevHabits => {
           console.log(deleteHabit);
