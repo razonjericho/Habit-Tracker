@@ -8,6 +8,7 @@ import BottomNav from './components/BottomNav/BottomNav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HabitDetailsPage from './pages/Progress/HabitDetails/HabitDetails.jsx';
 import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
+import Login from './pages/Login/Login.jsx';
 
 function App() {
   const today = new Date();
@@ -38,6 +39,7 @@ function App() {
       <BrowserRouter>
       <Header />
       <Routes>
+        <Route path="/auth/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/edit" element={<EditPage />} />
         <Route path="/progress" element={<ProgressPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />

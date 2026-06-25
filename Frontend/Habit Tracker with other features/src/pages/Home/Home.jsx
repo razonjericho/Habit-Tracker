@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import HabitList from '../../components/HabitList/HabitList';
 import { HabitContext } from '../../HabitContext';
 
-function HomePage(){
+function HomePage() {
     const context = useContext(HabitContext);
     const {habits, habitDone} = context;
     const todoHabits = habits.filter(habit => habit.active && habit.isCompleted === false);

@@ -11,9 +11,9 @@ router.patch("/edit/rename/:id", verifyToken, editHabit);
 router.patch("/edit/archive/:id", verifyToken, archiveHabit);
 router.patch("/edit/archive/restore/:id", verifyToken, restoreHabit);
 router.delete("/edit/archive/delete/:id", verifyToken, deleteHabit);
-router.get("/progress/:id", getHabitStreak);
-router.get("/progress/:id/details", getHabitLongestStreak);
-router.get("/progress", getHabitHeatMap);
-router.get("/progress/day/:date", getDayDetails);
+router.get("/progress/:id", verifyToken, getHabitStreak);
+router.get("/progress/:id/details", verifyToken, getHabitLongestStreak);
+router.get("/progress", verifyToken, getHabitHeatMap);
+router.get("/progress/day/:date", verifyToken, getDayDetails);
 
 export default router;

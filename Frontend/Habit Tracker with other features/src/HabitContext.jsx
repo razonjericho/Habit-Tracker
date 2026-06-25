@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react'
+import Login from './pages/Login/Login';
 import axios from 'axios'
 
 const HabitContext = createContext();
@@ -8,9 +9,15 @@ function HabitProvider({ children }) {
     const [habits, setHabit] = useState([]);
     const currentDate = new Date().toLocaleDateString("en-CA");
     const [storedDate, setStoredDate] = useState(currentDate);
+
     const fetchHabits = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const response = await axios.get(`${API_URL}/habits`);
+        const response = await axios.get(`${API_URL}/habits`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         setHabit(response.data);
       } catch (err) {
         console.error('Error fetching habits:', err);
