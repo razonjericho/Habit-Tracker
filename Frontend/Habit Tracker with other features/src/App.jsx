@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HabitDetailsPage from './pages/Progress/HabitDetails/HabitDetails.jsx';
 import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
 import Login from './pages/Login/Login.jsx';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 
 function App() {
   const today = new Date();
@@ -40,13 +41,37 @@ function App() {
       <Header />
       <Routes>
         <Route path="/auth/login" element={<Login />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/edit" element={<EditPage />} />
-        <Route path="/progress" element={<ProgressPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
-        <Route path="/progress/:id" element={<HabitDetailsPage month={month} year={year} previous={prevMonth} next={nextMonth} />} />
-        <Route path="/progress/day/:date" element={<DayDetails />} />
+        <Route path="/" element={ 
+          <ProtectedRoute> 
+            <HomePage /> 
+          </ProtectedRoute> } 
+        />
+        <Route path="/edit" element={ 
+            <ProtectedRoute> 
+              <EditPage /> 
+            </ProtectedRoute> 
+          } 
+        />
+        <Route path="/progress" element={ 
+            <ProtectedRoute>
+              <ProgressPage month={month} year={year} previous={prevMonth} next={nextMonth} />
+            </ProtectedRoute> 
+          } 
+        />
+        <Route path="/progress/:id" element={
+            <ProtectedRoute>
+              <HabitDetailsPage month={month} year={year} previous={prevMonth} next={nextMonth} />
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="/progress/day/:date" element={ 
+            <ProtectedRoute>
+              <DayDetails />
+            </ProtectedRoute> 
+          } 
+        />
       </Routes>
-      <BottomNav />
+        <ProtectedRoute><BottomNav /></ProtectedRoute> 
       </BrowserRouter>
     </div>
   )
