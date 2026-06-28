@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../../../components/HabitList/HabitList"
 import { useParams } from 'react-router-dom';
-import { HabitContext } from '../../../HabitContext';
+import { HabitContext } from '../../../../Context/HabitContext';
 import './HabitDetails.css'
 import Calendar from '../../../services/Calendar/Calendar';
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import HabitList from '../../components/HabitList/HabitList';
 import HabitInput from '../../components/HabitInput/HabitInput';
-import { HabitContext } from '../../HabitContext';
+import { HabitContext } from '../../../Context/HabitContext';
 import { useNavigate } from 'react-router-dom';
 
 function EditPage() {

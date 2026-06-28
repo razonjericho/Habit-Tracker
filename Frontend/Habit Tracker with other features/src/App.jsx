@@ -5,11 +5,12 @@ import EditPage from './pages/Edit/Edit.jsx';
 import ProgressPage from './pages/Progress/Progress.jsx'
 import Header from './components/Header/Header';
 import BottomNav from './components/BottomNav/BottomNav';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HabitDetailsPage from './pages/Progress/HabitDetails/HabitDetails.jsx';
 import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
 import Login from './pages/Login/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import SessionExpiredModal from './components/SessionExpiredModal/SessionExpiredModal.jsx';
 
 function App() {
   const today = new Date();
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <SessionExpiredModal isOpen={true} onClose={() => console.log("OK clicked")} />
       <Header />
       <Routes>
         <Route path="/auth/login" element={<Login />} />
@@ -71,8 +72,7 @@ function App() {
           } 
         />
       </Routes>
-        <ProtectedRoute><BottomNav /></ProtectedRoute> 
-      </BrowserRouter>
+        <BottomNav /> 
     </div>
   )
 }

@@ -8,9 +8,7 @@ function Header() {
 
     function logOut() {
         
-        console.log("Logout clicked");
         localStorage.removeItem("token");
-        console.log(localStorage.getItem("token"));
         navigate(`/auth/login`);
         
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react'
-import Login from './pages/Login/Login';
+import Login from '../src/pages/Login/Login';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const HabitContext = createContext();
 
@@ -9,6 +10,7 @@ function HabitProvider({ children }) {
     const [habits, setHabit] = useState([]);
     const currentDate = new Date().toLocaleDateString("en-CA");
     const [storedDate, setStoredDate] = useState(currentDate);
+    const navigate = useNavigate();
 
     const fetchHabits = async () => {
       const token = localStorage.getItem("token");
@@ -22,6 +24,10 @@ function HabitProvider({ children }) {
         setHabit(response.data);
       } catch (err) {
         console.error('Error fetching habits:', err);
+        if (err.response && err.response.status === 401) { 
+            localStorage.removeItem("token");
+            navigate(`/auth/login`);
+        } 
       }
     };
 

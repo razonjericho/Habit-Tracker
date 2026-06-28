@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../../components/HabitList/HabitList";
 import Tooltip from '../../components/Tooltip/Tooltip';
-import { HabitContext } from '../../HabitContext';
+import { HabitContext } from '../../../Context/HabitContext';
 import { useNavigate } from 'react-router-dom';
 import './Progress.css';
 
