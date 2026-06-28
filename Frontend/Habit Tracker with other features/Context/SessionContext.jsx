@@ -1,6 +1,6 @@
-import React, { createContext, useState } from "react";
+import { React, createContext, useState } from "react";
 
-export const SessionContext = createContext();
+const SessionContext = createContext();
 
 function SessionProvider({ children }) {
     const [ isSessionExpired, setIsSessionExpired ] = useState(false);
@@ -16,4 +16,4 @@ function SessionProvider({ children }) {
 
 }
 
-export default SessionProvider;
+export { SessionContext, SessionProvider };

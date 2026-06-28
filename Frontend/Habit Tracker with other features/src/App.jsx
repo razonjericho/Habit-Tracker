@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useContext } from 'react'
 import './App.css'
 import HomePage from './pages/Home/Home.jsx';
 import EditPage from './pages/Edit/Edit.jsx';
@@ -11,6 +11,7 @@ import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
 import Login from './pages/Login/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import SessionExpiredModal from './components/SessionExpiredModal/SessionExpiredModal.jsx';
+import { SessionContext } from '../Context/SessionContext.jsx';
 
 function App() {
   const today = new Date();
@@ -36,9 +37,11 @@ function App() {
     }
   }
 
+  const { isSessionExpired } = useContext(SessionContext);
+
   return (
     <div className="App">
-      <SessionExpiredModal isOpen={true} onClose={() => console.log("OK clicked")} />
+      <SessionExpiredModal isOpen={isSessionExpired} onClose={() => console.log("OK clicked")} />
       <Header />
       <Routes>
         <Route path="/auth/login" element={<Login />} />
