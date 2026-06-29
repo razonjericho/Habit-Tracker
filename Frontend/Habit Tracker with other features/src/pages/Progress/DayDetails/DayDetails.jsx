@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import HabitList from '../../../components/HabitList/HabitList';
+import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
 
 function DayDetails () {
     const { date } = useParams();
     const API_URL = "http://localhost:3000";
     const [ dayDetails, setDayDetails ]   = useState(null);;
+    const handleUnauthorized = useUnauthorizedHandler();
 
     useEffect(() => {
         const fetchDayDetails = async () => {
@@ -21,6 +23,7 @@ function DayDetails () {
 
                 setDayDetails(response.data);
             } catch (err) {
+                handleUnauthorized(err);
                 console.error('Error, unable to load the details of this date', err);
             }
         }

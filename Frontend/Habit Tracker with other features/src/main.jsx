@@ -4,7 +4,7 @@ import './styles/global.css'
 import App from './App.jsx'
 import { HabitProvider } from '../Context/HabitContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import SessionProvider from '../Context/SessionContext.jsx'
+import { SessionProvider } from '../Context/SessionContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

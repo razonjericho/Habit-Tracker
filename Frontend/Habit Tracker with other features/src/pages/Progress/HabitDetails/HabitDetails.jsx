@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { HabitContext } from '../../../../Context/HabitContext';
 import './HabitDetails.css'
 import Calendar from '../../../services/Calendar/Calendar';
+import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
 
 function HabitDetailsPage(props){
     const params = useParams();
@@ -13,6 +14,7 @@ function HabitDetailsPage(props){
     const { habits } = context;
     const [ streaks, setStreak ] = useState(null);
     const API_URL = "http://localhost:3000";
+    const handleUnauthorized = useUnauthorizedHandler();
 
     useEffect(() => {
          const fetchStreak = async () => {
@@ -28,6 +30,7 @@ function HabitDetailsPage(props){
                 setStreak(response.data);
 
                 } catch (err) {
+                    handleUnauthorized(err);
                     console.error('Error, unable to get habit streak:', err);
                 }
             }

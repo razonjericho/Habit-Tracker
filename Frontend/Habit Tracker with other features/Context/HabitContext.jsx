@@ -1,7 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react'
-import Login from '../src/pages/Login/Login';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import useUnauthorizedHandler from '../src/hooks/UseUnauthorizedHandler';
 
 const HabitContext = createContext();
 
@@ -10,7 +9,7 @@ function HabitProvider({ children }) {
     const [habits, setHabit] = useState([]);
     const currentDate = new Date().toLocaleDateString("en-CA");
     const [storedDate, setStoredDate] = useState(currentDate);
-    const navigate = useNavigate();
+    const handleUnauthorized = useUnauthorizedHandler();
 
     const fetchHabits = async () => {
       const token = localStorage.getItem("token");
@@ -23,11 +22,8 @@ function HabitProvider({ children }) {
         });
         setHabit(response.data);
       } catch (err) {
+        handleUnauthorized(err);
         console.error('Error fetching habits:', err);
-        if (err.response && err.response.status === 401) { 
-            localStorage.removeItem("token");
-            navigate(`/auth/login`);
-        } 
       }
     };
 
@@ -72,6 +68,7 @@ function HabitProvider({ children }) {
           return [...prevHabits, newHabit]
         })
       } catch (err) {
+        handleUnauthorized(err);
         console.error('Error, unable to post new habit:', err);
       }
     }
@@ -96,7 +93,8 @@ function HabitProvider({ children }) {
               })
             })
           } catch (err) {
-          console.error('Error, unable to edit a habit', err);
+            handleUnauthorized(err);
+            console.error('Error, unable to edit a habit', err);
           }
       }
 
@@ -117,7 +115,8 @@ function HabitProvider({ children }) {
               )
           })
           } catch (err) {
-          console.error('Error, unable to archive a habit:', err);
+            handleUnauthorized(err);
+            console.error('Error, unable to archive a habit:', err);
           }
       }
 
@@ -138,6 +137,7 @@ function HabitProvider({ children }) {
             )
           })
         } catch (err) {
+          handleUnauthorized(err);
           console.error(err);
         }
       }
@@ -159,6 +159,7 @@ function HabitProvider({ children }) {
           )
         });
       } catch (err) {
+        handleUnauthorized(err);
         console.error('Error, unable to restore a habit', err);
       }
     }
@@ -180,6 +181,7 @@ function HabitProvider({ children }) {
           })
         });
       } catch (err) {
+        handleUnauthorized(err);
         console.error('Error, unable to delete a habit:', err)
       }
     } 

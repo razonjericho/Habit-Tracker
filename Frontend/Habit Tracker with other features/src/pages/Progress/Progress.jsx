@@ -5,6 +5,7 @@ import Tooltip from '../../components/Tooltip/Tooltip';
 import { HabitContext } from '../../../Context/HabitContext';
 import { useNavigate } from 'react-router-dom';
 import './Progress.css';
+import useUnauthorizedHandler from '../../hooks/UseUnauthorizedHandler';
 
 function ProgressPage(props) {
     const API_URL = "http://localhost:3000";
@@ -14,6 +15,7 @@ function ProgressPage(props) {
     const [ heatMap, setHeatMap ] = useState({});
     const activeHabits = habits.filter(habit => habit.active === true);
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const handleUnauthorized = useUnauthorizedHandler();
 
     useEffect(() => {
         if (habits.length === 0) return;
@@ -41,6 +43,7 @@ function ProgressPage(props) {
                 setStreak(streakData);
 
                 } catch (err) {
+                    handleUnauthorized(err);
                     console.error('Error, unable to get habit streak:', err);
                 }
             }
@@ -60,6 +63,7 @@ function ProgressPage(props) {
 
                 setHeatMap(response.data);
             } catch (err) {
+                handleUnauthorized(err);
                 console.error('Error, unable to fetch completion count', err);
             }
         }
