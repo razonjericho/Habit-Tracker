@@ -3,17 +3,17 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import HabitList from '../../../components/HabitList/HabitList';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
+import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
 
 function DayDetails () {
     const { date } = useParams();
     const API_URL = "http://localhost:3000";
     const [ dayDetails, setDayDetails ]   = useState(null);;
     const handleUnauthorized = useUnauthorizedHandler();
+    const { token } = useContext(AuthenticationContext);
 
     useEffect(() => {
         const fetchDayDetails = async () => {
-            const token = localStorage.getItem("token");
-            
             try {
                 const response = await axios.get(`${API_URL}/habits/progress/day/${date}`, {
                     headers: {

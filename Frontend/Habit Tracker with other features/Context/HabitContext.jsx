@@ -59,8 +59,6 @@ function HabitProvider({ children }) {
     }, [storedDate]);
 
     const addHabit = async (inputText) => {
-      const token = localStorage.getItem("token");
-
       try {
         const response = await axios.post(`${API_URL}/habits`, {addHabit: inputText}, {
           headers: {
@@ -78,8 +76,6 @@ function HabitProvider({ children }) {
     }
 
     const editHabit = async (id, newText) => {
-      const token = localStorage.getItem("token");
-
       try {
           const response = await axios.patch(`${API_URL}/habits/edit/rename/${id}`, {editHabit: newText}, {
             headers: {
@@ -103,8 +99,6 @@ function HabitProvider({ children }) {
       }
 
     const archiveHabit = async (id) => {
-      const token = localStorage.getItem("token");
-
       try {
           const response = await axios.patch(`${API_URL}/habits/edit/archive/${id}`, {}, {
             headers: {
@@ -125,8 +119,6 @@ function HabitProvider({ children }) {
       }
 
     const habitDone = async (id) => {
-      const token = localStorage.getItem("token");
-
       try {
           const response = await axios.post(`${API_URL}/habits/${id}/completed`, {}, {
             headers: {
@@ -147,8 +139,6 @@ function HabitProvider({ children }) {
       }
 
     const restoreHabit = async (id) => {
-      const token = localStorage.getItem("token");
-
       try {
         const response = await axios.patch(`${API_URL}/habits/edit/archive/restore/${id}`, {}, {
           headers: {
@@ -169,8 +159,6 @@ function HabitProvider({ children }) {
     }
 
     const deleteHabit = async (id) => {
-      const token = localStorage.getItem("token");
-      
       try {
         const response = await axios.delete(`${API_URL}/habits/edit/archive/delete/${id}`, {
           headers: {

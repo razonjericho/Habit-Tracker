@@ -6,6 +6,7 @@ import { HabitContext } from '../../../Context/HabitContext';
 import { useNavigate } from 'react-router-dom';
 import './Progress.css';
 import useUnauthorizedHandler from '../../hooks/UseUnauthorizedHandler';
+import { AuthenticationContext } from '../../../Context/AuthenticationContext';
 
 function ProgressPage(props) {
     const API_URL = "http://localhost:3000";
@@ -16,13 +17,12 @@ function ProgressPage(props) {
     const activeHabits = habits.filter(habit => habit.active === true);
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const handleUnauthorized = useUnauthorizedHandler();
+    const { token } = useContext(AuthenticationContext);
 
     useEffect(() => {
         if (habits.length === 0) return;
 
          const fetchStreak = async () => {
-            const token = localStorage.getItem("token");
-
                 try {
                    const requests = habits.map(habit => 
                      axios.get(`${API_URL}/habits/progress/${habit.id}`, {
@@ -51,9 +51,7 @@ function ProgressPage(props) {
     }, [habits]);
 
     useEffect(() => {
-        const fetchHeatMap = async () => {
-            const token = localStorage.getItem("token");
-            
+        const fetchHeatMap = async () => {   
             try {
                 const response = await axios.get(`${API_URL}/habits/progress`, {
                     headers: {

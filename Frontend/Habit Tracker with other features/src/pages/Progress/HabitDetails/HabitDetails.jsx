@@ -6,6 +6,7 @@ import { HabitContext } from '../../../../Context/HabitContext';
 import './HabitDetails.css'
 import Calendar from '../../../services/Calendar/Calendar';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
+import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
 
 function HabitDetailsPage(props){
     const params = useParams();
@@ -15,11 +16,10 @@ function HabitDetailsPage(props){
     const [ streaks, setStreak ] = useState(null);
     const API_URL = "http://localhost:3000";
     const handleUnauthorized = useUnauthorizedHandler();
+    const { token } = useContext(AuthenticationContext);
 
     useEffect(() => {
          const fetchStreak = async () => {
-            const token = localStorage.getItem("token");
-
                 try {
                    const response = await axios.get(`${API_URL}/habits/progress/${id}/details`, {
                     headers: {
