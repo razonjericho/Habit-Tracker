@@ -10,9 +10,9 @@ function HabitProvider({ children }) {
     const currentDate = new Date().toLocaleDateString("en-CA");
     const [storedDate, setStoredDate] = useState(currentDate);
     const handleUnauthorized = useUnauthorizedHandler();
+    const [ token, setToken ] = useState(localStorage.getItem("token"));
 
     const fetchHabits = async () => {
-      const token = localStorage.getItem("token");
 
       try {
         const response = await axios.get(`${API_URL}/habits`, {
@@ -28,8 +28,12 @@ function HabitProvider({ children }) {
     };
 
     useEffect(() => {
-      fetchHabits();
-    }, []);
+      if (token) {
+        fetchHabits();
+        setToken(token);
+        console.log(token);
+      }  
+    }, [token]);
 
     const checkDate = () => {
       const now = new Date().toLocaleDateString("en-CA");
