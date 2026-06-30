@@ -5,7 +5,7 @@ import EditPage from './pages/Edit/Edit.jsx';
 import ProgressPage from './pages/Progress/Progress.jsx'
 import Header from './components/Header/Header';
 import BottomNav from './components/BottomNav/BottomNav';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import HabitDetailsPage from './pages/Progress/HabitDetails/HabitDetails.jsx';
 import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
 import Login from './pages/Login/Login.jsx';
@@ -18,6 +18,10 @@ function App() {
 
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
+
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === "/auth/login"
 
   function nextMonth(){
     if (month === 11) {
@@ -49,7 +53,7 @@ function App() {
   return (
     <div className="App">
       <SessionExpiredModal isOpen={isSessionExpired} onClose={handleSessionExpiredClose} />
-      <Header />
+      {!isLoginPage && <Header />}
       <Routes>
         <Route path="/auth/login" element={<Login />} />
         <Route path="/" element={ 
@@ -82,7 +86,7 @@ function App() {
           } 
         />
       </Routes>
-        <BottomNav /> 
+        {!isLoginPage && <BottomNav />} 
     </div>
   )
 }
