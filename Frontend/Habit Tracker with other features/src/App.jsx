@@ -86,7 +86,7 @@ function App() {
           } 
         />
       </Routes>
-        {!isLoginPage && <BottomNav />} 
+      {!isLoginPage && <BottomNav />} 
     </div>
   )
 }

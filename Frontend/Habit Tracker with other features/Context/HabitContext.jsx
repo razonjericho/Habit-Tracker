@@ -1,6 +1,7 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import axios from 'axios'
 import useUnauthorizedHandler from '../src/hooks/UseUnauthorizedHandler';
+import { AuthenticationContext } from './AuthenticationContext';
 
 const HabitContext = createContext();
 
@@ -10,7 +11,7 @@ function HabitProvider({ children }) {
     const currentDate = new Date().toLocaleDateString("en-CA");
     const [storedDate, setStoredDate] = useState(currentDate);
     const handleUnauthorized = useUnauthorizedHandler();
-    const [ token, setToken ] = useState(localStorage.getItem("token"));
+    const { token } = useContext(AuthenticationContext);
 
     const fetchHabits = async () => {
 
@@ -30,7 +31,6 @@ function HabitProvider({ children }) {
     useEffect(() => {
       if (token) {
         fetchHabits();
-        setToken(token);
         console.log(token);
       }  
     }, [token]);
