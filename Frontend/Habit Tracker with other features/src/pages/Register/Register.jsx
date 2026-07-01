@@ -23,13 +23,24 @@ function Register () {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setRegisterError("");
 
         try {
+            if (password !== confirmPassword) {
+                setRegisterError("Passwords do not match");
+                return;
+            }
+
             setIsRegistering(true);
         } catch (err) {
+            setRegisterError("Invalid email or password");
             console.error('Error, unable to register', err);
+        } finally {
+            setIsRegistering(false);
         }
     };
+
+    
 
     return (
         <div>
