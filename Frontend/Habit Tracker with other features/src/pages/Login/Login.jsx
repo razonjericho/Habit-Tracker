@@ -1,13 +1,11 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
 
 function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const API_URL = "http://localhost:3000";
-    const { token, setToken } = useContext(AuthenticationContext);
+    const { login } = useContext(AuthenticationContext);
 
     function handleChange(event) {
     const { name, value } = event.target;
@@ -25,15 +23,7 @@ function Login () {
         event.preventDefault();
 
         try {
-            const response = await axios.post(`${API_URL}/auth/login`, {
-                email,
-                password
-            });
-            localStorage.setItem(
-                "token",
-                response.data.token
-            )
-            setToken(response.data.token);
+            await login(email, password);
             navigate(`/`);
         } catch (err) {
             console.error(err);
