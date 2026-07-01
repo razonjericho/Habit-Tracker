@@ -7,6 +7,7 @@ function Login () {
     const [password, setPassword] = useState("");
     const { login } = useContext(AuthenticationContext);
     const [ loginError, setLoginError ]  = useState("");
+    const [ isLoggingIn, setIsLoggingIn ] = useState(false);
 
     function handleChange(event) {
     const { name, value } = event.target;
@@ -25,12 +26,14 @@ function Login () {
         event.preventDefault();
 
         try {
+            setIsLoggingIn(true);
             await login(email, password);
-            setLoginError("");
             navigate(`/`);
         } catch (err) {
             setLoginError("Invalid email or password");
-            console.error(err);
+            console.error('Error, unable to log in', err);
+        } finally {
+            setIsLoggingIn(false);
         }
     };
 
@@ -46,6 +49,7 @@ function Login () {
                         type="email"
                         value={email}
                         onChange={handleChange}
+                        disabled={isLoggingIn}
                         required
                     />
                 </div>
@@ -58,16 +62,20 @@ function Login () {
                         type="password"
                         value={password}
                         onChange={handleChange}
+                        disabled={isLoggingIn}
                         required
                     />
                 </div>
 
                 {loginError && (
-                    <p>{loginError}</p>
+                    <p className='login-error'>{loginError}</p>
                 )}
 
-                <button type="submit">
-                    Login
+                <button 
+                    type="submit"
+                    disabled={isLoggingIn}
+                >
+                    {isLoggingIn ? "Logging in..." : "Login"}
                 </button>
             </form>
         </div>
