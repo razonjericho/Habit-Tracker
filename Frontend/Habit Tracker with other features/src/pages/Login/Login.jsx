@@ -6,6 +6,7 @@ function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { login } = useContext(AuthenticationContext);
+    const [ loginError, setLoginError ]  = useState("");
 
     function handleChange(event) {
     const { name, value } = event.target;
@@ -15,6 +16,7 @@ function Login () {
         } else if (name === "password") {
             setPassword(value);
         }
+        setLoginError("");
     }
 
     const navigate = useNavigate();
@@ -24,8 +26,10 @@ function Login () {
 
         try {
             await login(email, password);
+            setLoginError("");
             navigate(`/`);
         } catch (err) {
+            setLoginError("Invalid email or password");
             console.error(err);
         }
     };
@@ -57,6 +61,10 @@ function Login () {
                         required
                     />
                 </div>
+
+                {loginError && (
+                    <p>{loginError}</p>
+                )}
 
                 <button type="submit">
                     Login
