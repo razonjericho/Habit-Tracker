@@ -31,7 +31,6 @@ function HabitProvider({ children }) {
     useEffect(() => {
       if (token) {
         fetchHabits();
-        console.log(token);
       }  
     }, [token]);
 

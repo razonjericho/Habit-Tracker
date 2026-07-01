@@ -12,6 +12,7 @@ import Login from './pages/Login/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import SessionExpiredModal from './components/SessionExpiredModal/SessionExpiredModal.jsx';
 import { SessionContext } from '../Context/SessionContext.jsx';
+import { AuthenticationContext } from '../Context/AuthenticationContext.jsx';
 
 function App() {
   const today = new Date();
@@ -44,8 +45,10 @@ function App() {
   const { isSessionExpired, setIsSessionExpired } = useContext(SessionContext);
   const navigate = useNavigate();
 
+  const { logout } = useContext(AuthenticationContext);
+
   const handleSessionExpiredClose = () => {
-    localStorage.removeItem("token");
+    logout();
     setIsSessionExpired(false);
     navigate(`/auth/login`);
   }

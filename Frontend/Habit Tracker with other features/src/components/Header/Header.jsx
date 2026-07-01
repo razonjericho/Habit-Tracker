@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css'
 import { useNavigate } from 'react-router-dom';
+import { AuthenticationContext } from '../../../Context/AuthenticationContext';
 
 function Header() {
     const navigate = useNavigate();
+    const { logout } = useContext(AuthenticationContext);
 
-    function logOut() {
-        
-        localStorage.removeItem("token");
-        navigate(`/auth/login`);
-        
+    function handleLogout() { 
+        logout();
+        navigate(`/auth/login`); 
     }
 
 
@@ -24,7 +24,7 @@ function Header() {
                     <li><Link to="/progress">Progress</Link></li>
                 </ul>      
             </nav>
-            <button onClick={logOut} > Log Out </button>
+            <button onClick={handleLogout} > Log Out </button>
         </header>
     );
 }   

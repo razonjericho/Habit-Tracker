@@ -29,7 +29,6 @@ function Login () {
                 email,
                 password
             });
-            console.log("Context token before navigation:", response.data.token);
             localStorage.setItem(
                 "token",
                 response.data.token
