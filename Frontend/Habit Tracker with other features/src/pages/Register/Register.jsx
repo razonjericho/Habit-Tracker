@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Register () {
     const [ email, setEmail ] = useState("");
@@ -7,6 +8,8 @@ function Register () {
 
     const [ registerError, setRegisterError ] = useState("");
     const [ isRegistering, setIsRegistering ] = useState(false);
+
+    const API_URL = "http://localhost:3000";
 
     function handleChange(event) {
     const { name, value } = event.target;
@@ -21,6 +24,14 @@ function Register () {
         setRegisterError("");
     }
 
+    async function register(email, password) {
+            await axios.post(`${API_URL}/auth/register`, {
+                email,
+                password
+            });
+        
+    }
+
     async function handleSubmit(event) {
         event.preventDefault();
         setRegisterError("");
@@ -32,6 +43,7 @@ function Register () {
             }
 
             setIsRegistering(true);
+            await register(email, password);
         } catch (err) {
             setRegisterError("Invalid email or password");
             console.error('Error, unable to register', err);
