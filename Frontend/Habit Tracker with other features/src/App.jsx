@@ -23,7 +23,7 @@ function App() {
 
   const location = useLocation();
 
-  const isLoginPage = location.pathname === "/auth/login"
+  const isAuthenticationPage = location.pathname === "/auth/login" || location.pathname === "/auth/register";
 
   function nextMonth(){
     if (month === 11) {
@@ -57,7 +57,7 @@ function App() {
   return (
     <div className="App">
       <SessionExpiredModal isOpen={isSessionExpired} onClose={handleSessionExpiredClose} />
-      {!isLoginPage && <Header />}
+      {!isAuthenticationPage  && <Header />}
       <Routes>
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
@@ -91,7 +91,7 @@ function App() {
           } 
         />
       </Routes>
-      {!isLoginPage && <BottomNav />} 
+      {!isAuthenticationPage && <BottomNav />} 
     </div>
   )
 }
