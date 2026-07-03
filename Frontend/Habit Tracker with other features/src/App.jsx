@@ -13,6 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import SessionExpiredModal from './components/SessionExpiredModal/SessionExpiredModal.jsx';
 import { SessionContext } from '../Context/SessionContext.jsx';
 import { AuthenticationContext } from '../Context/AuthenticationContext.jsx';
+import Register from './pages/Register/Register.jsx';
 
 function App() {
   const today = new Date();
@@ -59,6 +60,7 @@ function App() {
       {!isLoginPage && <Header />}
       <Routes>
         <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/register" element={<Register />} />
         <Route path="/" element={ 
           <ProtectedRoute> 
             <HomePage /> 

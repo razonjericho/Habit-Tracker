@@ -13,6 +13,7 @@ const registerUser = async (req, res) => {
 
         if (existingUser.rows.length > 0) {
             return res.status(400).json({ error: "User already exists" });
+            console.error("Error, unable to register", err);
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -32,6 +33,7 @@ const registerUser = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Failed to register user" });
+        console.log(err);
     }   
 }
 

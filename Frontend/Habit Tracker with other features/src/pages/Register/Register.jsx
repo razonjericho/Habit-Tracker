@@ -7,6 +7,7 @@ function Register () {
     const [ confirmPassword, setConfirmPassword ] = useState("");
 
     const [ registerError, setRegisterError ] = useState("");
+    const [ registerSuccess, setRegisterSuccess ] = useState("");
     const [ isRegistering, setIsRegistering ] = useState(false);
 
     const API_URL = "http://localhost:3000";
@@ -22,6 +23,7 @@ function Register () {
             setConfirmPassword(value);
         }
         setRegisterError("");
+        setRegisterSuccess("");
     }
 
     async function register(email, password) {
@@ -35,18 +37,19 @@ function Register () {
     async function handleSubmit(event) {
         event.preventDefault();
         setRegisterError("");
+        setRegisterSuccess("");
 
         try {
             if (password !== confirmPassword) {
                 setRegisterError("Passwords do not match");
                 return;
             }
-
             setIsRegistering(true);
             await register(email, password);
+            setRegisterSuccess("Successfully Registered");
         } catch (err) {
-            setRegisterError("Invalid email or password");
-            console.error('Error, unable to register', err);
+            setRegisterError(err.response.data.error);
+            console.error(err.response.data);
         } finally {
             setIsRegistering(false);
         }
@@ -99,6 +102,10 @@ function Register () {
 
                 {registerError && (
                     <p className='register-error'>{registerError}</p>
+                )}
+
+                {registerSuccess && (
+                    <p className='register-error'>{registerSuccess}</p>
                 )}
 
                 <button 
