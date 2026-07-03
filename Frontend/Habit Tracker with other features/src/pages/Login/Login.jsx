@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
+import Register from '../Register/Register';
 
 function Login () {
     const [email, setEmail] = useState("");
@@ -78,6 +79,14 @@ function Login () {
                     {isLoggingIn ? "Logging in..." : "Login"}
                 </button>
             </form>
+
+                <button 
+                    type="submit"
+                    disabled={isLoggingIn}
+                    onClick={(event) => navigate("/auth/register")}
+                >
+                    {"Register"}
+                </button>
         </div>
     );
 }

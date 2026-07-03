@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register () {
     const [ email, setEmail ] = useState("");
@@ -34,6 +35,8 @@ function Register () {
         
     }
 
+    const navigate = useNavigate();
+
     async function handleSubmit(event) {
         event.preventDefault();
         setRegisterError("");
@@ -47,6 +50,9 @@ function Register () {
             setIsRegistering(true);
             await register(email, password);
             setRegisterSuccess("Successfully Registered");
+            setTimeout(() => {
+                    navigate(`/auth/login`);
+                }, 3000);
         } catch (err) {
             setRegisterError(err.response.data.error);
             console.error(err.response.data);
