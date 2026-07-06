@@ -121,6 +121,15 @@ function Register () {
                     {isRegistering ? "Registering..." : "Register"}
                 </button>
             </form>
+
+            <p>Already Have an Account?</p>
+                    <button 
+                    type="submit"
+                    disabled={isRegistering}
+                    onClick={(event) => navigate("/auth/login")}
+                    >
+                    {"Login"}
+                </button>
         </div>
     );
 }
