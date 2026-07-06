@@ -6,17 +6,25 @@ import { HabitProvider } from '../Context/HabitContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { SessionProvider } from '../Context/SessionContext.jsx'
 import { AuthenticationProvider } from '../Context/AuthenticationContext.jsx'
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./theme"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <AuthenticationProvider>
-        <SessionProvider>
-          <HabitProvider>
-            <App />
-          </HabitProvider>
-        </SessionProvider>
-      </AuthenticationProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+
+        <BrowserRouter>
+          <AuthenticationProvider>
+            <SessionProvider>
+              <HabitProvider>
+                <App />
+              </HabitProvider>
+            </SessionProvider>
+          </AuthenticationProvider>
+        </BrowserRouter>
+
+    </ThemeProvider>
+    
   </StrictMode>,
 )

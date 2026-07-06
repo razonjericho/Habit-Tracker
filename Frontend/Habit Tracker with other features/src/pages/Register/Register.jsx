@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "./Register.css"
 
 function Register () {
     const [ email, setEmail ] = useState("");
@@ -122,14 +123,17 @@ function Register () {
                 </button>
             </form>
 
-            <p>Already Have an Account?</p>
-                    <button 
-                    type="submit"
-                    disabled={isRegistering}
-                    onClick={(event) => navigate("/auth/login")}
+                <p>
+                    Already Have an Account?
+                    <span 
+                        className='auth-link'
+                        type="submit"
+                        disabled={isRegistering}
+                        onClick={(event) => navigate("/auth/login")}
                     >
-                    {"Login"}
-                </button>
+                        {"Login"}
+                    </span>
+                </p>
         </div>
     );
 }

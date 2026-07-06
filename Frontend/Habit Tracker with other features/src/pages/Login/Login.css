@@ -1,0 +1,10 @@
+
+.register-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.auth-link:hover {
+    opacity: 0.8;
+}

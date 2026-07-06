@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
 import Register from '../Register/Register';
+import "./Login.css"
 
 function Login () {
     const [email, setEmail] = useState("");
@@ -80,13 +81,18 @@ function Login () {
                 </button>
             </form>
 
-                <button 
-                    type="submit"
-                    disabled={isLoggingIn}
-                    onClick={(event) => navigate("/auth/register")}
-                >
-                    {"Register"}
-                </button>
+                
+                <p>
+                    Don't Have an Account?
+                    <span 
+                        className='register-link'
+                        type="submit"
+                        disabled={isLoggingIn}
+                        onClick={(event) => navigate("/auth/register")}
+                    >
+                        {"Register"}
+                    </span>
+                </p>
         </div>
     );
 }
