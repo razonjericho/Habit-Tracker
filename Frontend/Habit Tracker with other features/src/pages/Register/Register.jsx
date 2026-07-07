@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./Register.css"
+import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material"
 
 function Register () {
     const [ email, setEmail ] = useState("");
@@ -50,10 +51,10 @@ function Register () {
             }
             setIsRegistering(true);
             await register(email, password);
-            setRegisterSuccess("Successfully Registered");
+            setRegisterSuccess("Account created successfully! Redirecting to login...");
             setTimeout(() => {
                     navigate(`/auth/login`);
-                }, 3000);
+                }, 2000);
         } catch (err) {
             setRegisterError(err.response.data.error);
             console.error(err.response.data);
@@ -65,76 +66,121 @@ function Register () {
     
 
     return (
-        <div>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit} >
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={email}
-                        onChange={handleChange}
-                        disabled={isRegistering}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        value={password}
-                        onChange={handleChange}
-                        disabled={isRegistering}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        value={confirmPassword}
-                        onChange={handleChange}
-                        disabled={isRegistering}
-                        required
-                    />
-                </div>
-
-                {registerError && (
-                    <p className='register-error'>{registerError}</p>
-                )}
-
-                {registerSuccess && (
-                    <p className='register-error'>{registerSuccess}</p>
-                )}
-
-                <button 
-                    type="submit"
-                    disabled={isRegistering}
+        <Container
+            maxWidth="sm"
+            sx={{
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                py: 4,
+            }}
+        >
+            <Card
+                sx={{
+                    width: "100%",
+                }}
+            >
+                <CardContent
+                    sx={{
+                        p: 4,
+                    }}
                 >
-                    {isRegistering ? "Registering..." : "Register"}
-                </button>
-            </form>
-
-                <p>
-                    Already Have an Account?
-                    <span 
-                        className='auth-link'
-                        type="submit"
-                        disabled={isRegistering}
-                        onClick={(event) => navigate("/auth/login")}
+                    <Typography 
+                        variant="h2"
+                        align="center"
+                        gutterBottom
                     >
-                        {"Login"}
-                    </span>
-                </p>
-        </div>
+                        Create Your Account
+                    </Typography>
+
+                    <Typography 
+                        variant="body1"
+                        align="center"
+                        gutterBottom
+                    >
+                        Your habit journey starts here.
+                    </Typography>
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit}
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 2,
+                            mt:3
+                        }}
+                    >
+                        <TextField 
+                            id="email"
+                            name="email"
+                            label="Email"
+                            type="email"
+                            value={email}
+                            onChange={handleChange}
+                            disabled={isRegistering}
+                            required
+                        />
+
+                        <TextField 
+                            id="password"
+                            name="password"
+                            label="Password"
+                            type="password"
+                            value={password}
+                            onChange={handleChange}
+                            disabled={isRegistering}
+                            required
+                        />         
+
+                        <TextField 
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            label="Confirm Password"
+                            type="password"
+                            value={confirmPassword}
+                            onChange={handleChange}
+                            disabled={isRegistering}
+                            required
+                        />
+
+                        {registerError && (
+                            <Alert severity="error">{registerError}</Alert>
+                        )}
+
+                        {registerSuccess && (
+                            <Alert severity="success">{registerSuccess}</Alert>
+                        )}
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            disabled={isRegistering}
+                        >
+                            {isRegistering ? "Creating Account..." : "Create Account"}
+                        </Button>
+                    </Box>
+
+                    <Box
+                        sx={{
+                            textAlign:"center",
+                            mt: 3,
+                        }}
+                    >
+                        <Typography variant="body2">Already have an account?</Typography>
+
+                        <Link 
+                            underline="none"
+                            onClick={() => navigate("/auth/login")}
+                        >
+                            {"Log in"}
+                        </Link>
+                    </Box>
+                </CardContent>
+            </Card>
+            
+        </Container>
     );
 }
 
