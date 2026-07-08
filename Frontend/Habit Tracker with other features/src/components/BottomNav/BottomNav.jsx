@@ -1,14 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import './BottomNav.css'
+import { Link as RouterLink } from 'react-router-dom'
+import { BottomNavigationAction, BottomNavigation } from "@mui/material"
 
 function BottomNav() {
-    return (
-            <nav className="bottom-nav">
-                <Link to="/" className="nav-item">Home</Link>
-                <Link to="/progress" className="nav-item">Progress</Link>   
-                <Link to="/edit" className="nav-item">Edit</Link>
-            </nav>
+    return (  
+                <BottomNavigation
+                    showLabels
+                    sx={{
+                        display: {
+                            xs: "flex",
+                            md: "none",
+                        },
+                        zIndex: (theme) => theme.zIndex.appBar,
+                        position: "fixed",
+                        bottom: 0,
+                        width: "100%",
+                    }}
+                >
+                    <BottomNavigationAction label="Home" component={RouterLink} to="/" />
+                    <BottomNavigationAction label="Progress" component={RouterLink} to="/progress" />  
+                    <BottomNavigationAction label="Edit" component={RouterLink} to="/edit" />
+                </BottomNavigation>
+            
     )
 }
 

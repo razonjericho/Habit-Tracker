@@ -1,15 +1,27 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom'
 import './Header.css'
-import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
-import { AppBar, Toolbar, Typography, Box,  Button } from "@mui/material"
+import { AppBar, Toolbar, Typography, Box, Button, Stack, IconButton, Menu, MenuItem } from "@mui/material"
+import MoreVertIcon from "@mui/icons-material/MoreVert"
 
 function Header() {
     const navigate = useNavigate();
     const { logout } = useContext(AuthenticationContext);
+    const [ anchorEl, setAnchorEl ] = useState(null);
 
-    function handleLogout() { 
+    const open = Boolean(anchorEl);
+
+    function handleMenuOpen(event) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function handleMenuClose(event) {
+        setAnchorEl(null);
+    }
+
+    function handleLogout() {
+        handleMenuClose();
         logout();
         navigate(`/auth/login`); 
     }
@@ -21,7 +33,12 @@ function Header() {
             color="inherit"
             elevation={1}
         >
-            <Toolbar>
+            <Toolbar
+                sx={{
+                    width: "100%",
+                    px: 3,
+                }}
+            >
                 <Box sx={{ flexGrow: 1 }}>
                     <Typography 
                         variant="h5"
@@ -41,21 +58,34 @@ function Header() {
                     <Box
                         sx={{
                             display: {
-                            xs: "none",
-                            md: "block"
+                                xs: "none",
+                                md: "block"
                             }
                         }}
                     >
-                        <nav className="header-nav">
-                            <ul>
-                                <li><Link to="/">Home</Link></li>
-                                <li><Link to="/edit">Edit</Link></li>
-                                <li><Link to="/progress">Progress</Link></li>
-                            </ul>      
-                        </nav>
+                        <Stack 
+                            direction="row"
+                            spacing={1}
+                        >
+                                <Button component={RouterLink} to="/">Home</Button>
+                                <Button component={RouterLink} to="/edit">Edit</Button>
+                                <Button component={RouterLink} to="/progress">Progress</Button>  
+                        </Stack>
                     </Box>
                     
-                    <Button onClick={handleLogout} > Log Out </Button>
+                    <IconButton onClick={handleMenuOpen} >
+                        <MoreVertIcon /> 
+                    </IconButton>
+
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleMenuClose}
+                    >
+                        <MenuItem onClick={handleLogout}>
+                            Log Out
+                        </MenuItem>
+                    </Menu>
                 </Box>
                 
             </Toolbar>    
