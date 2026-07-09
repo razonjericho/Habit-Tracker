@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import './Header.css'
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
 import { AppBar, Toolbar, Typography, Box, Button, Stack, IconButton, Menu, MenuItem } from "@mui/material"
