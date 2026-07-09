@@ -1,14 +1,23 @@
 import React, { useContext, useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom'
 import './Header.css'
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
 import { AppBar, Toolbar, Typography, Box, Button, Stack, IconButton, Menu, MenuItem } from "@mui/material"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 function Header() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { logout } = useContext(AuthenticationContext);
     const [ anchorEl, setAnchorEl ] = useState(null);
+
+    const currentTab =
+        location.pathname.startsWith("/progress")
+            ? "/progress"
+            : location.pathname;
 
     const open = Boolean(anchorEl);
 
@@ -67,9 +76,39 @@ function Header() {
                             direction="row"
                             spacing={1}
                         >
-                                <Button component={RouterLink} to="/">Home</Button>
-                                <Button component={RouterLink} to="/edit">Edit</Button>
-                                <Button component={RouterLink} to="/progress">Progress</Button>  
+                                <Button 
+                                    startIcon={<HomeOutlinedIcon />} 
+                                    component={RouterLink} 
+                                    to="/"
+                                    sx={{
+                                        color: currentTab === "/" ? "primary.main" : "text.secondary",
+                                        fontWeight: currentTab === "/" ? 600 : 400,
+                                    }}
+                                >
+                                    Home
+                                </Button>
+                                <Button 
+                                startIcon={<InsightsOutlinedIcon />} 
+                                component={RouterLink} 
+                                to="/progress"
+                                sx={{
+                                    color: currentTab === "/progress" ? "primary.main" : "text.secondary",
+                                    fontWeight: currentTab === "/progress" ? 600 : 400,
+                                }}
+                                >
+                                    Progress
+                                </Button> 
+                                <Button 
+                                startIcon={<EditOutlinedIcon />} 
+                                component={RouterLink} 
+                                to="/edit"
+                                sx={{
+                                    color: currentTab === "/edit" ? "primary.main" : "text.secondary",
+                                    fontWeight: currentTab === "/edit" ? 600 : 400,
+                                }}
+                                >
+                                    Edit
+                                </Button> 
                         </Stack>
                     </Box>
                     
