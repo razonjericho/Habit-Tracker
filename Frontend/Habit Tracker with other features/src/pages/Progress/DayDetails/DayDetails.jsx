@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import HabitList from '../../../components/HabitList/HabitList';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
@@ -11,6 +11,7 @@ function DayDetails () {
     const [ dayDetails, setDayDetails ]   = useState(null);;
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDayDetails = async () => {
@@ -37,6 +38,7 @@ function DayDetails () {
 
     return (
         <div>
+            <button onClick={() => navigate("/progress")}>Back</button>
             <h1>Day Details</h1>
             <h2>Date</h2>
             <p>{dayDetails?.date}</p>

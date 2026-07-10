@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../../../components/HabitList/HabitList"
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { HabitContext } from '../../../../Context/HabitContext';
 import './HabitDetails.css'
 import Calendar from '../../../services/Calendar/Calendar';
@@ -17,6 +17,7 @@ function HabitDetailsPage(props){
     const API_URL = "http://localhost:3000";
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
          const fetchStreak = async () => {
@@ -59,6 +60,7 @@ function HabitDetailsPage(props){
 
     return (
         <div>
+            <button onClick={() => navigate("/progress")}>Back</button>
             <h1>Habit Details</h1>
             <button onClick={props.previous}>Previous</button>
             <h2>{months[props.month]} {props.year}</h2>

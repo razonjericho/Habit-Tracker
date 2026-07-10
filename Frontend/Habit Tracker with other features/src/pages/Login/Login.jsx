@@ -41,29 +41,56 @@ function Login () {
 
     return (
         <Container 
-            maxWidth="sm"
             sx={{
                 minHeight: "100vh",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                py: 4,
+                
+                py: {
+                    xs: 3,
+                    sm: 4,
+                    md: 6,
+                },
+
+                px: {
+                    xs: 2,
+                    sm: 3,
+                    md: 4,
+                },
             }}
         >
             <Card 
                 sx={{
                     width: "100%",
+
+                    maxWidth: {
+                        xs: 420,
+                        sm: 520,
+                        md: 640,
+                    },
                 }}
             >
                 <CardContent
                     sx={{
-                        p: 4,
+                        p: {
+                            xs: 3,
+                            sm: 4,
+                            md: 5,
+                        },
                     }}
                 >
                     <Typography 
                         variant="h2"
                         align="center"
                         gutterBottom
+                        sx={{
+                            fontSize: {
+                                xs: "2rem",
+                                sm: "2.25rem",
+                                md: "2.5rem",
+                            },
+                        }}
                     >
                         Welcome Back
                     </Typography>
@@ -72,17 +99,34 @@ function Login () {
                         variant="body1"
                         align="center"
                         gutterBottom
+                        sx={{
+                            fontSize: {
+                                xs: "0.95rem",
+                                sm: "1rem",
+                                md: "1.05rem",
+                            },
+                        }}
                     >
                         Sign in to continue your habit journey.
                     </Typography>
                     <Box 
-                        component="form" 
-                        onSubmit={handleSubmit} 
+                        component="form"
+                        onSubmit={handleSubmit}
                         sx={{
                             display: "flex",
                             flexDirection: "column",
-                            gap: 2,
-                            mt:3
+
+                            gap: {
+                                xs: 2,
+                                sm: 2.5,
+                                md: 3,
+                            },
+
+                            mt: {
+                                xs: 3,
+                                sm: 3.5,
+                                md: 4,
+                            },
                         }}
                     >
                         
@@ -117,6 +161,13 @@ function Login () {
                             color="primary"
                             type="submit"
                             disabled={isLoggingIn}
+                            sx={{
+                                py: {
+                                    xs: 1.25,
+                                    sm: 1.4,
+                                    md: 1.5,
+                                },
+                            }}
                         >
                             {isLoggingIn ? "Logging in..." : "Login"}
                         </Button>
@@ -124,15 +175,39 @@ function Login () {
 
                     <Box
                         sx={{
-                            textAlign:"center",
-                            mt: 3,
+                            textAlign: "center",
+
+                            mt: {
+                                xs: 3,
+                                sm: 3.5,
+                                md: 4,
+                            },
                         }}
                     >
-                        <Typography variant="body2">Don't have an account?</Typography>
+                        <Typography 
+                            variant="body2"
+                            sx={{
+                                fontSize: {
+                                    xs: "0.85rem",
+                                    sm: "0.9rem",
+                                    md: "0.95rem",
+                                },
+                            }}
+                        >
+                            Don't have an account?
+                        </Typography>
 
                         <Link 
                             underline="none"
                             onClick={() => navigate("/auth/register")}
+                            sx={{
+                                cursor: "pointer",
+                                fontSize: {
+                                    xs: "0.9rem",
+                                    sm: "0.95rem",
+                                    md: "1rem",
+                                },
+                            }}
                         >
                             {"Create an account"}
                         </Link>
