@@ -67,29 +67,56 @@ function Register () {
 
     return (
         <Container
-            maxWidth="sm"
             sx={{
-                minHeight: "100vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                py: 4,
-            }}
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            px: {
+                xs: 2,
+                sm: 3,
+                md: 4,
+            },
+
+            py: {
+                xs: 3,
+                sm: 4,
+                md: 6,
+            },
+        }}
         >
             <Card
                 sx={{
                     width: "100%",
+
+                    maxWidth: {
+                        xs: 420,
+                        sm: 520,
+                        md: 640,
+                    },
                 }}
             >
                 <CardContent
                     sx={{
-                        p: 4,
+                        p: {
+                            xs: 3,
+                            sm: 4,
+                            md: 5,
+                        },
                     }}
                 >
                     <Typography 
                         variant="h2"
                         align="center"
                         gutterBottom
+                        sx={{
+                            fontSize: {
+                                xs: "2rem",
+                                sm: "2.25rem",
+                                md: "2.5rem",
+                            },
+                        }}
                     >
                         Create Your Account
                     </Typography>
@@ -98,6 +125,13 @@ function Register () {
                         variant="body1"
                         align="center"
                         gutterBottom
+                        sx={{
+                            fontSize: {
+                                xs: "0.95rem",
+                                sm: "1rem",
+                                md: "1.05rem",
+                            },
+                        }}
                     >
                         Your habit journey starts here.
                     </Typography>
@@ -107,8 +141,18 @@ function Register () {
                         sx={{
                             display: "flex",
                             flexDirection: "column",
-                            gap: 2,
-                            mt:3
+
+                            gap: {
+                                xs: 2,
+                                sm: 2.5,
+                                md: 3,
+                            },
+
+                            mt: {
+                                xs: 3,
+                                sm: 3.5,
+                                md: 4,
+                            },
                         }}
                     >
                         <TextField 
@@ -157,6 +201,13 @@ function Register () {
                             color="primary"
                             type="submit"
                             disabled={isRegistering}
+                            sx={{
+                                py: {
+                                    xs: 1.25,
+                                    sm: 1.4,
+                                    md: 1.5,
+                                },
+                            }}
                         >
                             {isRegistering ? "Creating Account..." : "Create Account"}
                         </Button>
@@ -164,15 +215,40 @@ function Register () {
 
                     <Box
                         sx={{
-                            textAlign:"center",
-                            mt: 3,
+                            textAlign: "center",
+
+                            mt: {
+                                xs: 3,
+                                sm: 3.5,
+                                md: 4,
+                            },
                         }}
                     >
-                        <Typography variant="body2">Already have an account?</Typography>
+                        <Typography 
+                            variant="body2"
+                            sx={{
+                                fontSize: {
+                                    xs: "0.85rem",
+                                    sm: "0.9rem",
+                                    md: "0.95rem",
+                                },
+                            }}
+                        >
+                            Already have an account?
+                        </Typography>
 
                         <Link 
                             underline="none"
                             onClick={() => navigate("/auth/login")}
+                            sx={{
+                                cursor: "pointer",
+                                fontWeight: 500,
+                                fontSize: {
+                                    xs: "0.9rem",
+                                    sm: "0.95rem",
+                                    md: "1rem",
+                                },
+                            }}
                         >
                             {"Log in"}
                         </Link>
