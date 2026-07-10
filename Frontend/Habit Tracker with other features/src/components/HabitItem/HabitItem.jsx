@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Stack } from "@mui/material";
+import { Card, CardContent, Typography, Stack, Button, Checkbox } from "@mui/material";
 
 function HabitItem(props){
     const streak = props.streaks ? props.streaks[props.id] : undefined;
@@ -54,48 +54,67 @@ function HabitItem(props){
                         </Typography>
                         {streak}
                         {props.onEdit && (
-                            <span>
-                                <button
+                            <Stack direction="row" spacing={1}>
+                                <Button
+                                    variant="contained"
+                                    size="small"
                                     onClick = {() => {
                                         const newText = prompt("Rename Habit:", props.text);
                                         props.onEdit(props.id, newText);
                                     }}
                                 >
                                     Rename Habit
-                                </button>
-                                <button onClick = {() => {props.onArchive(props.id);}}>
+                                </Button>
+
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    onClick = {() => {props.onArchive(props.id);}}
+                                >
                                     Archive Habit
-                                </button>
-                            </span>
+                                </Button>
+                            </Stack>
                         )}  
                         
                         {props.onDone && (
-                            <span>
-                                <button onClick= {() => {props.onDone(props.id)}}>
-                                    {props.isCompleted ? "Undo" : "Done"}
-                                </button>
-                            </span> 
+                                <Checkbox
+                                    checked={props.isCompleted}
+                                    onChange= {() => {props.onDone(props.id)}}
+                                    sx={{
+                                        p: {
+                                            xs: 0.5,
+                                            sm: 0.75,
+                                            md: 1,
+                                        },
+                                    }}
+                                />
+                                
                         )}
 
-                        {props.onViewDetails && (
-                            <span>
-                                <button onClick={() => {props.onViewDetails(props.id)}}>
+                        {props.onViewDetails && ( 
+                                <Button 
+                                    variant="contained"
+                                    size="small"
+                                    onClick={() => {props.onViewDetails(props.id)}}
+                                >
                                     Details
-                                </button>
-                            </span>
+                                </Button>
                         )}
 
                         {props.onRestore && (
-                            <span>
-                                <button onClick={() => {props.onRestore(props.id)}}>
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    onClick={() => {props.onRestore(props.id)}}
+                                >
                                     Restore Habit
-                                </button>
-                            </span>
+                                </Button>
                         )} 
 
                         {props.onDelete && (
-                            <span>
-                                <button 
+                                <Button
+                                    variant="contained"
+                                    size="small"
                                     onClick={() => {
                                         const confirmDelete = window.confirm( "Are you sure you want to delete this habit? This action cannot be undone and all habit data will be permanently lost.")
 
@@ -105,8 +124,7 @@ function HabitItem(props){
                                         }} 
                                     >
                                     Delete Habit
-                                </button>
-                            </span>
+                                </Button>
                         )}
                     </Stack>
                 </CardContent>
