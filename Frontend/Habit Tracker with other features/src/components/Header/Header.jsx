@@ -45,13 +45,33 @@ function Header() {
             <Toolbar
                 sx={{
                     width: "100%",
-                    px: 3,
+
+                    px: {
+                        xs: 2,
+                        sm: 3,
+                        md: 4,
+                    },
+
+                    minHeight: {
+                        xs: 56,
+                        sm: 64,
+                        md: 72,
+                    },
                 }}
             >
                 <Box sx={{ flexGrow: 1 }}>
                     <Typography 
                         variant="h5"
                         component="h1"
+                        sx={{
+                            fontSize: {
+                                xs: "1.6rem",
+                                sm: "1.8rem",
+                                md: "2rem",
+                            },
+
+                            fontWeight: 600,
+                        }}
                     >
                         Habit Tracker
                     </Typography>
@@ -61,58 +81,145 @@ function Header() {
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        gap: 2,
+
+                        gap: {
+                            xs: 1,
+                            sm: 2,
+                            md: 3,
+                        },
                     }}
                 >
                     <Box
                         sx={{
                             display: {
                                 xs: "none",
-                                md: "block"
-                            }
+                                md: "block",
+                            },
                         }}
                     >
                         <Stack 
                             direction="row"
-                            spacing={1}
+                            spacing={{
+                                xs: 1,
+                                md: 2,
+                            }}
                         >
                                 <Button 
-                                    startIcon={<HomeOutlinedIcon />} 
-                                    component={RouterLink} 
+                                    startIcon={
+                                        <HomeOutlinedIcon
+                                           sx={{
+                                                fontSize: {
+                                                    xs: 20,
+                                                    md: 22,
+                                                },
+                                            }} 
+                                        />
+                                    }
+                                    component={RouterLink}
                                     to="/"
                                     sx={{
-                                        color: currentTab === "/" ? "primary.main" : "text.secondary",
-                                        fontWeight: currentTab === "/" ? 600 : 400,
+                                        color:
+                                            currentTab === "/" ? "primary.main" : "text.secondary",
+
+                                        fontWeight:
+                                            currentTab === "/" ? 600 : 400,
+
+                                        fontSize: {
+                                            xs: "0.875rem",
+                                            md: "1rem",
+                                        },
+
+                                        px: {
+                                            xs: 1,
+                                            md: 2,
+                                        },
                                     }}
                                 >
                                     Home
                                 </Button>
+
                                 <Button 
-                                startIcon={<InsightsOutlinedIcon />} 
-                                component={RouterLink} 
-                                to="/progress"
-                                sx={{
-                                    color: currentTab === "/progress" ? "primary.main" : "text.secondary",
-                                    fontWeight: currentTab === "/progress" ? 600 : 400,
-                                }}
+                                    startIcon={
+                                        <InsightsOutlinedIcon
+                                             sx={{
+                                                fontSize: {
+                                                    xs: 20,
+                                                    md: 22,
+                                                },
+                                            }}
+                                        />
+                                    }
+                                    component={RouterLink}
+                                    to="/progress"
+                                    sx={{
+                                        color:
+                                            currentTab === "/progress"
+                                                ? "primary.main"
+                                                : "text.secondary",
+
+                                        fontWeight:
+                                            currentTab === "/progress"
+                                                ? 600
+                                                : 400,
+
+                                        fontSize: {
+                                            xs: "0.875rem",
+                                            md: "1rem",
+                                        },
+
+                                        px: {
+                                            xs: 1,
+                                            md: 2,
+                                        },
+                                    }}
                                 >
                                     Progress
-                                </Button> 
+                                </Button>
+
                                 <Button 
-                                startIcon={<EditOutlinedIcon />} 
-                                component={RouterLink} 
-                                to="/edit"
-                                sx={{
-                                    color: currentTab === "/edit" ? "primary.main" : "text.secondary",
-                                    fontWeight: currentTab === "/edit" ? 600 : 400,
-                                }}
+                                    startIcon={
+                                    <EditOutlinedIcon 
+                                        sx={{
+                                                fontSize: {
+                                                    xs: 20,
+                                                    md: 22,
+                                                },
+                                            }}
+                                    />
+                                    }
+                                    component={RouterLink}
+                                    to="/edit"
+                                    sx={{
+                                        color:
+                                            currentTab === "/edit"
+                                                ? "primary.main"
+                                                : "text.secondary",
+
+                                        fontWeight:
+                                            currentTab === "/edit"
+                                                ? 600
+                                                : 400,
+
+                                        fontSize: {
+                                            xs: "0.875rem",
+                                            md: "1rem",
+                                        },
+
+                                        px: {
+                                            xs: 1,
+                                            md: 2,
+                                        },
+                                    }}
                                 >
                                     Edit
                                 </Button> 
                         </Stack>
                     </Box>
                     
-                    <IconButton onClick={handleMenuOpen} >
+                    <IconButton 
+                        onClick={handleMenuOpen}
+                        size="large" 
+                    >
                         <MoreVertIcon /> 
                     </IconButton>
 
