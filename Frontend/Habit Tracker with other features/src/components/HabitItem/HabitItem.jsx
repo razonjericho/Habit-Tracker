@@ -1,12 +1,26 @@
 import React from 'react';
-import "./HabitItem.css"
+import { Card, CardContent, Typography } from "@mui/material";
 
 function HabitItem(props){
     const streak = props.streaks ? props.streaks[props.id] : undefined;
 
     return (
-            <li>
-                {props.text} {streak}
+            <Card>
+                <CardContent>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            fontSize: {
+                                xs: "1.2rem",
+                                sm: "1.3rem",
+                                md: "1.4rem",
+                            },
+                            fontWeight: 600,
+                        }}
+                    >
+                        {props.text}
+                    </Typography>
+                     {streak}
                      {props.onEdit && (
                         <span>
                             <button
@@ -62,8 +76,9 @@ function HabitItem(props){
                             </button>
                         </span>
                     )}
-                   
-            </li>
+
+                </CardContent>
+            </Card>
     )
 }
 

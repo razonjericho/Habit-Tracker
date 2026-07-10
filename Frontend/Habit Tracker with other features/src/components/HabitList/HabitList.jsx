@@ -1,9 +1,21 @@
 import React, { useContext } from 'react'
 import HabitItem from '../HabitItem/HabitItem';
+import { Box } from "@mui/material"
 
 function HabitList(props){
     return (
-        <ul> 
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+
+                gap: {
+                    xs: 1.5,
+                    sm: 2,
+                    md: 2.5,
+                },
+            }}
+        > 
             {props.habits.map(habit => (
             <HabitItem 
                 key={habit.id} 
@@ -19,7 +31,7 @@ function HabitList(props){
                 onDelete={props.onDelete}
             />  
              ))}
-        </ul>
+        </Box>
     )
 }
 
