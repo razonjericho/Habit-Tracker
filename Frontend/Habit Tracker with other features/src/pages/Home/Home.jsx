@@ -23,6 +23,12 @@ function HomePage() {
                     sm: 3,
                     md: 4,
                 },
+
+                pb: {
+                    xs: 10,
+                    sm: 11,
+                    md: 6,
+                },
             }}
         >
             <Typography
