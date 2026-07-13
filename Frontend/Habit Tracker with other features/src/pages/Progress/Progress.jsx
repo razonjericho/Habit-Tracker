@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import './Progress.css';
 import useUnauthorizedHandler from '../../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
+import { Container, Typography, Box } from "@mui/material";
 
 function ProgressPage(props) {
     const API_URL = "http://localhost:3000";
@@ -81,8 +82,43 @@ function ProgressPage(props) {
 
    
     return (
-        <div>
-            <h1>Progress</h1>
+        <Container
+            sx={{
+                py: {
+                    xs: 3,
+                    sm: 4,
+                    md: 6,
+                },
+
+                px: {
+                    xs: 2,
+                    sm: 3,
+                    md: 4,
+                },
+
+                pb: {
+                    xs: 10,
+                    sm: 11,
+                    md: 6,
+                },
+            }}
+        >
+            <Typography
+                variant="h2"
+                component="h1"
+                gutterBottom
+                sx={{
+                    fontSize: {
+                        xs: "2rem",
+                        sm: "2.25rem",
+                        md: "2.5rem",
+                    },
+
+                    fontWeight: 700,
+                }}
+            >
+                Progress
+            </Typography>
             <button onClick= {props.previous} > Previous </button>
             <h2> {months[props.month]} {props.year} </h2>
             <button onClick= {props.next} > Next </button>
@@ -99,7 +135,7 @@ function ProgressPage(props) {
                 onViewDetails={viewHabitDetails}            
             />
             
-        </div>
+        </Container>
     )
 }
 
