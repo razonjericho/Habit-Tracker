@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import './Progress.css';
 import useUnauthorizedHandler from '../../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from '../../../Context/AuthenticationContext';
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, IconButton } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 function ProgressPage(props) {
     const API_URL = "http://localhost:3000";
@@ -119,9 +121,56 @@ function ProgressPage(props) {
             >
                 Progress
             </Typography>
-            <button onClick= {props.previous} > Previous </button>
-            <h2> {months[props.month]} {props.year} </h2>
-            <button onClick= {props.next} > Next </button>
+            <Box
+                sx={{
+                     display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 2,
+
+                    gap: {
+                        xs: 1,
+                        sm: 2,
+                        md: 3,
+                    },
+
+                    mb: {
+                        xs: 2,
+                        sm: 3,
+                        md: 4,
+                    },
+                }}
+            >
+                <IconButton 
+                    onClick= {props.previous}
+                    aria-label="Previous month"
+                > 
+                    <ChevronLeftIcon />
+                </IconButton>
+
+
+                <Typography
+                    variant="h4"
+                    sx={{
+                        fontWeight: 600,
+
+                        fontSize: {
+                            xs: "1.5rem",
+                            sm: "1.75rem",
+                            md: "2rem",
+                        },
+                    }}
+                > 
+                    {months[props.month]} {props.year} 
+                </Typography>
+                <IconButton 
+                    onClick= {props.next}
+                    aria-label="Next month"
+                > 
+                    <ChevronRightIcon />
+                </IconButton>
+            </Box>
+            
             <Tooltip
                 month={props.month}
                 year={props.year}
