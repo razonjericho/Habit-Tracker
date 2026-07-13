@@ -1,6 +1,15 @@
 import React from 'react';
 import calendarGenerator from './calendarGenerator';
 import './Calendar.css'
+import { Box, Typography } from "@mui/material";
+
+const heatColors = {
+    0: "transparent",
+    1: "#FDE7CF",
+    2: "#FED7AA",
+    3: "#FB923C",
+    4: "#F97316",
+};
 
 function Calendar(props) {
     
@@ -11,43 +20,105 @@ function Calendar(props) {
         props.heatMap
     );
 
+    const weekDays = [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+    ];
+
+    function getDayStyles(day) {
+        if (!day) {
+            return {
+                bgcolor: "transparent",
+                cursor: "default",
+            };
+        }
+
+        return {
+            bgcolor: day.level > 0
+                ? heatColors[day.level]
+                : "background.default",
+
+            color: day.level > 0 ? "#fff" : "text.primary",
+
+            border: "2px solid white",
+            borderRadius: "20px",
+
+            cursor: "pointer",
+        };
+    }
+
     return (
-        <div>
-            <div className="weekly-header" >
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-            </div>
+        <Box>
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(7, 1fr)",
+                    textAlign: "center",
+                    mb: 1,
+                }}
+            >
+                {weekDays.map((day) => (
+                    <Typography
+                        key={day}
+                        variant="body2"
+                        fontWeight={600}
+                        color="text.secondary"
+                    >
+                        {day}
+                    </Typography>
+                ))}
+            </Box>
             
-            <div className="calendar">
-            {weeks.map((week, weekIndex) => (
-                <div key={weekIndex} className="week" >
+            <Box
+                sx={{
+                    bgcolor: "background.paper",
+                }}
+            >
+                {weeks.map((week, weekIndex) => (
+                <Box 
+                    key={weekIndex} 
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(7, 1fr)",
+                    }}
+                >
                     {week.map((day, dayIndex) => (
-                        <div 
-                        key={dayIndex} 
-                        className={
-                            day 
-                            ? day.level > 0 
-                                ? `heat-${day.level}` 
-                                : (day.isCompleted ? "completed" : "not-completed") 
-                            : "empty"
-                        }
-                        onClick={(event) => {
-                            const position = event.currentTarget.getBoundingClientRect();
-                            props.onSelectedDay(day, position);
-                        }}
+                        <Box 
+                            key={dayIndex} 
+                            onClick={(event) => {
+                                if (!day) return;
+
+                                const position = event.currentTarget.getBoundingClientRect();
+                                props.onSelectedDay(day, position);
+                            }}
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+
+                                minHeight: {
+                                    xs: 32,
+                                    sm: 36,
+                                    md: 40,
+                                },
+
+                                borderRadius: "20px",
+
+                                ...getDayStyles(day),
+                            }}
                         >
                             {day ? new Date(day.day).getDate() : null}
-                        </div>
+                        </Box>
                     ))}
-                </div>
+                </Box>
             ))}
-            </div>
-        </div>
+            </Box>
+        </Box>
         
     )
 }
