@@ -90,12 +90,7 @@ function Calendar(props) {
                     {week.map((day, dayIndex) => (
                         <Box 
                             key={dayIndex} 
-                            onClick={(event) => {
-                                if (!day) return;
-
-                                const position = event.currentTarget.getBoundingClientRect();
-                                props.onSelectedDay(day, position);
-                            }}
+                            onClick={() => day && props.onSelectedDay(day)}
                             sx={{
                                 display: "flex",
                                 justifyContent: "center",
