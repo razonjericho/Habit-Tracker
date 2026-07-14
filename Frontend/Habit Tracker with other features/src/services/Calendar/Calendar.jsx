@@ -4,7 +4,7 @@ import './Calendar.css'
 import { Box, Typography } from "@mui/material";
 
 const heatColors = {
-    0: "transparent",
+    0: "#f8f9fa",
     1: "#FDE7CF",
     2: "#FED7AA",
     3: "#FB923C",

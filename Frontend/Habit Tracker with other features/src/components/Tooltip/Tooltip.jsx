@@ -16,6 +16,14 @@ function Tooltip (props) {
         })
         : "";
 
+    const heatColors = {
+        0: "#f8f9fa",
+        1: "#FDE7CF",
+        2: "#FED7AA",
+        3: "#FB923C",
+        4: "#F97316",
+    };
+
     function handleSelectDay(day){
         if (selectedDay && selectedDay.day === day.day) {
             setSelectedDay(null);
@@ -61,6 +69,88 @@ function Tooltip (props) {
                 onSelectedDay={handleSelectDay}
             />
 
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+
+                    mt: {
+                        xs: 2,
+                        sm: 2.5,
+                        md: 3,
+                    },
+
+                    mb: {
+                        xs: 2,
+                        sm: 2.5,
+                        md: 3,
+                    },
+                }}
+            >
+                <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mb: 1 }}
+                >
+                    Completion Rate
+                </Typography>
+
+                <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{
+                        alignItems:"center",
+                    }}
+                >
+                    <Typography
+                        variant="caption"
+                        color="text.secondary"
+                    >
+                        0%
+                    </Typography>
+
+                    {Object.values(heatColors).map((color, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                width: {
+                                    xs: 18,
+                                    sm: 20,
+                                    md: 22,
+                                },
+
+                                height: {
+                                    xs: 10,
+                                    sm: 12,
+                                    md: 14,
+                                },
+
+                                bgcolor: color,
+
+                                borderRadius: "999px",
+
+                                border:
+                                    index === 0
+                                        ? "1px solid"
+                                        : "none",
+
+                                borderColor: "divider",
+
+                                position: "relative",
+                                top: "-1px",
+                            }}
+                        />
+                    ))}
+
+                    <Typography
+                        variant="caption"
+                        color="text.secondary"
+                    >
+                        100%
+                    </Typography>
+                </Stack>
+            </Box>
                 <Paper 
                     ref={tooltipRef}
                     elevation={0}
