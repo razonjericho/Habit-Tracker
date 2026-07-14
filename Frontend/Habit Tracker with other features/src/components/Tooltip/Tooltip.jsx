@@ -57,6 +57,7 @@ function Tooltip (props) {
                 month={props.month}
                 year={props.year}
                 heatMap={props.heatMap}
+                selectedDay={selectedDay}
                 onSelectedDay={handleSelectDay}
             />
 

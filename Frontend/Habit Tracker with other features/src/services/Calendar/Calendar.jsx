@@ -87,29 +87,52 @@ function Calendar(props) {
                         gridTemplateColumns: "repeat(7, 1fr)",
                     }}
                 >
-                    {week.map((day, dayIndex) => (
-                        <Box 
-                            key={dayIndex} 
-                            onClick={() => day && props.onSelectedDay(day)}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
+                    {week.map((day, dayIndex) => {
+                        const isSelected = day && props.selectedDay && props.selectedDay.day === day.day;
+                        return (
+                            <Box 
+                                key={dayIndex} 
+                                onClick={() => day && props.onSelectedDay(day)}
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
 
-                                minHeight: {
-                                    xs: 32,
-                                    sm: 36,
-                                    md: 40,
-                                },
+                                    minHeight: {
+                                        xs: 32,
+                                        sm: 36,
+                                        md: 40,
+                                    },
 
-                                borderRadius: "20px",
+                                    ...getDayStyles(day),
 
-                                ...getDayStyles(day),
-                            }}
-                        >
-                            {day ? new Date(day.day).getDate() : null}
-                        </Box>
-                    ))}
+                                    border: isSelected
+                                        ? "2px solid #EA580C"
+                                        : "2px solid white",
+
+                                    boxShadow: isSelected
+                                        ? "0 0 0 2px rgba(249,115,22,.25)"
+                                        : "none",
+
+                                    userSelect: "none",
+
+                                    WebkitTapHighlightColor: "transparent",
+
+                                    "&:focus": {
+                                        outline: "none",
+                                    },
+
+                                    "&:focus-visible": {
+                                        outline: "none",
+                                    },
+                                }}
+
+                                
+                            >
+                                {day ? new Date(day.day).getDate() : null}
+                            </Box>
+                        ) 
+                    })}
                 </Box>
             ))}
             </Box>

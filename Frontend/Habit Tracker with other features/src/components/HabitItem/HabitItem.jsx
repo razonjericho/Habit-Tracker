@@ -36,23 +36,49 @@ function HabitItem(props){
                         sx={{
                             justifyContent: "space-between",
                             alignItems: "center",
-                            width: "100%",
                         }}
                     >
-                        <Typography
-                            variant="h6"
-                            sx={{
-                                fontSize: {
-                                    xs: "1.2rem",
-                                    sm: "1.3rem",
-                                    md: "1.4rem",
-                                },
-                                fontWeight: 600,
-                            }}
-                        >
-                            {props.text}
-                        </Typography>
-                        {streak}
+                        <Stack>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    fontSize: {
+                                        xs: "1.2rem",
+                                        sm: "1.3rem",
+                                        md: "1.4rem",
+                                    },
+                                    fontWeight: 600,
+                                }}
+                            >
+                                {props.text}
+                            </Typography>
+
+                            {streak !== undefined && (
+                                <Stack
+                                    spacing={0.5}
+                                    sx={{
+                                        mt: 1,
+                                    }}
+                                >
+                                    <Typography
+                                        variant="body2"
+                                        color="text.secondary"
+                                    >
+                                        Current Streak
+                                    </Typography>
+
+                                    <Typography
+                                        variant="h5"
+                                        fontWeight={700}
+                                        color="primary"
+                                    >
+                                        {streak} day{streak === 1 ? "" : "s"}
+                                    </Typography>
+                                </Stack>
+                            )}
+                        </Stack>
+                        
+                        
                         {props.onEdit && (
                             <Stack direction="row" spacing={1}>
                                 <Button
