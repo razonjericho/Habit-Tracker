@@ -10,6 +10,7 @@ import { AuthenticationContext } from '../../../../Context/AuthenticationContext
 import { Container, Box, Stack, Typography, Button, Paper, IconButton, Card, CardContent } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function HabitDetailsPage(props){
     const params = useParams();
@@ -79,118 +80,236 @@ function HabitDetailsPage(props){
                     md: 4,
                 }}
             >
-                <Button onClick={() => navigate("/progress")}>Back</Button>
-            <Typography
-                variant="h2"
-                component="h1"
-                gutterBottom
-                sx={{
-                    fontSize: {
-                        xs: "2rem",
-                        sm: "2.25rem",
-                        md: "2.5rem",
-                    },
-
-                    fontWeight: 700,
-                }}
-            >
-                Habit Details
-            </Typography>
-
-            <Card
-                elevation={0}
-                sx={{
-                    borderRadius: 2,
-
-                    border: "1px solid",
-                    borderColor: "divider",
-
-                    mb: {
-                        xs: 3,
-                        sm: 4,
-                        md: 5,
-                    },
-                }}
-            >
-                <CardContent
+                <Button 
+                    startIcon={<ArrowBackIcon />}
+                    variant="text"
+                    onClick={() => navigate("/progress")}
+                    disableRipple
                     sx={{
-                        p: {
-                            xs: 2,
-                            sm: 3,
-                        },
+                        alignSelf: "flex-start",
 
-                        "&:last-child": {
-                            pb: {
-                                xs: 2,
-                                sm: 3,
-                            },
+                        px: 0,
+                        minWidth: 0,
+
+                        color: "primary.main",
+
+                        fontWeight: 600,
+
+                        "&:hover": {
+                            bgcolor: "transparent",
+                            color: "primary.dark",
                         },
                     }}
                 >
-                    <Box
+                    Progress
+                </Button>
+
+                <Typography
+                    variant="h2"
+                    component="h1"
+                    gutterBottom
+                    sx={{
+                        fontSize: {
+                            xs: "2rem",
+                            sm: "2.25rem",
+                            md: "2.5rem",
+                        },
+
+                        fontWeight: 700,
+                    }}
+                >
+                    Habit Details
+                </Typography>
+
+                <Card
+                    elevation={0}
+                    sx={{
+                        borderRadius: 2,
+
+                        border: "1px solid",
+                        borderColor: "divider",
+
+                        mb: {
+                            xs: 3,
+                            sm: 4,
+                            md: 5,
+                        },
+                    }}
+                >
+                    <CardContent
                         sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-
-                            gap: {
-                                xs: 1,
-                                sm: 2,
-                                md: 3,
-                            },
-
-                            mb: {
+                            p: {
                                 xs: 2,
                                 sm: 3,
-                                md: 4,
+                            },
+
+                            "&:last-child": {
+                                pb: {
+                                    xs: 2,
+                                    sm: 3,
+                                },
                             },
                         }}
                     >
-                        <IconButton
-                            onClick={props.previous}
-                            aria-label="Previous month"
-                        >
-                            <ChevronLeftIcon />
-                        </IconButton>
-                        
-                        <Typography
-                            variant="h4"
+                        <Box
                             sx={{
-                                fontWeight: 600,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
 
-                                fontSize: {
-                                    xs: "1.5rem",
-                                    sm: "1.75rem",
-                                    md: "2rem",
+                                gap: {
+                                    xs: 1,
+                                    sm: 2,
+                                    md: 3,
+                                },
+
+                                mb: {
+                                    xs: 2,
+                                    sm: 3,
+                                    md: 4,
                                 },
                             }}
-                        > 
-                            {months[props.month]} {props.year} 
-                        </Typography>
+                        >
+                            <IconButton
+                                onClick={props.previous}
+                                aria-label="Previous month"
+                            >
+                                <ChevronLeftIcon />
+                            </IconButton>
+                            
+                            <Typography
+                                variant="h4"
+                                sx={{
+                                    fontWeight: 600,
 
-                        <IconButton 
-                            onClick= {props.next}
-                            aria-label="Next month"
-                        > 
-                            <ChevronRightIcon />
-                        </IconButton>
-                    </Box>
+                                    fontSize: {
+                                        xs: "1.5rem",
+                                        sm: "1.75rem",
+                                        md: "2rem",
+                                    },
+                                }}
+                            > 
+                                {months[props.month]} {props.year} 
+                            </Typography>
 
-                    <Calendar 
-                        year={props.year} 
-                        month={props.month} 
-                        completedDates={completedDates}
-                    />
-                </CardContent>
-            </Card>
+                            <IconButton 
+                                onClick= {props.next}
+                                aria-label="Next month"
+                            > 
+                                <ChevronRightIcon />
+                            </IconButton>
+                        </Box>
 
-            
-            
+                        <Calendar 
+                            year={props.year} 
+                            month={props.month} 
+                            completedDates={completedDates}
+                        />
 
-            
-            <p>Habit: {selectedHabit.habit}</p>
-            <p>Current Streak: {streaks.streak}</p>
-            <p>Longest Streak: {streaks.longestStreak}</p>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+
+                                mt: {
+                                    xs: 2,
+                                    sm: 2.5,
+                                    md: 3,
+                                },
+                            }}
+                        >
+                            <Stack
+                                direction="row"
+                                spacing={{
+                                    xs: 2,
+                                    sm: 3,
+                                }}
+                                sx={{
+                                    alignItems:"center",
+                                }}
+                                
+                            >
+                                <Stack
+                                    direction="row"
+                                    spacing={1}
+                                    sx={{
+                                       alignItems:"center",
+                                    }}  
+                                >
+                                    <Box
+                                        sx={{
+                                            width: {
+                                                xs: 18,
+                                                sm: 20,
+                                                md: 22,
+                                            },
+
+                                            height: {
+                                                xs: 10,
+                                                sm: 12,
+                                                md: 14,
+                                            },
+
+                                            bgcolor: "background.default",
+
+                                            borderRadius: "999px",
+
+                                            border: "1px solid",
+                                            borderColor: "divider",
+                                        }}
+                                    />
+
+                                    <Typography
+                                        variant="caption"
+                                        color="text.secondary"
+                                    >
+                                        Not Completed
+                                    </Typography>
+                                </Stack>
+
+                                <Stack
+                                    direction="row"
+                                    spacing={1}
+                                    sx={{
+                                       alignItems:"center",
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            width: {
+                                                xs: 18,
+                                                sm: 20,
+                                                md: 22,
+                                            },
+
+                                            height: {
+                                                xs: 10,
+                                                sm: 12,
+                                                md: 14,
+                                            },
+
+                                            bgcolor: "#F97316",
+
+                                            borderRadius: "999px",
+                                        }}
+                                    />
+
+                                    <Typography
+                                        variant="caption"
+                                        color="text.secondary"
+                                    >
+                                        Completed
+                                    </Typography>
+                                </Stack>
+                            </Stack>
+                        </Box>
+                    </CardContent>
+                </Card>
+
+                <p>Habit: {selectedHabit.habit}</p>
+                <p>Current Streak: {streaks.streak}</p>
+                <p>Longest Streak: {streaks.longestStreak}</p>
             </Stack>
         </Container>
     )
