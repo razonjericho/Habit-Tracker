@@ -240,12 +240,11 @@ function Tooltip (props) {
                                 sx={{
                                     alignSelf: "center",
                                     cursor: "pointer",
-
-                                    color: "primary.main",
-
-                                    "&:hover": {
-                                        opacity: 0.8,
-                                    },
+                                    userSelect: "none",
+                                    WebkitUserSelect: "none",
+                                    MozUserSelect: "none",
+                                    msUserSelect: "none",
+                                    WebkitTapHighlightColor: "transparent", 
                                 }}
                             >
                                 <Typography

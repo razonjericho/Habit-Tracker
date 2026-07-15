@@ -123,18 +123,18 @@ function ProgressPage(props) {
             </Typography>
             <Card
                 elevation={0}
-                    sx={{
-                        borderRadius: 2,
+                sx={{
+                    borderRadius: 2,
 
-                        border: "1px solid",
-                        borderColor: "divider",
+                    border: "1px solid",
+                    borderColor: "divider",
 
-                        mb: {
-                            xs: 3,
-                            sm: 4,
-                            md: 5,
-                        },
-                    }}
+                    mb: {
+                        xs: 3,
+                        sm: 4,
+                        md: 5,
+                    },
+                }}
             >
                 <CardContent
                     sx={{
