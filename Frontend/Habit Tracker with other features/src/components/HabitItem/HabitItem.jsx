@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardContent, Typography, Stack, Button, Checkbox } from "@mui/material";
+import { Card, CardContent, Typography, Stack, Button, Checkbox, IconButton } from "@mui/material";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 
 function HabitItem(props){
     const streak = props.streaks ? props.streaks[props.id] : undefined;
@@ -68,9 +69,11 @@ function HabitItem(props){
                                     </Typography>
 
                                     <Typography
-                                        variant="h5"
-                                        fontWeight={700}
-                                        color="primary"
+                                        variant="body1"
+                                        sx={{
+                                            color: "#F97316",
+                                            fontWeight: 550,
+                                        }}
                                     >
                                         {streak} day{streak === 1 ? "" : "s"}
                                     </Typography>
@@ -118,13 +121,12 @@ function HabitItem(props){
                         )}
 
                         {props.onViewDetails && ( 
-                                <Button 
-                                    variant="contained"
-                                    size="small"
+                                <IconButton 
                                     onClick={() => {props.onViewDetails(props.id)}}
-                                >
-                                    Details
-                                </Button>
+                                    aria-label="View habit details"
+                                > 
+                                    <ChevronRightIcon />
+                                </IconButton>
                         )}
 
                         {props.onRestore && (

@@ -235,20 +235,31 @@ function Tooltip (props) {
                                 </Box>
                             </Box>
 
-                            <Button
-                                variant="contained"
+                            <Box
                                 onClick={() => props.onViewDayDetails(selectedDay.day)}
                                 sx={{
                                     alignSelf: "center",
-                                    width: {
-                                        xs: "100%",
-                                        sm: 220,
-                                        md: 240,
+                                    cursor: "pointer",
+
+                                    color: "primary.main",
+
+                                    "&:hover": {
+                                        opacity: 0.8,
                                     },
                                 }}
                             >
-                                View Details
-                            </Button>
+                                <Typography
+                                    variant="body1"
+                                    sx={{
+                                        color: "#F97316",
+                                        fontWeight: 550,
+                                        fontSize: "1.05rem",
+                                    }}
+                                >
+                                    View Details&nbsp;&nbsp;→
+                                </Typography>
+                                
+                            </Box>
                         </Stack>
                     ) : (
                         <Stack spacing={1}>
