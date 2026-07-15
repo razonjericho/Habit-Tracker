@@ -7,7 +7,7 @@ import './HabitDetails.css'
 import Calendar from '../../../services/Calendar/Calendar';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
-import { Container, Box, Stack, Typography, Button, Paper, IconButton, Card, CardContent } from "@mui/material";
+import { Container, Box, Stack, Typography, Button, Paper, IconButton, Card, CardContent, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -70,6 +70,12 @@ function HabitDetailsPage(props){
                     xs: 2,
                     sm: 3,
                     md: 4,
+                },
+
+                pb: {
+                    xs: 10,
+                    sm: 11,
+                    md: 6,
                 },
             }}
         >
@@ -307,9 +313,93 @@ function HabitDetailsPage(props){
                     </CardContent>
                 </Card>
 
-                <p>Habit: {selectedHabit.habit}</p>
-                <p>Current Streak: {streaks.streak}</p>
-                <p>Longest Streak: {streaks.longestStreak}</p>
+                <Card>
+                    <CardContent>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    fontSize: {
+                                        xs: "1.2rem",
+                                        sm: "1.3rem",
+                                        md: "1.4rem",
+                                    },
+                                    fontWeight: 600,
+                                }}
+                            >
+                                {selectedHabit.habit}
+                            </Typography>
+
+                        <Divider
+                            sx={{
+                                mb: 1,
+                            }}
+                        />
+
+                        <Box
+                            sx={{
+                                display: "grid",
+                                gridTemplateColumns: "1fr auto 1fr",
+                                justifyContent: "center",
+                                gap: 3,
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <Stack spacing={1} >
+                                    <Typography variant="body2">
+                                        Current Streak
+                                    </Typography>
+
+                                    <Typography
+                                        variant="body1"
+                                        sx={{
+                                            color: "#F97316",
+                                            fontWeight: 550,
+                                        }}
+                                    >
+                                        {streaks.streak} day{streaks.streak === 1 ? "" : "s"}
+                                    </Typography>
+
+                                </Stack>
+                            </Box>
+                            
+
+                            <Divider
+                                orientation="vertical"
+                                flexItem
+                            />
+
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <Stack spacing={1} >
+                                    <Typography
+                                        variant="body2"
+                                    >
+                                        Longest Streak
+                                    </Typography>
+
+                                    <Typography
+                                        variant="body1"
+                                        sx={{
+                                            color: "#F97316",
+                                            fontWeight: 550,
+                                        }}
+                                    >
+                                        {streaks.longestStreak} day{streaks.streak === 1 ? "" : "s"}
+                                    </Typography>
+                                </Stack>
+                            </Box>
+                        </Box>
+                    </CardContent>
+                </Card>
             </Stack>
         </Container>
     )
