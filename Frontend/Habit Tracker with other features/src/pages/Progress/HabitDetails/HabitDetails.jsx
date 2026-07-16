@@ -7,7 +7,7 @@ import './HabitDetails.css'
 import Calendar from '../../../services/Calendar/Calendar';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
-import { Container, Box, Stack, Typography, Button, Paper, IconButton, Card, CardContent, Divider } from "@mui/material";
+import { Container, Box, Stack, Typography, Button, IconButton, Card, CardContent, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -329,11 +329,7 @@ function HabitDetailsPage(props){
                                 {selectedHabit.habit}
                             </Typography>
 
-                        <Divider
-                            sx={{
-                                mb: 1,
-                            }}
-                        />
+                        <Divider sx={{ mb: 1, }} />
 
                         <Box
                             sx={{
