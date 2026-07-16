@@ -29,6 +29,7 @@ function HabitList(props){
                 isCompleted={habit.isCompleted}
                 onRestore={props.onRestore}
                 onDelete={props.onDelete}
+                status={props.status}
             />  
              ))}
         </Box>

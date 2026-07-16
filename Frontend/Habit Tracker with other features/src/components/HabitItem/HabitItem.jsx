@@ -1,9 +1,12 @@
 import React from 'react';
-import { Card, CardContent, Typography, Stack, Button, Checkbox, IconButton } from "@mui/material";
+import { Card, CardContent, Typography, Stack, Button, Checkbox, IconButton, Box } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
+import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 function HabitItem(props){
     const streak = props.streaks ? props.streaks[props.id] : undefined;
+    const isDayDetails = props.status !== undefined;
 
     return (
             <Card
@@ -34,11 +37,48 @@ function HabitItem(props){
                 >
                     <Stack
                         direction="row"
+                        spacing={1}
                         sx={{
-                            justifyContent: "space-between",
+                            justifyContent: isDayDetails ? "flex-start" : "space-between",
                             alignItems: "center",
                         }}
                     >
+                        {props.status === "completed" ? (
+                            <Box
+                                sx={{
+                                    width: 36,
+                                    height: 36,
+                                    borderRadius: "50%",
+
+                                    bgcolor: "#EAF6E8",
+
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+
+                                    flexShrink: 0,
+                                }}
+                            >
+                                <DoneRoundedIcon
+                                    sx={{
+                                        color: "success.dark",
+                                        fontSize: 25,
+                                    }}
+                                />
+                            </Box>
+                        ) : props.status === "not-completed" ? (
+                            <Box>
+                                <RadioButtonUncheckedIcon
+                                    sx={{
+                                        color: "text.secondary",
+                                        fontSize: 25,
+                                        mt: 0.5,
+                                        pr: 0.5,
+                                    }}
+                                />
+                            </Box>
+                        ) : null}
+
                         <Stack>
                             <Typography
                                 variant="h6"
@@ -80,7 +120,6 @@ function HabitItem(props){
                                 </Stack>
                             )}
                         </Stack>
-                        
                         
                         {props.onEdit && (
                             <Stack direction="row" spacing={1}>

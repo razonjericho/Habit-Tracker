@@ -120,8 +120,10 @@ function DayDetails () {
                     sx={{
                         borderRadius: 2,
 
+                        bgcolor: "#FFF9F3",
+
                         border: "1px solid",
-                        borderColor: "divider",
+                        borderColor: "#F2D7C5",
 
                         mb: {
                             xs: 3,
@@ -323,12 +325,81 @@ function DayDetails () {
                         
                     </CardContent>
                 </Card>
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        pr: 1,
+                    }}
+                >
+                    <CheckCircleIcon
+                        color="success"
+                        sx={{
+                            fontSize: 24,
+                        }}
+                    />
                 
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            fontWeight: 600,
+
+                            mt: {
+                                xs: 3,
+                                sm: 4,
+                            },
+
+                            mb: 3,
+                        }}
+                    >
+                        Completed Habits
+                    </Typography>
+                </Box>
+
                 
-                <Typography>Completed Habits</Typography>
-                    <HabitList habits={completedHabits} />
-                <Typography>Not Completed Habits</Typography>
-                    <HabitList habits={incompletedHabits} />
+
+                    <HabitList 
+                        habits={completedHabits}
+                        status="completed"
+                    />
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        pr: 1,
+                    }}
+                >
+                    <RadioButtonUncheckedIcon
+                        sx={{
+                            fontSize: 24,
+                            color: "text.secondary",
+                        }}
+                    />
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            fontWeight: 600,
+
+                            mt: {
+                                xs: 3,
+                                sm: 4,
+                            },
+
+                            mb: 3,
+                        }}
+                    >
+                        Not Completed Habits
+                    </Typography>
+                </Box>
+
+                    <HabitList 
+                        habits={incompletedHabits}
+                        status="not-completed"                    
+                    />
             
         </Container>
     )
