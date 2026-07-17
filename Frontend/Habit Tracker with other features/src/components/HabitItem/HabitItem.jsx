@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Stack, Button, Checkbox, IconButton, Box } from "@mui/material";
+import { Card, CardContent, Typography, Stack, Checkbox, IconButton, Box } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -119,30 +119,7 @@ function HabitItem(props){
                                     </Typography>
                                 </Stack>
                             )}
-                        </Stack>
-                        
-                        {props.onEdit && (
-                            <Stack direction="row" spacing={1}>
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    onClick = {() => {
-                                        const newText = prompt("Rename Habit:", props.text);
-                                        props.onEdit(props.id, newText);
-                                    }}
-                                >
-                                    Rename Habit
-                                </Button>
-
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    onClick = {() => {props.onArchive(props.id);}}
-                                >
-                                    Archive Habit
-                                </Button>
-                            </Stack>
-                        )}  
+                        </Stack> 
                         
                         {props.onDone && (
                                 <Checkbox
@@ -168,31 +145,6 @@ function HabitItem(props){
                                 </IconButton>
                         )}
 
-                        {props.onRestore && (
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    onClick={() => {props.onRestore(props.id)}}
-                                >
-                                    Restore Habit
-                                </Button>
-                        )} 
-
-                        {props.onDelete && (
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    onClick={() => {
-                                        const confirmDelete = window.confirm( "Are you sure you want to delete this habit? This action cannot be undone and all habit data will be permanently lost.")
-
-                                        if (confirmDelete) {
-                                            props.onDelete(props.id);
-                                        }
-                                        }} 
-                                    >
-                                    Delete Habit
-                                </Button>
-                        )}
                     </Stack>
                 </CardContent>
             </Card>

@@ -2,13 +2,16 @@ import React from 'react';
 import { Box, ListItem, ListItemText, Divider, Stack, IconButton, Tooltip } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 
 function EditHabitItem(props) {
     return (
         <Box>
             <ListItem
                 sx={{
-                    py: 2,
+                    py: 1.5,
                     justifyContent: "space-between",
                 }}
             >
@@ -30,30 +33,80 @@ function EditHabitItem(props) {
                         flexShrink: 0,
                     }} 
                 >
-                    <Tooltip title="Rename">
-                        <IconButton
-                            sx={{
-                                color:"primary.main",
-                            }}
-                        >
-                            <EditOutlinedIcon />
-                        </IconButton>
-                    </Tooltip>
-                    
-                    <Tooltip title="Archive">
-                        <IconButton
-                            sx={{
-                                color:"primary.main",
-                            }}
-                        >
-                            <ArchiveOutlinedIcon />
-                        </IconButton>
-                    </Tooltip>
-                    
+                    {props.mode === "active" && (
+                        <Box>
+                            <Tooltip title="Rename">
+                                <IconButton
+                                    onClick = {() => {
+                                        const newText = prompt("Rename Habit:", props.text);
+                                        props.onEdit(props.id, newText);
+                                    }}
+                                    sx={{
+                                        color:"primary.main",
+                                    }}
+                                >
+                                    <EditOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
+                            
+                            <Tooltip title="Archive">
+                                <IconButton
+                                    onClick = {() => {props.onArchive(props.id);}}
+                                    sx={{
+                                        color:"primary.main",
+                                    }}
+                                >
+                                    <ArchiveOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                    )}
+
+                    {props.mode === "archived" && (
+                        <Box>
+                            <Tooltip title="Restore">
+                                <IconButton
+                                    onClick={() => {props.onRestore(props.id)}}
+                                    sx={{
+                                        color:"primary.main",
+                                    }}
+                                >
+                                    <AutorenewOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
+                            
+                            <Tooltip title="Delete">
+                                <IconButton
+                                    onClick={() => {
+                                        const confirmDelete = window.confirm( "Are you sure you want to delete this habit? This action cannot be undone and all habit data will be permanently lost.")
+
+                                        if (confirmDelete) {
+                                            props.onDelete(props.id);
+                                        }
+                                    }}
+                                    sx={{
+                                        color:"primary.main",
+                                    }}
+                                >
+                                    <DeleteOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
+
+                            <Tooltip title="View details">
+                                <IconButton 
+                                    onClick={() => {props.onViewDetails(props.id)}}
+                                    aria-label="View habit details"
+                                > 
+                                    <ChevronRightIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                    )} 
                 </Stack>
+
             </ListItem>
 
-            <Divider />
+            {!props.isLast && <Divider />}
         </Box>
     )
 }
