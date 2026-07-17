@@ -1,25 +1,51 @@
 import React, {useState} from 'react';
+import { TextField, Button, Stack } from "@mui/material";
 
 function HabitInput(props) {
     const [inputText, setInputText] = useState("");
+    const [error, setError] = useState("");
 
     function handleChange(event) {
         const newValue = event.target.value;
         setInputText(newValue);
+
+        if (error) {
+            setError("");
+        }
+    }
+
+    const handleAdd = () => {
+        if (inputText.trim() === ""){
+            setError("Please enter a habit name");
+            return;
+        }
+
+        props.onAdd(inputText.trim());
+        setInputText("");
+        setError("");
     }
 
     return (
-        <div className="form">
-            <input id="habit-input" name="habit" type="text" onChange={handleChange} value={inputText} />
-            <button
-            onClick={() => {
-                props.onAdd(inputText);
-                setInputText("");
-            }}
+        <Stack>
+            <TextField 
+                label="Habit Name" 
+                onChange={handleChange} 
+                value={inputText}
+                error={Boolean(error)}
+                helperText={error}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                        handleAdd();
+                    }
+                }}
+            />
+            <Button
+                variant="contained"
+                onClick={handleAdd}
             >
-                <span>Add Habit</span>
-            </button>
-        </div>
+                Add Habit
+            </Button>
+        </Stack>
     )
 }
 
