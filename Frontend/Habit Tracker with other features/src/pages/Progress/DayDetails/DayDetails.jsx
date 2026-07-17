@@ -201,7 +201,10 @@ function DayDetails () {
 
                                 <Typography
                                     variant="body1"
-                                    color="text.secondary"
+                                    sx={{
+                                        color:"text.secondary",
+                                    }}
+                                    
                                 >
                                     {formattedDay}
                                 </Typography>
