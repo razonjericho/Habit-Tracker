@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, ListItem, ListItemText, Divider } from "@mui/material";
+import { Box, ListItem, ListItemText, Divider, Stack, IconButton, Tooltip } from "@mui/material";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 
 function EditHabitItem(props) {
     return (
@@ -7,6 +9,7 @@ function EditHabitItem(props) {
             <ListItem
                 sx={{
                     py: 2,
+                    justifyContent: "space-between",
                 }}
             >
                 <ListItemText 
@@ -19,6 +22,35 @@ function EditHabitItem(props) {
                         },
                     }}
                 />
+
+                <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{
+                        flexShrink: 0,
+                    }} 
+                >
+                    <Tooltip title="Rename">
+                        <IconButton
+                            sx={{
+                                color:"primary.main",
+                            }}
+                        >
+                            <EditOutlinedIcon />
+                        </IconButton>
+                    </Tooltip>
+                    
+                    <Tooltip title="Archive">
+                        <IconButton
+                            sx={{
+                                color:"primary.main",
+                            }}
+                        >
+                            <ArchiveOutlinedIcon />
+                        </IconButton>
+                    </Tooltip>
+                    
+                </Stack>
             </ListItem>
 
             <Divider />
