@@ -239,7 +239,6 @@ function DayDetails () {
                                             display: "flex",
                                             alignItems: "center",
                                             gap: 1,
-                                            pr: 1,
                                         }}
                                     >
 
@@ -341,6 +340,10 @@ function DayDetails () {
                         color="success"
                         sx={{
                             fontSize: 24,
+                            mt: {
+                                sm: 0.9,
+                                md: 0.9,
+                            },
                         }}
                     />
                 
@@ -380,6 +383,10 @@ function DayDetails () {
                         sx={{
                             fontSize: 24,
                             color: "text.secondary",
+                            mt: {
+                                sm: 1,
+                                md: 1,
+                            },
                         }}
                     />
                     <Typography
