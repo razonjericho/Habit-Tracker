@@ -38,9 +38,7 @@ function EditHabitItem(props) {
                         <Box>
                             <Tooltip title="Rename">
                                 <IconButton
-                                    onClick = {() => {
-                                        props.onRename(props.id);
-                                    }}
+                                    onClick = {() => { props.onRename(props.id) }}
                                     sx={{
                                         color:"primary.main",
                                     }}
@@ -51,7 +49,7 @@ function EditHabitItem(props) {
                             
                             <Tooltip title="Archive">
                                 <IconButton
-                                    onClick = {() => {props.onArchive(props.id);}}
+                                    onClick = {() => { props.onArchive(props.id) }}
                                     sx={{
                                         color:"primary.main",
                                     }}
@@ -66,7 +64,7 @@ function EditHabitItem(props) {
                         <Box>
                             <Tooltip title="Restore">
                                 <IconButton
-                                    onClick={() => {props.onRestore(props.id)}}
+                                    onClick={() => { props.onRestore(props.id) }}
                                     sx={{
                                         color:"primary.main",
                                     }}
@@ -77,13 +75,7 @@ function EditHabitItem(props) {
                             
                             <Tooltip title="Delete">
                                 <IconButton
-                                    onClick={() => {
-                                        const confirmDelete = window.confirm( "Are you sure you want to delete this habit? This action cannot be undone and all habit data will be permanently lost.")
-
-                                        if (confirmDelete) {
-                                            props.onDelete(props.id);
-                                        }
-                                    }}
+                                    onClick={() => { props.onDelete(props.id) }}
                                     sx={{
                                         color:"primary.main",
                                     }}
@@ -94,7 +86,7 @@ function EditHabitItem(props) {
 
                             <Tooltip title="View details">
                                 <IconButton 
-                                    onClick={() => {props.onViewDetails(props.id)}}
+                                    onClick={() => { props.onViewDetails(props.id) }}
                                     aria-label="View habit details"
                                 > 
                                     <ChevronRightIcon />

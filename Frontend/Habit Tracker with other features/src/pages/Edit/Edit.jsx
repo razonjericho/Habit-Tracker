@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import axios from 'axios';
+import React, { useContext, useState } from 'react'
 import EditHabitList from '../../components/EditHabitList/EditHabitList';
 import HabitInput from '../../components/HabitInput/HabitInput';
 import { HabitContext } from '../../../Context/HabitContext';
@@ -8,6 +7,7 @@ import { Container, Typography, Stack } from "@mui/material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import RenameHabitModal from '../../components/RenameHabitModal/RenameHabitModal';
+import DeleteHabitModal from '../../components/DeleteHabitModal/DeleteHabitModal';
 
 function EditPage() {
     const context = useContext(HabitContext);
@@ -16,19 +16,13 @@ function EditPage() {
     const archivedHabits = habits.filter(habit => !habit.active);
 
     const [isRenameHabit, setIsRenameHabit] = useState(false);
+    const [isDeleteHabit, setIsDeleteHabit] = useState(false);
     const [selectedHabit, setSelectedHabit] = useState(null);
 
     const navigate = useNavigate();
 
     function viewHabitDetails(id) {
         navigate(`/progress/${id}`);
-    }
-
-    async function handleRenameSave(newText) {
-        await editHabit(selectedHabit.id, newText);
-        
-        setIsRenameHabit(false);
-        setSelectedHabit(null);
     }
 
     function handleRenameClick(id) {
@@ -38,8 +32,34 @@ function EditPage() {
         setIsRenameHabit(true);
     }
 
+    async function handleRenameSave(newText) {
+        await editHabit(selectedHabit.id, newText);
+
+        setIsRenameHabit(false);
+        setSelectedHabit(null);
+    }
+
     function habitRenameClose() {
         setIsRenameHabit(false);
+        setSelectedHabit(null);
+    }
+
+    function handleDeleteClick(id) {
+        const habit = habits.find(habit => habit.id === id);
+
+        setSelectedHabit(habit);
+        setIsDeleteHabit(true);
+    }
+
+    async function handleDelete() {
+        await deleteHabit(selectedHabit.id);
+
+        setIsDeleteHabit(false);
+        setSelectedHabit(null);
+    }
+
+    function habitDeleteClose() {
+        setIsDeleteHabit(false);
         setSelectedHabit(null);
     }
 
@@ -83,6 +103,7 @@ function EditPage() {
                     Edit Habits
                 </Typography>
                 <RenameHabitModal isOpen={isRenameHabit} habit={selectedHabit} onClose={habitRenameClose} onSave={handleRenameSave} />
+                <DeleteHabitModal isOpen={isDeleteHabit} habit={selectedHabit} onClose={habitDeleteClose} onDelete={handleDelete} />
                 <EditHabitList
                     mode = "active"
                     title={`Active Habits (${activeHabits.length})`}
@@ -102,7 +123,7 @@ function EditPage() {
                     habits={archivedHabits} 
                     onViewDetails={viewHabitDetails} 
                     onRestore={restoreHabit} 
-                    onDelete={deleteHabit} 
+                    onDelete={handleDeleteClick}
                 />
             </Stack>
                 
