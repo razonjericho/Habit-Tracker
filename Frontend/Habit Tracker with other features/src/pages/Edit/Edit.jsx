@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Stack } from "@mui/material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import RenameHabitModal from '../../components/RenameHabitModal/RenameHabitModal';
 
 function EditPage() {
     const context = useContext(HabitContext);
@@ -14,10 +15,32 @@ function EditPage() {
     const activeHabits = habits.filter(habit => habit.active);
     const archivedHabits = habits.filter(habit => !habit.active);
 
+    const [isRenameHabit, setIsRenameHabit] = useState(false);
+    const [selectedHabit, setSelectedHabit] = useState(null);
+
     const navigate = useNavigate();
 
     function viewHabitDetails(id) {
         navigate(`/progress/${id}`);
+    }
+
+    async function handleRenameSave(newText) {
+        await editHabit(selectedHabit.id, newText);
+        
+        setIsRenameHabit(false);
+        setSelectedHabit(null);
+    }
+
+    function handleRenameClick(id) {
+        const habit = habits.find(habit => habit.id === id);
+
+        setSelectedHabit(habit);
+        setIsRenameHabit(true);
+    }
+
+    function habitRenameClose() {
+        setIsRenameHabit(false);
+        setSelectedHabit(null);
     }
 
     return (
@@ -59,13 +82,14 @@ function EditPage() {
                 >
                     Edit Habits
                 </Typography>
+                <RenameHabitModal isOpen={isRenameHabit} habit={selectedHabit} onClose={habitRenameClose} onSave={handleRenameSave} />
                 <EditHabitList
                     mode = "active"
                     title={`Active Habits (${activeHabits.length})`}
                     description="Your current habits"
                     icon={<FormatListBulletedIcon color="primary" sx={{ fontSize: 25 }} />}
                     habits={activeHabits} 
-                    onEdit={editHabit} 
+                    onRename={handleRenameClick}
                     onArchive={archiveHabit} 
                 />
                 <HabitInput onAdd={addHabit} />

@@ -7,6 +7,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 
 function EditHabitItem(props) {
+    
     return (
         <Box>
             <ListItem
@@ -38,8 +39,7 @@ function EditHabitItem(props) {
                             <Tooltip title="Rename">
                                 <IconButton
                                     onClick = {() => {
-                                        const newText = prompt("Rename Habit:", props.text);
-                                        props.onEdit(props.id, newText);
+                                        props.onRename(props.id);
                                     }}
                                     sx={{
                                         color:"primary.main",

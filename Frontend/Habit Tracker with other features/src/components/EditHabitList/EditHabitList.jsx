@@ -65,7 +65,7 @@ function EditHabitList(props){
                                 id={habit.id}
                                 text={habit.habit}
                                 mode={props.mode}
-                                onEdit={props.onEdit} 
+                                onRename={props.onRename} 
                                 onArchive={props.onArchive}
                                 onViewDetails={props.onViewDetails}
                                 onRestore={props.onRestore}
