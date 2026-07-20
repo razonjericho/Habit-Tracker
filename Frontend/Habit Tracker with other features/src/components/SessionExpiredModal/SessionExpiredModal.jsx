@@ -17,19 +17,18 @@ function SessionExpiredModal({ isOpen, onClose }) {
 
                     onClose();
                 }}
-                PaperProps={{
-                    sx: {
-                        width: {
-                            xs: "90%",
-                            sm: 420,
+                slotProps={{
+                    paper: {
+                        sx: {
+                            width: {
+                                xs: "92%",
+                                sm: 460,
+                            },
+                            borderRadius: 2,
+                            border: "1px solid",
+                            borderColor: "divider",
+                            boxShadow: "0px 20px 50px rgba(0,0,0,0.18)",
                         },
-
-                        borderRadius: 4,
-
-                        border: "1px solid",
-                        borderColor: "divider",
-
-                        boxShadow: "0px 20px 50px rgba(0,0,0,0.18)",
                     },
                 }}
             >
