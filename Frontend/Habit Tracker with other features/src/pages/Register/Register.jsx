@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material"
+import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material";
+import { API_URL } from '../../config';
 
 function Register () {
     const [ email, setEmail ] = useState("");
@@ -11,8 +12,6 @@ function Register () {
     const [ registerError, setRegisterError ] = useState("");
     const [ registerSuccess, setRegisterSuccess ] = useState("");
     const [ isRegistering, setIsRegistering ] = useState(false);
-
-    const API_URL = "http://localhost:3000";
 
     function handleChange(event) {
     const { name, value } = event.target;

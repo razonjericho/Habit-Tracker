@@ -9,9 +9,9 @@ import { AuthenticationContext } from '../../context/AuthenticationContext';
 import { Container, Typography, Box, IconButton, Card, CardContent } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { API_URL } from '../../config';
 
 function ProgressPage(props) {
-    const API_URL = "http://localhost:3000";
     const context = useContext(HabitContext);
     const { habits } = context;
     const [ streaks, setStreak ] = useState({});

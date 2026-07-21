@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext, createContext } from 'react'
 import axios from 'axios'
 import useUnauthorizedHandler from '../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from './AuthenticationContext';
+import { API_URL } from '../config';
 
 const HabitContext = createContext();
 
 function HabitProvider({ children }) {
-    const API_URL = "http://localhost:3000";
+    
     const [habits, setHabit] = useState([]);
     const currentDate = new Date().toLocaleDateString("en-CA");
     const [storedDate, setStoredDate] = useState(currentDate);

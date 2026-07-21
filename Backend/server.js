@@ -5,10 +5,10 @@ import router from "./routes/habitRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin:  process.env.CLIENT_URL || "http://localhost:5173"
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));

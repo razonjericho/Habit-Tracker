@@ -9,10 +9,10 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import { API_URL } from '../../../config';
 
 function DayDetails () {
     const { date } = useParams();
-    const API_URL = "http://localhost:3000";
     const [ dayDetails, setDayDetails ]   = useState(null);;
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);

@@ -10,6 +10,7 @@ import { Container, Box, Stack, Typography, Button, IconButton, Card, CardConten
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { API_URL } from '../../../config';
 
 function HabitDetailsPage(props){
     const params = useParams();
@@ -17,7 +18,6 @@ function HabitDetailsPage(props){
     const context = useContext(HabitContext);
     const { habits } = context;
     const [ streaks, setStreak ] = useState(null);
-    const API_URL = "http://localhost:3000";
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);
     const navigate = useNavigate();

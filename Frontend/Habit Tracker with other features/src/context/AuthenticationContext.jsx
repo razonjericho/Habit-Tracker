@@ -1,11 +1,11 @@
 import React, { createContext, useState } from "react";
 import axios from 'axios';
+import { API_URL } from "../config";
 
 const AuthenticationContext = createContext();
 
 function AuthenticationProvider ({ children }) {
     const [ token, setToken ] = useState(localStorage.getItem("token"));
-    const API_URL = "http://localhost:3000";
 
     async function login(email, password) {
         
