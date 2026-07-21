@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import HabitList from '../../components/HabitList/HabitList';
 import { HabitContext } from '../../context/HabitContext'
 import { Container, Box, Typography } from "@mui/material";
-import EmptyState from '../../components/EmptyState/EmptyState';
+import CompletedHabitState from '../../components/CompletedHabitState/CompletedHabitState';
+import EmptyHabitState from '../../components/EmptyHabitState/EmptyHabitState';
 
 function HomePage() {
     const context = useContext(HabitContext);
     const {habits, habitDone} = context;
     const todoHabits = habits.filter(habit => habit.active && !habit.isCompleted);
     const doneHabits = habits.filter(habit => habit.active && habit.isCompleted);
+    const activeHabits = habits.filter(habit => habit.active);
 
     return (
         <Container
@@ -49,71 +51,77 @@ function HomePage() {
                 Home
             </Typography>
 
-            <Box
-                sx={{
-                    mt: {
-                        xs: 4,
-                        sm: 5,
-                        md: 6,
-                    },
-                }}
-            >
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{
-                        fontSize: {
-                            xs: "1.2rem",
-                            sm: "1.35rem",
-                            md: "1.5rem",
-                        },
+            {activeHabits.length === 0 ? (
+                <EmptyHabitState />
+            ) : (
+                <Box>
+                   <Box
+                        sx={{
+                            mt: {
+                                xs: 4,
+                                sm: 5,
+                                md: 6,
+                            },
+                        }}
+                    >
+                        <Typography
+                            variant="h4"
+                            gutterBottom
+                            sx={{
+                                fontSize: {
+                                    xs: "1.2rem",
+                                    sm: "1.35rem",
+                                    md: "1.5rem",
+                                },
 
-                        fontWeight: 600,
-                    }}
-                >
-                    To Do
-                </Typography>
-                {todoHabits.length > 0 ? (
-                    <HabitList 
-                        habits={todoHabits}
-                        onDone={habitDone}
-                    />
-                ) : (
-                    <EmptyState />
-                )}
+                                fontWeight: 600,
+                            }}
+                        >
+                            To Do
+                        </Typography>
+                        {todoHabits.length > 0 ? (
+                            <HabitList 
+                                habits={todoHabits}
+                                onDone={habitDone}
+                            />
+                        ) : (
+                            <CompletedHabitState />
+                        )}
+                        
+                    </Box>
+                    
+                    <Box 
+                        sx={{
+                            mt: {
+                                xs: 4,
+                                sm: 5,
+                                md: 6,
+                            },
+                        }}
+                    >
+                        <Typography
+                            variant="h4"
+                            gutterBottom
+                            sx={{
+                                fontSize: {
+                                    xs: "1.2rem",
+                                    sm: "1.35rem",
+                                    md: "1.5rem",
+                                },
+
+                                fontWeight: 600,
+                            }}
+                        >
+                            Done
+                        </Typography>
+                        <HabitList 
+                            habits={doneHabits}
+                            onDone={habitDone}
+                        /> 
+                    </Box> 
+                </Box>
                 
-            </Box>
-            
-            <Box 
-                sx={{
-                    mt: {
-                        xs: 4,
-                        sm: 5,
-                        md: 6,
-                    },
-                }}
-            >
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{
-                        fontSize: {
-                            xs: "1.2rem",
-                            sm: "1.35rem",
-                            md: "1.5rem",
-                        },
-
-                        fontWeight: 600,
-                    }}
-                >
-                    Done
-                </Typography>
-                <HabitList 
-                    habits={doneHabits}
-                    onDone={habitDone}
-                /> 
-            </Box>
-            
+            )}
         </Container> 
     )
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, CardContent, Typography, Box, Stack } from "@mui/material";
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircle";
-import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
+import { Card, CardContent, Typography, Box, Stack, Button } from "@mui/material";
+import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
+import AddIcon from "@mui/icons-material/Add";
 
 
-function EmptyState(){
+function EmptyHabitState(){
     return (
         <Card
             elevation={0}
@@ -19,12 +19,12 @@ function EmptyState(){
         >
             <CardContent
                 sx={{
-                    py: 6,
+                    py: 4,
                     bgcolor: "#FEFAF6",
                 }}
             >
                 <Stack
-                    spacing={1.5}
+                    spacing={2}
                     sx={{
                        alignItems:"center",
                     }}
@@ -33,20 +33,19 @@ function EmptyState(){
                         sx={{
                             width: 72,
                             height: 72,
-
                             borderRadius: "50%",
 
-                            bgcolor: "#EAF6E8",
+                            bgcolor: "#FFF3E8",
 
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
                         }}
                     >
-                        <DoneRoundedIcon
+                        <AssignmentRoundedIcon
                             sx={{
-                                color: "success.dark",
-                                fontSize: 42,
+                                color: "primary.main",
+                                fontSize: 40,
                             }}
                         />
                     </Box>
@@ -57,26 +56,43 @@ function EmptyState(){
                             fontWeight: 700,
                         }}
                     >
-                        All done for today!
+                        No habits yet
                     </Typography>
 
                     <Typography
                         variant="body2"
                         align="center"
                         sx={{
-                            color:"text.secondary",
-                            maxWidth: 180,
-                            lineHeight: 1.6,
+                            color: "text.secondary",
+                            maxWidth: 220,
+                            lineHeight: 1.7,
+                            mb: 2,
                         }}
                     >
-                        Great job! You've completed all your habits.
+                        Create your first habit to start building your daily routine.
                     </Typography>
-                    
                 </Stack>
-                
+
+                <Stack
+                    spacing={1.5}
+                    sx={{
+                        alignItems:"center",
+                        mt: 2,
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        startIcon={<AddIcon />}
+                        sx={{
+                            color: "white",
+                        }}
+                    >
+                            Create Habit
+                    </Button>
+                </Stack>
             </CardContent>
         </Card>
     )
 }
 
-export default EmptyState;
+export default EmptyHabitState;
