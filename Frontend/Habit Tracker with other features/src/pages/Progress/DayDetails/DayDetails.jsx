@@ -364,12 +364,10 @@ function DayDetails () {
                     </Typography>
                 </Box>
 
-                
-
-                    <HabitList 
-                        habits={completedHabits}
-                        status="completed"
-                    />
+                <HabitList 
+                    habits={completedHabits}
+                    status="completed"
+                />
 
                 <Box
                     sx={{

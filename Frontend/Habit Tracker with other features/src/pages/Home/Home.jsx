@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import HabitList from '../../components/HabitList/HabitList';
 import { HabitContext } from '../../../Context/HabitContext';
 import { Container, Box, Typography } from "@mui/material";
+import EmptyState from '../../components/EmptyState/EmptyState';
 
 function HomePage() {
     const context = useContext(HabitContext);
@@ -72,10 +73,15 @@ function HomePage() {
                 >
                     To Do
                 </Typography>
-                <HabitList 
-                    habits={todoHabits}
-                    onDone={habitDone}
-                />
+                {todoHabits.length > 0 ? (
+                    <HabitList 
+                        habits={todoHabits}
+                        onDone={habitDone}
+                    />
+                ) : (
+                    <EmptyState />
+                )}
+                
             </Box>
             
             <Box 

@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Stack, Checkbox, IconButton, Box } from 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 
 function HabitItem(props){
     const streak = props.streaks ? props.streaks[props.id] : undefined;
@@ -124,16 +125,31 @@ function HabitItem(props){
                         {props.onDone && (
                                 <Checkbox
                                     checked={props.isCompleted}
-                                    onChange= {() => {props.onDone(props.id)}}
+                                    onChange={() => props.onDone(props.id)}
+                                    icon={<RadioButtonUncheckedIcon />}
+                                    checkedIcon={<CheckCircleRoundedIcon />}
                                     sx={{
+                                        color: "text.secondary",
+
+                                        "&.Mui-checked": {
+                                            color: "primary.main",
+                                        },
+
                                         p: {
                                             xs: 0.5,
                                             sm: 0.75,
                                             md: 1,
                                         },
+
+                                        "& .MuiSvgIcon-root": {
+                                            fontSize: {
+                                                xs: "1.5rem",
+                                                sm: "1.6rem",
+                                                md: "1.7rem",
+                                            },
+                                        },
                                     }}
                                 />
-                                
                         )}
 
                         {props.onViewDetails && ( 
