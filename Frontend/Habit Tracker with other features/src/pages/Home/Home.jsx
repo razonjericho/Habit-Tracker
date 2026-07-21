@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import HabitList from '../../components/HabitList/HabitList';
-import { HabitContext } from '../../../Context/HabitContext';
+import { HabitContext } from '../../context/HabitContext'
 import { Container, Box, Typography } from "@mui/material";
 import EmptyState from '../../components/EmptyState/EmptyState';
 

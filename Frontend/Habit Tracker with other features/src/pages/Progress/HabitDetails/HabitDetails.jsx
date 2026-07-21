@@ -2,11 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import HabitList from "../../../components/HabitList/HabitList"
 import { useParams, useNavigate } from 'react-router-dom';
-import { HabitContext } from '../../../../Context/HabitContext';
-import './HabitDetails.css'
+import { HabitContext } from '../../../context/HabitContext';
 import Calendar from '../../../services/Calendar/Calendar';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
-import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
+import { AuthenticationContext } from '../../../context/AuthenticationContext';
 import { Container, Box, Stack, Typography, Button, IconButton, Card, CardContent, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SessionContext } from '../../Context/SessionContext';
+import { SessionContext } from "../context/SessionContext";
 
 function useUnauthorizedHandler() {
     const { setIsSessionExpired } = useContext(SessionContext);

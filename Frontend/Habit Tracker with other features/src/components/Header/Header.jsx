@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom'
-import './Header.css'
-import { AuthenticationContext } from '../../../Context/AuthenticationContext';
+import { AuthenticationContext } from '../../context/AuthenticationContext';
 import { AppBar, Toolbar, Typography, Box, Button, Stack, IconButton, Menu, MenuItem } from "@mui/material"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -39,24 +38,23 @@ function Header() {
     return (
         <AppBar
             position="sticky"
-            color="inherit"
             elevation={1}
+            sx={{
+                bgcolor: "background.paper",
+                color: "text.primary",
+            }}
         >
             <Toolbar
+                disableGutters
                 sx={{
-                    width: "100%",
-
                     px: {
                         xs: 2,
                         sm: 3,
                         md: 4,
                     },
 
-                    minHeight: {
-                        xs: 56,
-                        sm: 64,
-                        md: 72,
-                    },
+                    py: 2,
+                    minHeight: "unset",
                 }}
             >
                 <Box sx={{ flexGrow: 1 }}>
@@ -65,12 +63,12 @@ function Header() {
                         component="h1"
                         sx={{
                             fontSize: {
-                                xs: "1.6rem",
-                                sm: "1.8rem",
+                                xs: "1.5rem",
+                                sm: "1.75rem",
                                 md: "2rem",
                             },
 
-                            fontWeight: 600,
+                            fontWeight: 700,
                         }}
                     >
                         Habit Tracker
@@ -105,24 +103,28 @@ function Header() {
                             }}
                         >
                                 <Button 
+                                    component={RouterLink}
+                                    to="/"
                                     startIcon={
                                         <HomeOutlinedIcon
-                                           sx={{
+                                            sx={{
                                                 fontSize: {
                                                     xs: 20,
                                                     md: 22,
                                                 },
-                                            }} 
+                                            }}
                                         />
                                     }
-                                    component={RouterLink}
-                                    to="/"
                                     sx={{
                                         color:
-                                            currentTab === "/" ? "primary.main" : "text.secondary",
+                                            currentTab === "/"
+                                                ? "primary.main"
+                                                : "text.secondary",
 
                                         fontWeight:
-                                            currentTab === "/" ? 600 : 400,
+                                            currentTab === "/"
+                                                ? 600
+                                                : 400,
 
                                         fontSize: {
                                             xs: "0.875rem",
@@ -132,6 +134,11 @@ function Header() {
                                         px: {
                                             xs: 1,
                                             md: 2,
+                                        },
+
+                                        "&:hover": {
+                                            color: "primary.main",
+                                            bgcolor: "transparent",
                                         },
                                     }}
                                 >

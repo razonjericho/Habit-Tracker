@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthenticationContext } from '../../../Context/AuthenticationContext';
-import "./Login.css"
+import { AuthenticationContext } from '../../context/AuthenticationContext';
 import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material"
 
 function Login () {
@@ -162,6 +161,7 @@ function Login () {
                             type="submit"
                             disabled={isLoggingIn}
                             sx={{
+                                color: "white",
                                 py: {
                                     xs: 1.25,
                                     sm: 1.4,

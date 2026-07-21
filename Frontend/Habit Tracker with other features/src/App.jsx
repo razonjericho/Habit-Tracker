@@ -1,5 +1,4 @@
 import { React, useState, useContext } from 'react'
-import './App.css'
 import HomePage from './pages/Home/Home.jsx';
 import EditPage from './pages/Edit/Edit.jsx';
 import ProgressPage from './pages/Progress/Progress.jsx'
@@ -11,8 +10,8 @@ import DayDetails from './pages/Progress/DayDetails/DayDetails.jsx';
 import Login from './pages/Login/Login.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import SessionExpiredModal from './components/SessionExpiredModal/SessionExpiredModal.jsx';
-import { SessionContext } from '../Context/SessionContext.jsx';
-import { AuthenticationContext } from '../Context/AuthenticationContext.jsx';
+import { SessionContext } from './context/SessionContext.jsx';
+import { AuthenticationContext } from './context/AuthenticationContext.jsx';
 import Register from './pages/Register/Register.jsx';
 
 function App() {

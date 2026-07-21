@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import "./Register.css"
 import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material"
 
 function Register () {
@@ -202,6 +201,7 @@ function Register () {
                             type="submit"
                             disabled={isRegistering}
                             sx={{
+                                color: "white",
                                 py: {
                                     xs: 1.25,
                                     sm: 1.4,

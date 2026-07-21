@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import HabitList from '../../../components/HabitList/HabitList';
 import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
-import { AuthenticationContext } from '../../../../Context/AuthenticationContext';
+import { AuthenticationContext } from '../../../context/AuthenticationContext';
 import { Container, Box, Typography, Button, Card, CardContent, Stack, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";

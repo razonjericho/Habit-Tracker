@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from 'react'
 import axios from 'axios'
-import useUnauthorizedHandler from '../src/hooks/UseUnauthorizedHandler';
+import useUnauthorizedHandler from '../hooks/UseUnauthorizedHandler';
 import { AuthenticationContext } from './AuthenticationContext';
 
 const HabitContext = createContext();

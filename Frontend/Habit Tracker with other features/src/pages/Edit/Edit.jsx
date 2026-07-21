@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import EditHabitList from '../../components/EditHabitList/EditHabitList';
 import HabitInput from '../../components/HabitInput/HabitInput';
-import { HabitContext } from '../../../Context/HabitContext';
+import { HabitContext } from '../../context/HabitContext';
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Stack } from "@mui/material";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
