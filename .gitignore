@@ -5,6 +5,7 @@
 
 queries.sql
 habit_tracker.sql
+habit_tracker_neon.sql
 
 # Logs
 logs
