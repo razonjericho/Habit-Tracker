@@ -1,6 +1,6 @@
 import express from "express";
 import { getHabits, createHabit, completeHabit, editHabit, archiveHabit, restoreHabit, deleteHabit, getHabitStreak, getHabitLongestStreak, getHabitHeatMap, getDayDetails } from "../controllers/habitController.js";
-import verifyToken from "../middleware/authMiddleWare.js";
+import verifyToken from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
