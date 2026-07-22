@@ -6,18 +6,19 @@ dotenv.config();
 const { Pool } = pg;
 
 const db = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: Number(process.env.DB_PORT),
-    ssl: {
-        rejectUnauthorized: false,
-    },
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
-db.connect()
-    .then(() => console.log("Connected to PostgreSQL"))
-    .catch(err => console.error("DB connection error", err));
+db.query("SELECT NOW()")
+  .then(() => console.log("Connected to PostgreSQL"))
+  .catch(err => console.error("DB connection error", err));
 
 export default db;

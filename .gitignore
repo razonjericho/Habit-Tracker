@@ -4,6 +4,7 @@
 .env
 
 queries.sql
+habit_tracker.sql
 
 # Logs
 logs
