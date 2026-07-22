@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Box, Stack, Button } from "@mui/material";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import AddIcon from "@mui/icons-material/Add";
 
 
 function EmptyHabitState(){
+const navigate = useNavigate();
+
     return (
         <Card
             elevation={0}
@@ -82,6 +85,7 @@ function EmptyHabitState(){
                 >
                     <Button
                         variant="contained"
+                        onClick={() => navigate("/edit")}
                         startIcon={<AddIcon />}
                         sx={{
                             color: "white",
