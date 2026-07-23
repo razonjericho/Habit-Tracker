@@ -79,10 +79,6 @@ const logUser = async (req, res) => {
 
         
     } catch (err) {
-        console.error("========== LOGIN ERROR ==========");
-        console.dir(err, { depth: null });
-        console.error(err.stack);
-
         console.error(err);
         res.status(500).json({ error: "Failed to log the user" });
     }
