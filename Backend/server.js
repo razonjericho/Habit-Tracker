@@ -7,8 +7,14 @@ import authRouter from "./routes/authRoutes.js";
 const app = express();
 const port = process.env.PORT || 3000;
 
+console.log("CLIENT_URL =", process.env.CLIENT_URL);
+
 app.use(cors({
-    origin:  process.env.CLIENT_URL || "http://localhost:5173"
+    origin(origin, callback) {
+        console.log("Request Origin:", origin);
+        console.log("CLIENT_URL:", process.env.CLIENT_URL);
+        callback(null, true);
+    }
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
