@@ -418,11 +418,15 @@ const getHabitLongestStreak = async (req, res) => {
 
 const getHabitHeatMap = async (req, res) => {
     const user_id = req.user.id;
-    const today = new Date().toLocaleDateString("en-CA", {
-        timeZone: "Asia/Manila"
+
+    const now = new Date();
+    const today = now.toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
     });
 
-    console.log("today =", today);
+    console.log("========== APPLICATION ==========");
+    console.log("Server ISO time:", now.toISOString());
+    console.log("Today sent to PostgreSQL:", today);
 
     try {
         const result = await db.query(
@@ -439,51 +443,55 @@ const getHabitHeatMap = async (req, res) => {
                 )::date AS date
             )
 
-            SELECT dates.date,
+            SELECT
+                ($2)::date AS today,
+                dates.date,
 
                 (
-                SELECT COUNT (*)
-                FROM completions
-                JOIN habits
-                    ON completions.habit_id = habits.id
-                WHERE completions.date = dates.date
-                    AND completions.completed = true
-                    AND habits.user_id = ($1)
+                    SELECT COUNT(*)
+                    FROM completions
+                    JOIN habits
+                        ON completions.habit_id = habits.id
+                    WHERE completions.date = dates.date
+                        AND completions.completed = true
+                        AND habits.user_id = ($1)
                 ) AS completed,
 
                 (
-                    SELECT COUNT (*)
-                        FROM (
-                            SELECT DISTINCT ON (habit_id)
-                                habit_id,
-                                event_type,
-                                occurred_at,
+                    SELECT COUNT(*)
+                    FROM (
+                        SELECT DISTINCT ON (habit_id)
+                            habit_id,
+                            event_type,
+                            occurred_at,
 
-                                CASE
-                                    WHEN event_type IN ('created', 'restored')
-                                        THEN true
-                                    ELSE false
-                                END AS active
-                            FROM habit_events 
-                            JOIN habits
-                                ON habit_events.habit_id = habits.id
-                            WHERE occurred_at < (dates.date + 1)
-                                AND habits.user_id = ($1)
-                            ORDER BY habit_id, occurred_at DESC
-                        ) latest_events
-                        WHERE active = true
+                            CASE
+                                WHEN event_type IN ('created', 'restored')
+                                    THEN true
+                                ELSE false
+                            END AS active
+
+                        FROM habit_events
+                        JOIN habits
+                            ON habit_events.habit_id = habits.id
+                        WHERE occurred_at < (dates.date + 1)
+                            AND habits.user_id = ($1)
+                        ORDER BY habit_id, occurred_at DESC
+                    ) latest_events
+                    WHERE active = true
                 ) AS total_habits
 
             FROM dates
             ORDER BY dates.date;
             `,
             [user_id, today]
-        )
-        
+        );
+
         const heatMap = {};
 
         result.rows.forEach(row => {
             console.log("================================");
+            console.log("today parameter:", row.today);
             console.log("row.date:", row.date);
             console.log("typeof row.date:", typeof row.date);
 
@@ -491,7 +499,10 @@ const getHabitHeatMap = async (req, res) => {
 
             console.log("parsed.toString():", parsed.toString());
             console.log("parsed.toISOString():", parsed.toISOString());
-            console.log("parsed.toLocaleDateString():", parsed.toLocaleDateString("en-CA"));
+            console.log(
+                "parsed.toLocaleDateString():",
+                parsed.toLocaleDateString("en-CA")
+            );
 
             const date = parsed.toLocaleDateString("en-CA");
 
@@ -501,16 +512,18 @@ const getHabitHeatMap = async (req, res) => {
                 intensity:
                     row.total_habits === 0
                         ? 0
-                        : Number(row.completed) / Number(row.total_habits)
+                        : Number(row.completed) / Number(row.total_habits),
             };
         });
 
         res.json(heatMap);
     } catch (err) {
         console.error(err);
-        res.status(500).json({error: "Failed to load total number of completed habits"});
+        res.status(500).json({
+            error: "Failed to load total number of completed habits",
+        });
     }
-}
+};
 
 const getDayDetails = async (req, res) => {
     const date = req.params.date;
