@@ -81,11 +81,6 @@ function ProgressPage(props) {
         navigate(`/progress/day/${date}`);
     }
 
-    console.log("Progress endpoint called");
-    console.log("Today:", new Date().toString());
-    console.log("Today (en-CA):", new Date().toLocaleDateString("en-CA"));
-
-   
     return (
         <Container
             sx={{

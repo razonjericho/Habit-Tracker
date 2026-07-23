@@ -418,6 +418,7 @@ const getHabitLongestStreak = async (req, res) => {
 
 const getHabitHeatMap = async (req, res) => {
     const user_id = req.user.id;
+    const today = new Date().toLocaleDateString("en-CA");
 
     try {
         const result = await db.query(
@@ -429,7 +430,7 @@ const getHabitHeatMap = async (req, res) => {
                         FROM habits
                         WHERE user_id = ($1)
                     ),
-                    CURRENT_DATE,
+                    ($2)::date,
                     INTERVAL '1 day'
                 )::date AS date
             )
@@ -472,7 +473,7 @@ const getHabitHeatMap = async (req, res) => {
             FROM dates
             ORDER BY dates.date;
             `,
-            [user_id]
+            [user_id, today]
         )
         
         const heatMap = {};
@@ -488,16 +489,6 @@ const getHabitHeatMap = async (req, res) => {
                     : Number(row.completed) / Number(row.total_habits)
         };
         });
-
-        const timeCheck = await db.query(`
-            SELECT
-                CURRENT_DATE,
-                CURRENT_TIMESTAMP,
-                NOW(),
-                CURRENT_SETTING('TIMEZONE') AS timezone
-        `);
-
-        console.log(timeCheck.rows[0]);
 
         res.json(heatMap);
     } catch (err) {
