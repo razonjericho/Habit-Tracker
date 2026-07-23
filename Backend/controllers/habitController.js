@@ -479,15 +479,26 @@ const getHabitHeatMap = async (req, res) => {
         const heatMap = {};
 
         result.rows.forEach(row => {
-            const date = new Date(row.date).toLocaleDateString("en-CA");
+            console.log("================================");
+            console.log("row.date:", row.date);
+            console.log("typeof row.date:", typeof row.date);
+
+            const parsed = new Date(row.date);
+
+            console.log("parsed.toString():", parsed.toString());
+            console.log("parsed.toISOString():", parsed.toISOString());
+            console.log("parsed.toLocaleDateString():", parsed.toLocaleDateString("en-CA"));
+
+            const date = parsed.toLocaleDateString("en-CA");
+
             heatMap[date] = {
-            completed: Number(row.completed),
-            totalHabits: Number(row.total_habits),
-            intensity:
-                row.total_habits === 0
-                    ? 0 
-                    : Number(row.completed) / Number(row.total_habits)
-        };
+                completed: Number(row.completed),
+                totalHabits: Number(row.total_habits),
+                intensity:
+                    row.total_habits === 0
+                        ? 0
+                        : Number(row.completed) / Number(row.total_habits)
+            };
         });
 
         res.json(heatMap);
