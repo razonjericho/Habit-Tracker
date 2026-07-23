@@ -418,7 +418,11 @@ const getHabitLongestStreak = async (req, res) => {
 
 const getHabitHeatMap = async (req, res) => {
     const user_id = req.user.id;
-    const today = new Date().toLocaleDateString("en-CA");
+    const today = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila"
+    });
+
+    console.log("today =", today);
 
     try {
         const result = await db.query(
