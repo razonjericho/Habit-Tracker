@@ -1,6 +1,19 @@
 import db from "../db.js"
 import { calculateStreak, calculateLongestStreak } from "../services/habitService.js"
 
+console.log("Server time:", new Date().toString());
+console.log("ISO time:", new Date().toISOString());
+console.log(
+  "Locale (default):",
+  new Date().toLocaleDateString("en-CA")
+);
+console.log(
+  "Locale (Asia/Manila):",
+  new Date().toLocaleDateString("en-CA", {
+    timeZone: "Asia/Manila",
+  })
+);
+
 const getHabits = async (req, res) => {
     const date = new Date().toLocaleDateString("en-CA");
     const user_id = req.user.id;
@@ -475,6 +488,16 @@ const getHabitHeatMap = async (req, res) => {
                     : Number(row.completed) / Number(row.total_habits)
         };
         });
+
+        const timeCheck = await db.query(`
+            SELECT
+                CURRENT_DATE,
+                CURRENT_TIMESTAMP,
+                NOW(),
+                CURRENT_SETTING('TIMEZONE') AS timezone
+        `);
+
+        console.log(timeCheck.rows[0]);
 
         res.json(heatMap);
     } catch (err) {
