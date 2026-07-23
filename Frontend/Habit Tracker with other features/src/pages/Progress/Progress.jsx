@@ -60,6 +60,7 @@ function ProgressPage(props) {
                         Authorization: `Bearer ${token}`
                     }
                 });
+                console.log("Heatmap response:", response.data);
 
                 setHeatMap(response.data);
             } catch (err) {

@@ -79,7 +79,11 @@ const createHabit = async (req, res) => {
 
 const completeHabit = async (req, res) => {
     const habit_id = req.params.id;
-    const date = new Date().toLocaleDateString("en-CA");
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
+
+    console.log("Completion date:", date);
     const user_id = req.user.id;
 
     try {
@@ -516,6 +520,7 @@ const getHabitHeatMap = async (req, res) => {
             };
         });
 
+        console.log("Final heatMap:", heatMap);
         res.json(heatMap);
     } catch (err) {
         console.error(err);

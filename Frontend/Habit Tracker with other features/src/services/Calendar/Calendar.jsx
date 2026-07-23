@@ -129,7 +129,7 @@ function Calendar(props) {
 
                                 
                             >
-                                {day ? new Date(day.day).getDate() : null}
+                                {day ? day.day.split("-")[2] : null}
                             </Box>
                         ) 
                     })}
