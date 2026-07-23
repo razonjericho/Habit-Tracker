@@ -15,13 +15,6 @@ const calculateStreak = (dates) => {
         timeZone: "Asia/Manila",
     });
 
-    console.log("dates:", dates);
-    console.log({
-        latestDate,
-        today,
-        yesterday,
-    });
-
       if (latestDate !== today && latestDate !== yesterday){
                 return 0;
             }
