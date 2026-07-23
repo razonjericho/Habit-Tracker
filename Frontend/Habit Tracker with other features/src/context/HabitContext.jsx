@@ -9,7 +9,9 @@ const HabitContext = createContext();
 function HabitProvider({ children }) {
     
     const [habits, setHabit] = useState([]);
-    const currentDate = new Date().toLocaleDateString("en-CA");
+    const currentDate = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
     const [storedDate, setStoredDate] = useState(currentDate);
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);
@@ -36,7 +38,9 @@ function HabitProvider({ children }) {
     }, [token]);
 
     const checkDate = () => {
-      const now = new Date().toLocaleDateString("en-CA");
+      const now = new Date().toLocaleDateString("en-CA", {
+          timeZone: "Asia/Manila",
+      });
       try {
         if (storedDate !== now) {
           fetchHabits();

@@ -1,21 +1,10 @@
 import db from "../db.js"
 import { calculateStreak, calculateLongestStreak } from "../services/habitService.js"
 
-console.log("Server time:", new Date().toString());
-console.log("ISO time:", new Date().toISOString());
-console.log(
-  "Locale (default):",
-  new Date().toLocaleDateString("en-CA")
-);
-console.log(
-  "Locale (Asia/Manila):",
-  new Date().toLocaleDateString("en-CA", {
-    timeZone: "Asia/Manila",
-  })
-);
-
 const getHabits = async (req, res) => {
-    const date = new Date().toLocaleDateString("en-CA");
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
     const user_id = req.user.id;
     try {
         const result = await db.query(
@@ -136,7 +125,9 @@ const completeHabit = async (req, res) => {
 }
 
 const editHabit = async (req, res) => {
-    const date = new Date().toLocaleDateString("en-CA");
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
     const updatedText = req.body.editHabit;
     const id = req.params.id;
     const user_id = req.user.id;
@@ -173,7 +164,9 @@ const editHabit = async (req, res) => {
 
 const archiveHabit = async (req, res) => {
     const id = req.params.id;
-    const date = new Date().toLocaleDateString("en-CA");
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
     const user_id = req.user.id;
     try {
         const result = await db.query(
@@ -230,7 +223,9 @@ const archiveHabit = async (req, res) => {
 }
 
 const restoreHabit = async (req, res) => {
-    const date = new Date().toLocaleDateString("en-CA");
+    const date = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
     const id = req.params.id;
     const user_id = req.user.id;
     try {
@@ -423,14 +418,9 @@ const getHabitLongestStreak = async (req, res) => {
 const getHabitHeatMap = async (req, res) => {
     const user_id = req.user.id;
 
-    const now = new Date();
-    const today = now.toLocaleDateString("en-CA", {
+    const today = new Date().toLocaleDateString("en-CA", {
         timeZone: "Asia/Manila",
     });
-
-    console.log("========== APPLICATION ==========");
-    console.log("Server ISO time:", now.toISOString());
-    console.log("Today sent to PostgreSQL:", today);
 
     try {
         const result = await db.query(
@@ -448,7 +438,6 @@ const getHabitHeatMap = async (req, res) => {
             )
 
             SELECT
-                ($2)::date AS today,
                 dates.date,
 
                 (
@@ -493,34 +482,19 @@ const getHabitHeatMap = async (req, res) => {
 
         const heatMap = {};
 
-        result.rows.forEach(row => {
-            console.log("================================");
-            console.log("today parameter:", row.today);
-            console.log("row.date:", row.date);
-            console.log("typeof row.date:", typeof row.date);
-
-            const parsed = new Date(row.date);
-
-            console.log("parsed.toString():", parsed.toString());
-            console.log("parsed.toISOString():", parsed.toISOString());
-            console.log(
-                "parsed.toLocaleDateString():",
-                parsed.toLocaleDateString("en-CA")
-            );
-
-            const date = parsed.toLocaleDateString("en-CA");
+        result.rows.forEach((row) => {
+            const date = new Date(row.date).toLocaleDateString("en-CA");
 
             heatMap[date] = {
                 completed: Number(row.completed),
                 totalHabits: Number(row.total_habits),
                 intensity:
-                    row.total_habits === 0
+                    Number(row.total_habits) === 0
                         ? 0
                         : Number(row.completed) / Number(row.total_habits),
             };
         });
 
-        console.log("Final heatMap:", heatMap);
         res.json(heatMap);
     } catch (err) {
         console.error(err);
