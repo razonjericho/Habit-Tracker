@@ -5,11 +5,15 @@ const calculateStreak = (dates) => {
 
     const latestDate = new Date(dates[0]).toLocaleDateString("en-CA");
 
-    const today = new Date().toLocaleDateString("en-CA");
+    const today = new Date().toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
 
     const yesterdayDate = new Date();
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-    const yesterday = yesterdayDate.toLocaleDateString("en-CA");
+    const yesterday = yesterdayDate.toLocaleDateString("en-CA", {
+        timeZone: "Asia/Manila",
+    });
 
     console.log("dates:", dates);
     console.log({
