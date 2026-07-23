@@ -11,6 +11,13 @@ const calculateStreak = (dates) => {
     yesterdayDate.setDate(yesterdayDate.getDate() - 1);
     const yesterday = yesterdayDate.toLocaleDateString("en-CA");
 
+    console.log("dates:", dates);
+    console.log({
+        latestDate,
+        today,
+        yesterday,
+    });
+
       if (latestDate !== today && latestDate !== yesterday){
                 return 0;
             }
