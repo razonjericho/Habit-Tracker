@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
+    
     console.log("Authorization header:", req.headers.authorization);
 
     if (!authHeader) {
@@ -22,7 +23,6 @@ const verifyToken = (req, res, next) => {
 
         next();
     } catch (err) {
-        console.log("JWT Error:", err.message);
         return res.status(401).json({
             error: "Invalid token"
         });
