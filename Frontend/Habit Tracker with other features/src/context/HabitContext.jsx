@@ -31,6 +31,14 @@ function HabitProvider({ children }) {
           console.log("Response status:", response.status);
           console.log("Fetched habits:", response.data);
 
+          console.table(
+              response.data.map(h => ({
+                  habit: h.habit,
+                  completed: h.isCompleted,
+                  active: h.active,
+              }))
+          );
+
           setHabit(response.data);
 
           console.log("setHabit() called");
