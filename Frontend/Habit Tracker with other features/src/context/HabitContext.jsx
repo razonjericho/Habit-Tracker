@@ -9,13 +9,8 @@ const HabitContext = createContext();
 function HabitProvider({ children }) {
     const [habits, setHabit] = useState([]);
 
-    const currentDate = new Date().toLocaleString("sv-SE", {
+    const currentDate = new Date().toLocaleString("en-CA", {
         timeZone: "Asia/Manila",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
     });
 
     const [storedDate, setStoredDate] = useState(currentDate);
@@ -45,18 +40,13 @@ function HabitProvider({ children }) {
     }, [token]);
 
     const checkDate = async () => {
-        const now = new Date().toLocaleString("sv-SE", {
+        const now = new Date().toLocaleString("en-CA", {
             timeZone: "Asia/Manila",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
         });
 
         try {
             if (storedDate !== now) {
-                console.log("Minute changed, fetching new habits");
+                console.log("Date changed, fetching new habits");
                 await fetchHabits();
                 setStoredDate(now);
             }

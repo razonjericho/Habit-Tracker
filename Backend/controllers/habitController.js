@@ -2,13 +2,12 @@ import db from "../db.js"
 import { calculateStreak, calculateLongestStreak } from "../services/habitService.js"
 
 const getHabits = async (req, res) => {
-    const testDate = new Date();
-    testDate.setDate(testDate.getDate() + 1);
-
-    const date = testDate.toLocaleDateString("en-CA", {
+    const date = new Date().toLocaleDateString("en-CA", {
         timeZone: "Asia/Manila",
     });
+
     const user_id = req.user.id;
+    
     try {
         const result = await db.query(
             `
