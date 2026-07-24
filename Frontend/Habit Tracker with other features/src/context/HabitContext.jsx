@@ -55,6 +55,10 @@ function HabitProvider({ children }) {
       }  
     }, [token]);
 
+    useEffect(() => {
+        console.log("Habits state updated:", habits);
+    }, [habits]);
+
     const checkDate = async () => {
       const now = "2099-01-01";
 
