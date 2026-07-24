@@ -46,6 +46,7 @@ function HabitProvider({ children }) {
 
         try {
             if (storedDate !== now) {
+                console.log("Date changed, fetching new habits");
                 await fetchHabits();
                 setStoredDate(now);
             }
