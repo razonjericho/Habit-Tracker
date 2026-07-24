@@ -21,6 +21,8 @@ function HabitProvider({ children }) {
           console.log("===== fetchHabits =====");
           console.log("Token:", token);
           console.log("Authorization:", `Bearer ${token}`);
+          console.log("Token before fetch:", token);
+          console.log("Current date:", new Date().toLocaleString());
 
           const response = await axios.get(`${API_URL}/habits`, {
               headers: {
