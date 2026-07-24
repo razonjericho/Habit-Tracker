@@ -17,19 +17,37 @@ function HabitProvider({ children }) {
     const { token } = useContext(AuthenticationContext);
 
     const fetchHabits = async () => {
-
       try {
-        const response = await axios.get(`${API_URL}/habits`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setHabit(response.data);
+          console.log("===== fetchHabits =====");
+          console.log("Token:", token);
+          console.log("Authorization:", `Bearer ${token}`);
+
+          const response = await axios.get(`${API_URL}/habits`, {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              },
+          });
+
+          console.log("Response status:", response.status);
+          console.log("Fetched habits:", response.data);
+
+          setHabit(response.data);
+
+          console.log("setHabit() called");
+          console.log("=======================");
+
       } catch (err) {
-        handleUnauthorized(err);
-        console.error('Error fetching habits:', err);
+          console.log("===== fetchHabits ERROR =====");
+          console.log("Status:", err.response?.status);
+          console.log("Response:", err.response?.data);
+          console.log("Token:", token);
+          console.log("Authorization:", `Bearer ${token}`);
+          console.log(err);
+          console.log("============================");
+
+          handleUnauthorized(err);
       }
-    };
+  };
 
     useEffect(() => {
       if (token) {
@@ -37,20 +55,21 @@ function HabitProvider({ children }) {
       }  
     }, [token]);
 
-    const checkDate = () => {
-      const now = new Date().toLocaleDateString("en-CA", {
-          timeZone: "Asia/Manila",
-      });
+    const checkDate = async () => {
+      const now = "2099-01-01";
+
       try {
-        if (storedDate !== now) {
-          fetchHabits();
-          setStoredDate(now);
-          console.log("Date changed, fetching new habits");
-        }
+          if (storedDate !== now) {
+              console.log("Date changed, fetching new habits");
+
+              await fetchHabits();
+
+              setStoredDate(now);
+          }
       } catch (err) {
-        console.error('Error, unable to check the dates:', err);
+          console.error(err);
       }
-    }
+  };
 
     useEffect(() => {
       checkDate();
