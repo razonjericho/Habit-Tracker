@@ -9,7 +9,7 @@ const HabitContext = createContext();
 function HabitProvider({ children }) {
     const [habits, setHabit] = useState([]);
 
-    const currentDate = new Date().toLocaleString("en-CA", {
+    const currentDate = new Date().toLocaleDateString("en-CA", {
         timeZone: "Asia/Manila",
     });
 
@@ -40,7 +40,7 @@ function HabitProvider({ children }) {
     }, [token]);
 
     const checkDate = async () => {
-        const now = new Date().toLocaleString("en-CA", {
+        const now = new Date().toLocaleDateString("en-CA", {
             timeZone: "Asia/Manila",
         });
 
