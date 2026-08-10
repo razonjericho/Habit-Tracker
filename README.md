@@ -2,6 +2,10 @@
 
 A full-stack Habit Tracker web application that helps users build consistent habits, visualize progress, and manage their daily routines.
 
+## Live Demo
+
+https://portfolio-website-ten-mu-34.vercel.app/
+
 ## Features
 
 - 🔐 User registration and login
