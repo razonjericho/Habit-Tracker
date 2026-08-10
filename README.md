@@ -4,7 +4,7 @@ A full-stack Habit Tracker web application that helps users build consistent hab
 
 ## Live Demo
 
-https://portfolio-website-ten-mu-34.vercel.app/
+https://habit-tracker-alpha-cyan.vercel.app/
 
 ## Features
 
@@ -106,6 +106,7 @@ npm run dev
 
 - Google OAuth authentication
 - Change Password feature
+- Add loading state to some pages
 
 ## License
 
