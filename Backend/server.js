@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes/habitRoutes.js";
 import authRouter from "./routes/authRoutes.js";
@@ -9,13 +8,11 @@ const port = process.env.PORT || 3000;
 
 console.log("CLIENT_URL =", process.env.CLIENT_URL);
 
-app.use(cors({
-    origin(origin, callback) {
-        console.log("Request Origin:", origin);
-        console.log("CLIENT_URL:", process.env.CLIENT_URL);
-        callback(null, true);
-    }
-}));
+app.use(
+    cors({
+        origin: process.env.CLIENT_URL,
+    })
+);
 
 app.use(express.json());
 
