@@ -7,7 +7,7 @@ import EmptyHabitState from '../../components/EmptyHabitState/EmptyHabitState';
 
 function HomePage() {
     const context = useContext(HabitContext);
-    const {habits, habitDone} = context;
+    const { habits, habitDone } = context;
     const todoHabits = habits.filter(habit => habit.active && !habit.isCompleted);
     const doneHabits = habits.filter(habit => habit.active && habit.isCompleted);
     const activeHabits = habits.filter(habit => habit.active);

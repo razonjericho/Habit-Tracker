@@ -40,21 +40,19 @@ const calculateStreak = (dates) => {
 } 
 
 const calculateLongestStreak = (dates) => {
-    if (!dates || dates.length === 0) return 0;
-
-    const sortedDate = [...dates].sort((a, b) => new Date(a) - new Date(b));
+    if (!dates || dates.length === 0) return 0; 
 
     let currentStreak = 1;
     let longestStreak = 1;
 
-    for(let i = 1; i < sortedDate.length; i++){
-        const previousDate = new Date(sortedDate[i - 1]);
-        const afterDate = new Date(sortedDate[i]); //after previous date
+    for(let i = 1; i < dates.length; i++){
+        const currentDate = new Date(dates[i - 1]);
+        const previousDate = new Date(dates[i]);
 
-        const dateAfterPrevious = new Date(previousDate)
-        dateAfterPrevious.setDate(previousDate.getDate() + 1); //also after previous date
+        const previousDay = new Date(currentDate);
+        previousDay.setDate(currentDate.getDate() - 1);
 
-        if (dateAfterPrevious.toLocaleDateString("en-CA") === afterDate.toLocaleDateString("en-CA")){
+        if (previousDay.toLocaleDateString("en-CA") === previousDate.toLocaleDateString("en-CA")){
             currentStreak++;
         } else {
             currentStreak = 1;

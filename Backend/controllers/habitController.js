@@ -330,7 +330,7 @@ const getHabitStreak = async (req, res) => {
             `
             SELECT id, user_id
             FROM habits
-            WHERE id = ($1)  
+            WHERE id = ($1)
             `,
             [habit_id]
         );

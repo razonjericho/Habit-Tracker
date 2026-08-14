@@ -11,7 +11,7 @@ import DeleteHabitModal from '../../components/DeleteHabitModal/DeleteHabitModal
 
 function EditPage() {
     const context = useContext(HabitContext);
-    const {habits, addHabit, editHabit, archiveHabit, restoreHabit, deleteHabit} = context;
+    const { habits, addHabit, editHabit, archiveHabit, restoreHabit, deleteHabit } = context;
     const activeHabits = habits.filter(habit => habit.active);
     const archivedHabits = habits.filter(habit => !habit.active);
 
