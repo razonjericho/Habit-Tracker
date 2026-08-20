@@ -1,6 +1,5 @@
 import React from 'react';
 import calendarGenerator from './calendarGenerator';
-import './Calendar.css'
 import { Box, Typography } from "@mui/material";
 
 const heatColors = {
@@ -125,9 +124,7 @@ function Calendar(props) {
                                     "&:focus-visible": {
                                         outline: "none",
                                     },
-                                }}
-
-                                
+                                }} 
                             >
                                 {day ? day.day.split("-")[2] : null}
                             </Box>

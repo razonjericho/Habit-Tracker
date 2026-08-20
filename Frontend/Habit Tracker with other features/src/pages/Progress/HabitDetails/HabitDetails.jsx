@@ -42,7 +42,7 @@ function HabitDetailsPage(props){
     }, [id]);
 
     if (streaks === null) {
-        return <p>loading...</p>
+        return <p>loading...</p>;
     }
 
     const selectedHabit = habits.find(habit => habit.id === id);

@@ -4,8 +4,6 @@ import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined"
 
 function SessionExpiredModal({ isOpen, onClose }) {
 
-    if (!isOpen) return null;
-
     return (
             <Dialog
                 open={isOpen}

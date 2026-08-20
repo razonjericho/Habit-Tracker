@@ -4,7 +4,7 @@ A full-stack Habit Tracker web application that helps users build consistent hab
 
 ## Live Demo
 
-https://habit-tracker-alpha-cyan.vercel.app/
+https://jericho-habit-tracker.vercel.app/
 
 ## Features
 
@@ -49,8 +49,8 @@ Backend/
 ### Clone the repository
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/razonjericho/Habit-Tracker
+cd Habit-Tracker
 ```
 
 ### Backend
@@ -106,6 +106,7 @@ npm run dev
 
 - Google OAuth authentication
 - Change Password feature
+- Delete Account feature
 - Add loading state to some pages
 
 ## License

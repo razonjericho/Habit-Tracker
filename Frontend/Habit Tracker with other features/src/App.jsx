@@ -56,14 +56,15 @@ function App() {
   return (
     <div className="App">
       <SessionExpiredModal isOpen={isSessionExpired} onClose={handleSessionExpiredClose} />
-      {!isAuthenticationPage  && <Header />}
+      {!isAuthenticationPage && <Header />}
       <Routes>
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/register" element={<Register />} />
         <Route path="/" element={ 
-          <ProtectedRoute> 
-            <HomePage /> 
-          </ProtectedRoute> } 
+            <ProtectedRoute> 
+              <HomePage /> 
+            </ProtectedRoute> 
+          } 
         />
         <Route path="/edit" element={ 
             <ProtectedRoute> 

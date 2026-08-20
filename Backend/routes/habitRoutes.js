@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", verifyToken, getHabits);
 router.post("/", verifyToken, createHabit);
 router.post("/:id/completed", verifyToken, completeHabit);
-router.patch("/edit/rename/:id", verifyToken, editHabit);
+router.patch("/edit/rename/:id", verifyToken, editHabit); 
 router.patch("/edit/archive/:id", verifyToken, archiveHabit);
 router.patch("/edit/archive/restore/:id", verifyToken, restoreHabit);
 router.delete("/edit/archive/delete/:id", verifyToken, deleteHabit);
