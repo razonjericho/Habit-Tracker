@@ -14,20 +14,20 @@ function Register () {
     const [ isRegistering, setIsRegistering ] = useState(false);
 
     function handleChange(event) {
-    const { name, value } = event.target;
+        const { name, value } = event.target;
 
-        if (name === "email") {
-            setEmail(value);
-        } else if (name === "password") {
-            setPassword(value);
-        } else if (name === "confirmPassword") {
-            setConfirmPassword(value);
+            if (name === "email") {
+                setEmail(value);
+            } else if (name === "password") {
+                setPassword(value);
+            } else if (name === "confirmPassword") {
+                setConfirmPassword(value);
+            }
+            setRegisterError("");
+            setRegisterSuccess("");
         }
-        setRegisterError("");
-        setRegisterSuccess("");
-    }
 
-    async function register(email, password) {
+        async function register(email, password) {
             await axios.post(`${API_URL}/auth/register`, {
                 email,
                 password

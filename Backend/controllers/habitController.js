@@ -434,9 +434,9 @@ const getHabitHeatMap = async (req, res) => {
                         FROM habits
                         WHERE user_id = ($1)
                     ),
-                    ($2)::date,
-                    INTERVAL '1 day'
-                )::date AS date
+                        ($2)::date,
+                        INTERVAL '1 day'
+                    )::date AS date
             )
 
             SELECT
@@ -536,7 +536,7 @@ const getDayDetails = async (req, res) => {
 
         const dayDetails = result.rows;
 
-        res.json({date, dayDetails});
+        res.json({dayDetails});
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Failed to load the details of this date"});

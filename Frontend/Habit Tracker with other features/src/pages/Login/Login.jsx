@@ -4,8 +4,8 @@ import { AuthenticationContext } from '../../context/AuthenticationContext';
 import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material"
 
 function Login () {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
     const { login } = useContext(AuthenticationContext);
     const [ loginError, setLoginError ]  = useState("");
     const [ isLoggingIn, setIsLoggingIn ] = useState(false);

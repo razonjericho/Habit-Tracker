@@ -7,13 +7,13 @@ import { API_URL } from "../config";
 const HabitContext = createContext();
 
 function HabitProvider({ children }) {
-    const [habits, setHabit] = useState([]);
+    const [ habits, setHabit ] = useState([]);
 
     const currentDate = new Date().toLocaleDateString("en-CA", {
         timeZone: "Asia/Manila",
     });
 
-    const [storedDate, setStoredDate] = useState(currentDate);
+    const [ storedDate, setStoredDate ] = useState(currentDate);
 
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);
@@ -96,7 +96,7 @@ function HabitProvider({ children }) {
                         Authorization: `Bearer ${token}`,
                     },
                 }
-            );
+            ); 
 
             const updatedHabit = response.data;
 

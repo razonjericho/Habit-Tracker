@@ -18,7 +18,6 @@ function AuthenticationProvider ({ children }) {
                 response.data.token
             )
             setToken(response.data.token);
-        
     }
 
     function logout() {

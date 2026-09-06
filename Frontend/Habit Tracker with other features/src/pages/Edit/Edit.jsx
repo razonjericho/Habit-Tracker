@@ -15,9 +15,9 @@ function EditPage() {
     const activeHabits = habits.filter(habit => habit.active);
     const archivedHabits = habits.filter(habit => !habit.active);
 
-    const [isRenameHabit, setIsRenameHabit] = useState(false);
-    const [isDeleteHabit, setIsDeleteHabit] = useState(false);
-    const [selectedHabit, setSelectedHabit] = useState(null);
+    const [ isRenameHabit, setIsRenameHabit ] = useState(false);
+    const [ isDeleteHabit, setIsDeleteHabit ] = useState(false);
+    const [ selectedHabit, setSelectedHabit ] = useState(null);
 
     const navigate = useNavigate();
 

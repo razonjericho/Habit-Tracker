@@ -37,26 +37,26 @@ function Tooltip (props) {
     }
 
     useEffect(() => {
-            if (!selectedDay) return;
-    
-                function handleDocumentClick(event) {
-                    if(tooltipRef.current?.contains(event.target)) {
-                        return;
-                    }
-    
-                    if(calendarRef.current?.contains(event.target)) {
-                        return;
-                    }
-                    closeSelectedDay();
+        if (!selectedDay) return;
+
+            function handleDocumentClick(event) {
+                if(tooltipRef.current?.contains(event.target)) {
+                    return;
                 }
-    
-            document.addEventListener("click", handleDocumentClick);
-    
-            return () => {
-                document.removeEventListener("click", handleDocumentClick);
+
+                if(calendarRef.current?.contains(event.target)) {
+                    return;
+                }
+                closeSelectedDay();
             }
-    
-        }, [selectedDay]);
+
+        document.addEventListener("click", handleDocumentClick);
+
+        return () => {
+            document.removeEventListener("click", handleDocumentClick);
+        }
+
+    }, [selectedDay]);
 
 
     return (

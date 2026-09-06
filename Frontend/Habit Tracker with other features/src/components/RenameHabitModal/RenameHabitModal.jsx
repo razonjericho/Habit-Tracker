@@ -4,8 +4,8 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 function RenameHabitModal({ isOpen, habit, onClose, onSave }) {
-    const [inputText, setInputText] = useState("");
-    const [error, setError] = useState("");
+    const [ inputText, setInputText ] = useState("");
+    const [ error, setError ] = useState("");
 
     useEffect(() => {
         if (habit) {
@@ -22,7 +22,7 @@ function RenameHabitModal({ isOpen, habit, onClose, onSave }) {
         const newValue = event.target.value;
         setInputText(newValue);
 
-       if (error) {
+        if (error) {
             setError("");
         }
     }
