@@ -8,11 +8,17 @@ const port = process.env.PORT || 3000;
 
 console.log("CLIENT_URL =", process.env.CLIENT_URL);
 
-app.use(
-    cors({
-        origin: process.env.CLIENT_URL,
-    })
-);
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+];
+
+if (process.env.NODE_ENV !== "production") {
+    allowedOrigins.push("http://localhost:5173");
+}
+
+app.use(cors({
+    origin: allowedOrigins,
+}))
 
 app.use(express.json());
 
