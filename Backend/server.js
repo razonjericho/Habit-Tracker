@@ -10,15 +10,12 @@ console.log("CLIENT_URL =", process.env.CLIENT_URL);
 
 const allowedOrigins = [
     process.env.CLIENT_URL,
+    "http://localhost:5173",
 ];
-
-if (process.env.NODE_ENV !== "production") {
-    allowedOrigins.push("http://localhost:5173");
-}
 
 app.use(cors({
     origin: allowedOrigins,
-}))
+}));
 
 app.use(express.json());
 
