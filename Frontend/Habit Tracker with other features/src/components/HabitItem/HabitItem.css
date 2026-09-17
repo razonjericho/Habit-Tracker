@@ -1,0 +1,154 @@
+.habit-item-card.MuiCard-root {
+    border-radius: 24px;
+}
+
+.habit-item-content.MuiCardContent-root {
+    padding: 16px 16px;
+}
+
+.habit-item-content.MuiCardContent-root:last-child {
+    padding-bottom: 16px;
+}
+
+.habit-item-stack {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.habit-item-stack.day-details {
+    justify-content: flex-start;
+}
+
+.habit-item-status-completed {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #EAF6E8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.habit-item-status-completed-icon {
+    font-size: 25px;
+}
+
+.habit-item-status-not-completed-icon {
+    font-size: 25px;
+    margin-top: 4px;
+    padding-right: 4px;
+}
+
+.habit-item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.habit-item-title.MuiTypography-root {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.habit-item-streak {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.habit-item-streak-value.MuiTypography-root {
+    color: #F97316;
+    font-weight: 600;
+}
+
+.habit-item-checkbox {
+    padding: 4px;
+}
+
+.habit-item-checkbox .MuiSvgIcon-root {
+    font-size: 1.5rem;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+    .habit-item-content.MuiCardContent-root {
+        padding: 20px;
+    }
+
+    .habit-item-content.MuiCardContent-root:last-child {
+        padding-bottom: 20px;
+    }
+
+    .habit-item-title.MuiTypography-root {
+        font-size: 1.3rem;
+    }
+
+    .habit-item-checkbox {
+        padding: 6px;
+    }
+
+    .habit-item-checkbox .MuiSvgIcon-root {
+        font-size: 1.6rem;
+    }
+
+    .habit-item-streak-value.MuiTypography-root {
+        color: #F97316;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+}
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+    .habit-item-content.MuiCardContent-root {
+        padding: 30px;
+    }
+
+    .habit-item-content.MuiCardContent-root:last-child {
+        padding-bottom: 30px;
+    }
+
+    .habit-item-title.MuiTypography-root {
+        font-size: 2rem;
+    }
+
+    .habit-item-checkbox.MuiSvgIcon-root {
+        font-size: 2rem;
+    }
+
+    .current-streak.MuiTypography-root {
+        font-size: 1.4rem;
+    }
+
+    .habit-item-view-details .MuiSvgIcon-root {
+        font-size: 2.5rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .habit-item-content.MuiCardContent-root {
+        padding: 24px;
+    }
+
+    .habit-item-content.MuiCardContent-root:last-child {
+        padding-bottom: 24px;
+    }
+
+    .habit-item-title {
+        font-size: 1.4rem;
+    }
+
+    .habit-item-checkbox {
+        padding: 8px;
+    }
+
+    .habit-item-checkbox .MuiSvgIcon-root {
+        font-size: 1.7rem;
+    }
+}
