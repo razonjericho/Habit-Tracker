@@ -151,4 +151,10 @@
     .habit-item-checkbox .MuiSvgIcon-root {
         font-size: 1.7rem;
     }
+
+    .habit-item-streak-value.MuiTypography-root {
+        color: #F97316;
+        font-size: 1rem;
+        font-weight: 600;
+    }
 }

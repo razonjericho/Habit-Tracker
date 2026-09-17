@@ -1,0 +1,150 @@
+
+.header-toolbar.MuiToolbar-root {
+    min-height: unset;
+    display: flex;
+    align-items: center;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.header-title.MuiTypography-root {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.header-navigation {
+    display: none;
+}
+
+.header-navigation-stack {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.header-nav-button.MuiButton-root {
+    background-color: transparent;
+    color: #666;
+    font-weight: 400;
+    font-size: 1rem;
+
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.header-nav-button.active.MuiButton-root {
+    color: #F97316;
+    font-weight: 600;
+}
+
+.header-nav-button.MuiButton-root:hover {
+    color: #F97316;
+    background-color: transparent;
+}
+
+.header-nav-button .MuiSvgIcon-root {
+    font-size: 22px;
+}
+
+.header-menu-button.MuiIconButton-root {
+    flex-shrink: 0;
+}
+
+.header-menu-button .MuiSvgIcon-root {
+    font-size: 28px;
+}
+
+
+/* Tablet */
+
+@media (min-width: 600px) {
+
+    .header-toolbar.MuiToolbar-root {
+        padding-left: 24px;
+        padding-right: 24px;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .header-title.MuiTypography-root {
+        font-size: 1.85rem;
+    }
+
+    .header-menu-button .MuiSvgIcon-root {
+        font-size: 30px;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .header-toolbar.MuiToolbar-root {
+        padding-left: 40px;
+        padding-right: 40px;
+
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .header-title.MuiTypography-root {
+        font-size: 2.6rem;
+    }
+
+    .header-navigation {
+        display: none;
+    }
+
+    .header-menu-button .MuiSvgIcon-root {
+        font-size: 40px;
+    }
+
+    .menu-item.MuiMenuItem-root {
+        font-size: 1.4rem;
+        padding: 14px 20px;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .header-toolbar.MuiToolbar-root {
+        padding-left: 48px;
+        padding-right: 48px;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .header-title.MuiTypography-root {
+        font-size: 2rem;
+    }
+
+    .header-navigation {
+        display: block;
+    }
+
+    .header-navigation-stack {
+        gap: 10px;
+    }
+
+    .header-nav-button.MuiButton-root {
+        font-size: 1rem;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .header-nav-button .MuiSvgIcon-root {
+        font-size: 22px;
+    }
+
+    .header-menu-button .MuiSvgIcon-root {
+        font-size: 32px;
+    }
+}
