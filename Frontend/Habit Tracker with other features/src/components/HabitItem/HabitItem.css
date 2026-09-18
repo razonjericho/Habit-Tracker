@@ -98,7 +98,7 @@
 
     .habit-item-streak-value.MuiTypography-root {
         color: #F97316;
-        font-size: 1.4rem;
+        font-size: 1rem;
         font-weight: 600;
     }
 }
@@ -123,6 +123,12 @@
 
     .habit-item-view-details .MuiSvgIcon-root {
         font-size: 2.5rem;
+    }
+
+    .habit-item-streak-value.MuiTypography-root {
+        color: #F97316;
+        font-size: 1.5rem;
+        font-weight: 600;
     }
 }
 

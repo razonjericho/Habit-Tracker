@@ -1,0 +1,179 @@
+.tooltip-container {
+    width: 100%;
+}
+
+/* Completion Rate / Heatmap Legend */
+
+.tooltip-completion-rate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.tooltip-completion-label {
+    margin-bottom: 8px;
+}
+
+.tooltip-heat-legend {
+    align-items: center;
+}
+
+.tooltip-heat-color {
+    width: 18px;
+    height: 10px;
+
+    border-radius: 999px;
+
+    position: relative;
+    top: -1px;
+}
+
+.tooltip-heat-color:first-of-type {
+    border: 1px solid;
+    border-color: #d1d5db;
+}
+
+
+/* Day Summary */
+
+.tooltip-day-summary {
+    margin-top: 16px;
+
+    padding: 16px;
+
+    background-color: #f8f6f3;
+
+    border-radius: 32px;
+    border: 1px solid;
+    border-color: #dedbd6;
+}
+
+.tooltip-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.tooltip-summary-grid {
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 24px;
+}
+
+.tooltip-summary-metric {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    min-height: 62px;
+}
+
+.tooltip-view-details {
+    align-self: center;
+
+    cursor: pointer;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.tooltip-view-details-text {
+    color: #F97316;
+    font-weight: 550;
+    font-size: 1.05rem;
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+    .tooltip-summary-grid {
+        align-items: start;
+    }
+}
+
+
+/* Tablet */
+@media (min-width: 600px) {
+    .tooltip-completion-rate {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .tooltip-heat-color {
+        width: 20px;
+        height: 12px;
+    }
+
+    .tooltip-day-summary {
+        margin-top: 24px;
+        padding: 20px;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+    .tooltip-completion-rate {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .tooltip-heat-color {
+        width: 22px;
+        height: 14px;
+    }
+
+    .tooltip-day-summary {
+        margin-top: 32px;
+        padding: 24px;
+    }
+
+    .tooltip-day-summary .MuiTypography-subtitle1 {
+        font-size: 1.25rem;
+    }
+
+    .tooltip-day-summary .MuiTypography-h6 {
+        font-size: 1.5rem;
+    }
+
+    .tooltip-day-summary .MuiTypography-body2 {
+        font-size: 1rem;
+    }
+
+    .tooltip-day-summary .MuiTypography-h4 {
+        font-size: 2rem;
+    }
+
+    .tooltip-view-details-text.MuiTypography-root {
+        font-size: 1.15rem;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .tooltip-completion-rate {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .tooltip-heat-color {
+        width: 22px;
+        height: 14px;
+    }
+
+    .tooltip-day-summary {
+        margin-top: 32px;
+        padding: 24px;
+    }
+}

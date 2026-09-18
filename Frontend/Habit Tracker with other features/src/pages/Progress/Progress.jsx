@@ -168,5 +168,4 @@ function ProgressPage(props) {
     );
 }
 
-
 export default ProgressPage;

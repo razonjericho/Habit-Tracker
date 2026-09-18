@@ -68,10 +68,6 @@
     .bottom-nav-action .MuiBottomNavigationAction-label.Mui-selected {
         font-size: 1rem;
     }
-
-    .habit-item-content.MuiCardContent-root:last-child {
-        padding-bottom: 16px;
-    }
 }
 
 
