@@ -106,18 +106,14 @@
 /* iPad Pro / Large Tablet */
 @media (min-width: 900px) and (max-width: 1199px) {
     .habit-item-content.MuiCardContent-root {
-        padding: 30px;
-    }
-
-    .habit-item-content.MuiCardContent-root:last-child {
-        padding-bottom: 30px;
+        padding: 30px !important;
     }
 
     .habit-item-title.MuiTypography-root {
         font-size: 2rem;
     }
 
-    .habit-item-checkbox.MuiSvgIcon-root {
+    .habit-item-checkbox .MuiSvgIcon-root {
         font-size: 2rem;
     }
 

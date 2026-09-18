@@ -1,0 +1,83 @@
+.bottom-nav.MuiBottomNavigation-root {
+    display: flex;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 64px;
+
+    z-index: 1100;
+
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.bottom-nav-action.MuiBottomNavigationAction-root {
+    min-width: 0;
+}
+
+.bottom-nav-action .MuiSvgIcon-root {
+    font-size: 24px;
+}
+
+.bottom-nav-action .MuiBottomNavigationAction-label {
+    font-size: 0.75rem;
+}
+
+.bottom-nav-action .MuiBottomNavigationAction-label.Mui-selected {
+    font-size: 0.75rem;
+}
+
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+    .bottom-nav.MuiBottomNavigation-root {
+        height: 72px;
+    }
+
+    .bottom-nav-action .MuiSvgIcon-root {
+        font-size: 28px;
+    }
+
+    .bottom-nav-action .MuiBottomNavigationAction-label {
+        font-size: 0.875rem;
+    }
+
+    .bottom-nav-action .MuiBottomNavigationAction-label.Mui-selected {
+        font-size: 0.875rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+    .bottom-nav.MuiBottomNavigation-root {
+        height: 100px;
+    }
+
+    .bottom-nav-action .MuiSvgIcon-root {
+        font-size: 34px;
+    }
+
+    .bottom-nav-action .MuiBottomNavigationAction-label {
+        font-size: 1rem;
+    }
+
+    .bottom-nav-action .MuiBottomNavigationAction-label.Mui-selected {
+        font-size: 1rem;
+    }
+
+    .habit-item-content.MuiCardContent-root:last-child {
+        padding-bottom: 16px;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .bottom-nav.MuiBottomNavigation-root {
+        display: none;
+    }
+}
