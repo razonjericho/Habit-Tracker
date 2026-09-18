@@ -131,6 +131,7 @@ function Tooltip(props) {
                         <Typography
                             variant="h6"
                             fontWeight={600}
+                            className="tooltip-day-summary-date"
                         >
                             {formattedDate}
                         </Typography>
