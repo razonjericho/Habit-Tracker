@@ -1,0 +1,151 @@
+
+.progress-container.MuiContainer-root {
+    padding-top: 24px;
+    padding-bottom: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.progress-title.MuiTypography-root {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+
+/* Progress Calendar Card */
+.progress-card.MuiCard-root {
+    border-radius: 32px;
+    margin-bottom: 24px;
+}
+
+.progress-card-content.MuiCardContent-root {
+    padding: 16px;
+}
+
+.progress-card-content.MuiCardContent-root:last-child {
+    padding-bottom: 16px;
+}
+
+.progress-month-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.progress-month-title.MuiTypography-root {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+
+    .progress-container.MuiContainer-root {
+        padding-top: 32px;
+        padding-bottom: 88px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .progress-title.MuiTypography-root {
+        font-size: 2.25rem;
+    }
+
+    .progress-card.MuiCard-root {
+        margin-bottom: 32px;
+    }
+
+    .progress-card-content.MuiCardContent-root {
+        padding: 24px;
+    }
+
+    .progress-card-content.MuiCardContent-root:last-child {
+        padding-bottom: 24px;
+    }
+
+    .progress-month-navigation {
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .progress-month-title.MuiTypography-root {
+        font-size: 1.75rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .progress-container.MuiContainer-root {
+        padding-top: 40px;
+        padding-bottom: 120px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .progress-title.MuiTypography-root {
+        font-size: 2.5rem;
+    }
+
+    .progress-card.MuiCard-root {
+        margin-bottom: 40px;
+    }
+
+    .progress-card-content.MuiCardContent-root {
+        padding: 30px;
+    }
+
+    .progress-card-content.MuiCardContent-root:last-child {
+        padding-bottom: 30px;
+    }
+
+    .progress-month-navigation {
+        gap: 24px;
+        margin-bottom: 32px;
+    }
+
+    .progress-month-title.MuiTypography-root {
+        font-size: 2rem;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .progress-container.MuiContainer-root {
+        padding-top: 48px;
+        padding-bottom: 32px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .progress-title.MuiTypography-root {
+        font-size: 2.5rem;
+    }
+
+    .progress-card.MuiCard-root {
+        margin-bottom: 40px;
+    }
+
+    .progress-card-content.MuiCardContent-root {
+        padding: 24px;
+    }
+
+    .progress-card-content.MuiCardContent-root:last-child {
+        padding-bottom: 24px;
+    }
+
+    .progress-month-navigation {
+        gap: 24px;
+        margin-bottom: 32px;
+    }
+
+    .progress-month-title.MuiTypography-root {
+        font-size: 2rem;
+    }
+}
