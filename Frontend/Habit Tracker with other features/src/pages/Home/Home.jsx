@@ -1,52 +1,27 @@
-import React, { useContext } from 'react';
-import HabitList from '../../components/HabitList/HabitList';
-import { HabitContext } from '../../context/HabitContext'
+import React, { useContext } from "react";
+import HabitList from "../../components/HabitList/HabitList";
+import { HabitContext } from "../../context/HabitContext";
 import { Container, Box, Typography } from "@mui/material";
-import CompletedHabitState from '../../components/CompletedHabitState/CompletedHabitState';
-import EmptyHabitState from '../../components/EmptyHabitState/EmptyHabitState';
+import CompletedHabitState from "../../components/CompletedHabitState/CompletedHabitState";
+import EmptyHabitState from "../../components/EmptyHabitState/EmptyHabitState";
+import "./Home.css";
+
 
 function HomePage() {
     const context = useContext(HabitContext);
     const { habits, habitDone } = context;
+
     const todoHabits = habits.filter(habit => habit.active && !habit.isCompleted);
     const doneHabits = habits.filter(habit => habit.active && habit.isCompleted);
     const activeHabits = habits.filter(habit => habit.active);
 
     return (
-        <Container
-            sx={{
-                py: {
-                    xs: 3,
-                    sm: 4,
-                    md: 6,
-                },
-
-                px: {
-                    xs: 2,
-                    sm: 3,
-                    md: 4,
-                },
-
-                pb: {
-                    xs: 10,
-                    sm: 11,
-                    md: 6,
-                },
-            }}
-        >
+        <Container className="home-container">
             <Typography
                 variant="h2"
                 component="h1"
                 gutterBottom
-                sx={{
-                    fontSize: {
-                        xs: "2rem",
-                        sm: "2.25rem",
-                        md: "2.5rem",
-                    },
-
-                    fontWeight: 700,
-                }}
+                className="home-title"
             >
                 Home
             </Typography>
@@ -55,75 +30,48 @@ function HomePage() {
                 <EmptyHabitState />
             ) : (
                 <Box>
-                   <Box
-                        sx={{
-                            mt: {
-                                xs: 4,
-                                sm: 5,
-                                md: 6,
-                            },
-                        }}
-                    >
+                    <Box className="home-section">
                         <Typography
                             variant="h4"
                             gutterBottom
-                            sx={{
-                                fontSize: {
-                                    xs: "1.2rem",
-                                    sm: "1.35rem",
-                                    md: "1.5rem",
-                                },
-
-                                fontWeight: 600,
-                            }}
+                            className="home-section-title"
                         >
                             To Do
                         </Typography>
+
                         {todoHabits.length > 0 ? (
-                            <HabitList 
+                            <HabitList
                                 habits={todoHabits}
                                 onDone={habitDone}
                             />
                         ) : (
+
                             <CompletedHabitState />
+
                         )}
-                        
                     </Box>
-                    
-                    <Box 
-                        sx={{
-                            mt: {
-                                xs: 4,
-                                sm: 5,
-                                md: 6,
-                            },
-                        }}
-                    >
+
+                    <Box className="home-section">
                         <Typography
                             variant="h4"
                             gutterBottom
-                            sx={{
-                                fontSize: {
-                                    xs: "1.2rem",
-                                    sm: "1.35rem",
-                                    md: "1.5rem",
-                                },
-
-                                fontWeight: 600,
-                            }}
+                            className="home-section-title"
                         >
                             Done
                         </Typography>
-                        <HabitList 
+
+                        <HabitList
                             habits={doneHabits}
                             onDone={habitDone}
-                        /> 
-                    </Box> 
+                        />
+                    </Box>
+
                 </Box>
-                
+
             )}
-        </Container> 
-    )
+
+        </Container>
+    );
 }
 
 export default HomePage;
