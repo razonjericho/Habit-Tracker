@@ -1,0 +1,370 @@
+
+.habit-details-container {
+    padding-top: 16px;
+    padding-bottom: 80px;
+}
+
+.habit-details-content {
+    gap: 16px;
+}
+
+.habit-details-back-button.MuiButton-root {
+    align-self: flex-start;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    min-width: 0;
+
+    color: #E07A5F;
+
+    font-weight: 600;
+}
+
+.habit-details-back-button.MuiButton-root:hover {
+    background-color: transparent;
+    color: #D95F3F;
+}
+
+.habit-details-title.MuiTypography-root {
+    margin-bottom: 0;
+
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+
+/* Calendar Card */
+.habit-details-calendar-card.MuiCard-root {
+    margin-bottom: 0px;
+
+    border: 1px solid;
+    border-color: #d1d5db;
+
+    border-radius: 32px;
+}
+
+.habit-details-calendar-content {
+    padding: 16px;
+}
+
+.habit-details-calendar-content:last-child {
+    padding-bottom: 16px;
+}
+
+
+/* Month Navigation */
+.habit-details-month-navigation {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.habit-details-month-title.MuiTypography-root {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+/* Calendar Legend */
+.habit-details-calendar-legend {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 16px;
+}
+
+.habit-details-legend-container {
+    align-items: center;
+
+    gap: 16px;
+}
+
+.habit-details-legend-box {
+    width: 18px;
+    height: 10px;
+
+    border-radius: 999px;
+}
+
+.habit-details-legend-box.not-completed {
+    position: relative;
+    top: -2px;
+    background-color: #f8f9fa;
+
+    border: 1px solid;
+    border-color: #d1d5db;
+}
+
+.habit-details-legend-box.completed {
+    position: relative;
+    top: -2px;
+    background-color: #F97316;
+}
+
+.habit-details-legend-item.MuiStack-root {
+    align-items: center;
+}
+
+
+/* Habit Statistics Card*/
+.habit-details-stats-card {
+    border-radius: 16px;
+}
+
+.habit-details-streak-container.MuiStack-root {
+    padding-top: 8px;
+}
+
+.habit-details-stats-content {
+    padding: 16px;
+}
+
+.habit-details-stats-content:last-child {
+    padding-bottom: 16px;
+}
+
+.habit-details-habit-name.MuiTypography-root {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.habit-details-stats-divider {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.habit-details-stats-grid {
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    justify-content: center;
+
+    gap: 24px;
+}
+
+.habit-details-stat {
+    padding-top: 8px;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.habit-details-stat-value.MuiTypography-root {
+    color: #F97316;
+
+    font-weight: 550;
+}
+
+
+/* Tablet */
+@media (min-width: 600px) {
+
+    .habit-details-container {
+        padding-top: 24px;
+        padding-bottom: 88px;
+    }
+
+    .habit-details-content {
+        gap: 24px;
+    }
+
+    .habit-details-title {
+        font-size: 2.25rem;
+    }
+
+    .habit-details-calendar-card {
+        margin-bottom: 32px;
+    }
+
+    .habit-details-calendar-content {
+        padding: 24px;
+    }
+
+    .habit-details-calendar-content:last-child {
+        padding-bottom: 24px;
+    }
+
+    .habit-details-month-navigation {
+        gap: 16px;
+
+        margin-bottom: 24px;
+    }
+
+    .habit-details-month-title {
+        font-size: 1.75rem;
+    }
+
+    .habit-details-calendar-legend {
+        margin-top: 20px;
+    }
+
+    .habit-details-legend-container {
+        gap: 24px;
+    }
+
+    .habit-details-legend-box {
+        width: 20px;
+        height: 12px;
+    }
+
+    .habit-details-stats-content {
+        padding: 24px;
+    }
+
+    .habit-details-stats-content:last-child {
+        padding-bottom: 24px;
+    }
+
+    .habit-details-habit-name {
+        font-size: 1.3rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .habit-details-back-button.MuiButton-root {
+        font-size: 1.4rem;
+
+        align-self: flex-start;
+
+        padding-left: 0;
+        padding-right: 0;
+
+        min-width: 0;
+
+        color: #E07A5F;
+
+        font-weight: 600;
+    }
+
+    .habit-details-container {
+        padding-top: 32px;
+        padding-bottom: 48px;
+    }
+
+    .habit-details-content {
+        gap: 32px;
+    }
+
+    .habit-details-title {
+        font-size: 2.5rem;
+    }
+
+    .habit-details-calendar-card {
+        margin-bottom: 40px;
+    }
+
+    .habit-details-month-navigation {
+        gap: 24px;
+
+        margin-bottom: 32px;
+    }
+
+    .habit-details-month-title {
+        font-size: 2rem;
+    }
+
+    .habit-details-calendar-legend {
+        margin-top: 24px;
+    }
+
+    .habit-details-legend-box {
+        width: 28px;
+        height: 16px;
+    }
+
+    .habit-details-legend-label.MuiTypography-root {
+        font-size: 1rem;
+    }
+
+    .habit-details-legend-box.not-completed {
+        top: 0px;
+    }
+
+    .habit-details-legend-box.completed {
+        top: 0px;
+    }
+
+    .habit-details-legend-item.MuiStack-root {
+        align-items: center;
+    }
+
+    .habit-details-habit-name.MuiTypography-root {
+        font-size: 2rem;
+    }
+
+    .habit-details-stat-label.MuiTypography-root {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .habit-details-stat-value.MuiTypography-root {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .habit-details-stat {
+        padding-top: 16px;
+
+        display: flex;
+
+        justify-content: center;
+    }
+}
+
+
+/*  Desktop */
+@media (min-width: 1200px) {
+
+    .habit-details-container {
+        padding-top: 32px;
+        padding-bottom: 48px;
+    }
+
+    .habit-details-content {
+        gap: 32px;
+    }
+
+    .habit-details-title {
+        font-size: 2.5rem;
+    }
+
+    .habit-details-calendar-card {
+        margin-bottom: 40px;
+    }
+
+    .habit-details-month-navigation {
+        gap: 24px;
+
+        margin-bottom: 32px;
+    }
+
+    .habit-details-month-title {
+        font-size: 2rem;
+    }
+
+    .habit-details-calendar-legend {
+        margin-top: 24px;
+    }
+
+    .habit-details-legend-box {
+        width: 22px;
+        height: 14px;
+    }
+
+    .habit-details-habit-name {
+        font-size: 1.4rem;
+    }
+}
