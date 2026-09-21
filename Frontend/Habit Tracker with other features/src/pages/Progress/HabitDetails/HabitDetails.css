@@ -5,7 +5,11 @@
 }
 
 .habit-details-content {
-    gap: 16px;
+    gap: 0;
+}
+
+.habit-details-stats-card.MuiCard-root {
+    margin-top: 16px;
 }
 
 .habit-details-back-button.MuiButton-root {
@@ -175,7 +179,7 @@
     }
 
     .habit-details-content {
-        gap: 24px;
+        gap: 0;
     }
 
     .habit-details-title {
@@ -210,6 +214,14 @@
 
     .habit-details-legend-container {
         gap: 24px;
+    }
+
+    .habit-details-calendar-card.MuiCard-root {
+        margin-top: 16px;
+    }
+
+    .habit-details-stats-card.MuiCard-root {
+        margin-top: 16px;
     }
 
     .habit-details-legend-box {
@@ -254,8 +266,12 @@
         padding-bottom: 48px;
     }
 
-    .habit-details-content {
-        gap: 32px;
+    .habit-details-calendar-card.MuiCard-root {
+        margin-top: 16px;
+    }
+    
+    .habit-details-stats-card.MuiCard-root {
+        margin-top: 16px;
     }
 
     .habit-details-title {
@@ -334,7 +350,7 @@
     }
 
     .habit-details-content {
-        gap: 32px;
+        gap: 0;
     }
 
     .habit-details-title {
@@ -342,6 +358,7 @@
     }
 
     .habit-details-calendar-card {
+        margin-top: 16px;
         margin-bottom: 40px;
     }
 

@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import HabitList from '../../../components/HabitList/HabitList';
-import useUnauthorizedHandler from '../../../hooks/UseUnauthorizedHandler';
-import { AuthenticationContext } from '../../../context/AuthenticationContext';
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import HabitList from "../../../components/HabitList/HabitList";
+import useUnauthorizedHandler from "../../../hooks/UseUnauthorizedHandler";
+import { AuthenticationContext } from "../../../context/AuthenticationContext";
 import { Container, Box, Typography, Button, Card, CardContent, Stack, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import { API_URL } from '../../../config';
+import { API_URL } from "../../../config";
+import "./DayDetails.css";
 
-function DayDetails () {
+function DayDetails() {
     const { date } = useParams();
-    const [ dayDetails, setDayDetails ]   = useState(null);;
+    const [dayDetails, setDayDetails] = useState(null);
+
     const handleUnauthorized = useUnauthorizedHandler();
     const { token } = useContext(AuthenticationContext);
     const navigate = useNavigate();
@@ -21,19 +23,24 @@ function DayDetails () {
     useEffect(() => {
         const fetchDayDetails = async () => {
             try {
-                const response = await axios.get(`${API_URL}/habits/progress/day/${date}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
+                const response = await axios.get(
+                    `${API_URL}/habits/progress/day/${date}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     }
-                });
-
+                );
                 setDayDetails(response.data);
             } catch (err) {
                 handleUnauthorized(err);
-                console.error('Error, unable to load the details of this date', err);
+                console.error(
+                    "Error, unable to load the details of this date",
+                    err
+                );
             }
-        }
-            fetchDayDetails();
+        };
+        fetchDayDetails();
     }, [date]);
 
     const currentDate = new Date(`${date}T00:00:00`);
@@ -41,17 +48,13 @@ function DayDetails () {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-
     const isFutureDate = currentDate > today;
 
-    const formattedDate = currentDate.toLocaleDateString(
-        "en-CA",
-        {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-        }
-    );
+    const formattedDate = currentDate.toLocaleDateString("en-CA", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
 
     const formattedDay = currentDate.toLocaleDateString("en-CA", {
         weekday: "long",
@@ -59,8 +62,13 @@ function DayDetails () {
 
     const habitsForDay = dayDetails?.dayDetails || [];
 
-    const incompletedHabits = habitsForDay.filter(habit => !habit.isCompleted);
-    const completedHabits = habitsForDay.filter(habit => habit.isCompleted);
+    const incompletedHabits = habitsForDay.filter(
+        (habit) => !habit.isCompleted
+    );
+
+    const completedHabits = habitsForDay.filter(
+        (habit) => habit.isCompleted
+    );
 
     const completedCount = completedHabits.length;
     const incompletedCount = incompletedHabits.length;
@@ -68,427 +76,211 @@ function DayDetails () {
     return (
         <Container
             maxWidth="lg"
-            sx={{
-                py: {
-                    xs: 2,
-                    sm: 3,
-                    md: 4,
-                },
-
-                pb: {
-                    xs: 10,
-                    sm: 11,
-                    md: 6,
-                },
-            }}
+            className="day-details-container"
         >
             <Button
+                className="day-details-back-button"
                 startIcon={<ArrowBackIcon />}
                 variant="text"
                 onClick={() => navigate("/progress")}
                 disableRipple
-                sx={{
-                    alignSelf: "flex-start",
-
-                    px: 0,
-                    minWidth: 0,
-
-                    color: "primary.main",
-
-                    fontWeight: 600,
-
-                    "&:hover": {
-                        bgcolor: "transparent",
-                        color: "primary.dark",
-                    },
-                }}
             >
                 Progress
             </Button>
-                <Typography
-                    variant="h2"
-                    component="h1"
-                    gutterBottom
-                    sx={{
-                        fontSize: {
-                            xs: "2rem",
-                            sm: "2.25rem",
-                            md: "2.5rem",
-                        },
 
-                        fontWeight: 700,
-                    }}
-                >
-                    Day Details
-                </Typography>
+            <Typography
+                variant="h2"
+                component="h1"
+                className="day-details-title"
+            >
+                Day Details
+            </Typography>
+
+            <Card
+                elevation={0}
+                className="day-details-summary-card"
+            >
+                <CardContent className="day-details-summary-content">
+                    <Box className="day-details-date-header">
+                        <Box className="day-details-date-icon">
+                            <CalendarMonthOutlinedIcon
+                                color="primary"
+                                className="day-details-calendar-icon"
+                            />
+                        </Box>
+
+                        <Box>
+                            <Typography
+                                variant="h5"
+                                className="day-details-date"
+                            >
+                                {formattedDate}
+                            </Typography>
+
+                            <Typography
+                                variant="body1"
+                                className="day-details-weekday"
+                            >
+                                {formattedDay}
+                            </Typography>
+                        </Box>
+                    </Box>
+
+                    <Divider className="day-details-summary-divider" />
+
+                    <Box className="day-details-stats-grid">
+                        <Box className="day-details-stat">
+                            <Stack
+                                spacing={0.5}
+                                className="day-details-stat-stack"
+                            >
+                                <Box className="day-details-stat-value-row">
+                                    <CheckCircleIcon
+                                        color="success"
+                                        className="day-details-stat-icon"
+                                    />
+
+                                    <Typography
+                                        variant="h4"
+                                        className="day-details-stat-number"
+                                    >
+                                        {isFutureDate
+                                            ? "–"
+                                            : completedCount}
+                                    </Typography>
+                                </Box>
+
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    className="day-details-stat-label"
+                                >
+                                    Completed
+                                </Typography>
+                            </Stack>
+                        </Box>
+
+                        <Divider
+                            orientation="vertical"
+                            flexItem
+                        />
+
+                        <Box className="day-details-stat">
+                            <Stack
+                                spacing={0.5}
+                                className="day-details-stat-stack"
+                            >
+                                <Box className="day-details-stat-value-row day-details-incomplete-row">
+                                    <RadioButtonUncheckedIcon
+                                        className="day-details-stat-icon day-details-incomplete-icon"
+                                    />
+
+                                    <Typography
+                                        variant="h4"
+                                        className="day-details-stat-number"
+                                    >
+                                        {isFutureDate
+                                            ? "–"
+                                            : incompletedCount}
+                                    </Typography>
+                                </Box>
+
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    className="day-details-stat-label"
+                                >
+                                    Not Completed
+                                </Typography>
+                            </Stack>
+                        </Box>
+                    </Box>
+                </CardContent>
+            </Card>
+
+            {isFutureDate ? (
                 <Card
                     elevation={0}
-                    sx={{
-                        borderRadius: 2,
-
-                        bgcolor: "#FFF9F3",
-
-                        border: "1px solid",
-                        borderColor: "#F2D7C5",
-
-                        mb: {
-                            xs: 3,
-                            sm: 4,
-                        },
-                    }}
+                    className="day-details-future-card"
                 >
-                    <CardContent
-                        sx={{
-                            p: {
-                                xs: 2.5,
-                                sm: 3,
-                            },
-
-                            "&:last-child": {
-                                pb: {
-                                    xs: 2.5,
-                                    sm: 3,
-                                },
-                            },
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 2,
-                                mb: 3,
-                            }}
+                    <CardContent className="day-details-future-content">
+                        <Stack
+                            direction="row"
+                            spacing={2.5}
+                            className="day-details-future-stack"
                         >
-                            <Box
-                                sx={{
-                                    width: {
-                                        xs: 56,
-                                        sm: 64,
-                                    },
-                                    height: {
-                                        xs: 56,
-                                        sm: 64,
-                                    },
-
-                                    borderRadius: "50%",
-
-                                    border: "1px solid",
-                                    borderColor: "divider",
-
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-
-                                    flexShrink: 0,
-                                }}
-                            >
+                            <Box className="day-details-future-icon">
                                 <CalendarMonthOutlinedIcon
+                                    className="day-details-future-calendar-icon"
                                     color="primary"
-                                    sx={{
-                                        fontSize: {
-                                            xs: 28,
-                                            sm: 32,
-                                        },
-                                    }}
+                                    fontSize="large"
                                 />
                             </Box>
 
                             <Box>
                                 <Typography
-                                    variant="h5"
-                                    sx={{
-                                        mt: 0.5,
-                                        fontWeight: 600,
-                                    }}
+                                    variant="subtitle1"
+                                    className="day-details-future-title"
                                 >
-                                    {formattedDate}
+                                    This day hasn't happened yet.
                                 </Typography>
 
                                 <Typography
-                                    variant="body1"
-                                    sx={{
-                                        color:"text.secondary",
-                                    }}
-                                    
+                                    variant="body2"
+                                    className="day-details-future-description"
                                 >
-                                    {formattedDay}
+                                    Progress for this day will become
+                                    available once the day begins.
                                 </Typography>
                             </Box>
-                        </Box>
-                        
-
-                        <Divider sx={{ my: 3, }} />
-
-                        <Box
-                            sx={{
-                                display: "grid",
-                                gridTemplateColumns: "1fr auto 1fr",
-                                justifyContent: "center",
-                                gap: 3,
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Stack
-                                    spacing={0.5}
-                                    sx={{
-                                        alignItems:"center",
-                                    }}      
-                                >
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            gap: 1,
-                                        }}
-                                    >
-
-                                        <CheckCircleIcon
-                                            color="success"
-                                            sx={{
-                                                fontSize: 24,
-                                            }}
-                                        />
-
-                                        <Typography
-                                            variant="h4"
-                                            sx={{
-                                                fontWeight: 550,
-                                            }}
-                                        >
-                                            {isFutureDate ? "–" : completedCount}
-                                        </Typography>
-
-                                    </Box>
-
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            Completed
-                                        </Typography>
-                                    
-                                </Stack>
-                            </Box>
-
-                            <Divider
-                                orientation="vertical"
-                                flexItem
-                            />
-
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                }}
-                            >
-                                <Stack
-                                    spacing={0.5}
-                                    sx={{
-                                        alignItems:"center",
-                                    }}  
-                                >
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            gap: 1,
-                                            pr: 1,
-                                        }}
-                                    >
-
-                                        <RadioButtonUncheckedIcon
-                                            sx={{
-                                                fontSize: 24,
-                                                color: "text.secondary",
-                                            }}
-                                        />
-
-                                        <Typography
-                                            variant="h4"
-                                            sx={{
-                                                fontWeight: 550,
-                                            }}
-                                        >
-                                            {isFutureDate ? "–" : incompletedCount}
-                                        </Typography>
-                                    </Box>
-
-                                    <Typography
-                                        variant="body2"
-                                        color="text.secondary"
-                                    >
-                                        Not Completed
-                                    </Typography>
-                                    
-                                </Stack>
-                            </Box>
-                        </Box>
-
-                        
+                        </Stack>
                     </CardContent>
                 </Card>
-
-                {isFutureDate ? (
-                    <Card
-                        elevation={0}
-                        sx={{
-                            mt: 3,
-                            borderRadius: 2,
-                            bgcolor: "#FFF9F3",
-                            border: "1px solid",
-                            borderColor: "#F2D7C5",
-                        }}
-                    >
-                        <CardContent>
-                            <Stack
-                                direction="row"
-                                spacing={2.5}
-                                sx={{
-                                    alignItems:"center",
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        width: 56,
-                                        height: 56,
-                                        borderRadius: "50%",
-                                        bgcolor: "#FFFFFF",
-                                        border: "1px dashed",
-                                        borderColor: "#F2D7C5",
-
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-
-                                        flexShrink: 0,
-                                    }}
-                                >
-                                    <CalendarMonthOutlinedIcon
-                                        color="primary"
-                                        fontSize="large"
-                                    />
-                                </Box>
-
-                                <Box>
-                                    <Typography 
-                                        variant="subtitle1"
-                                        sx={{
-                                            fontWeight: 600,
-                                            mb: 0.5,
-                                        }}
-                                    >
-                                        This day hasn't happened yet.
-                                    </Typography>
-
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color:"text.secondary",
-                                            lineHeight: 1.5,
-                                        }}
-                                    >
-                                        Progress for this day will become available once the day begins.
-                                    </Typography>
-                                </Box>
-                                
-                            </Stack>
-                        </CardContent>
-                    </Card>
-                    
-                ) : (
-                    <Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 1,
-                                pr: 1,
-                            }}
-                        >
+            ) : (
+                <>
+                    <Box className="day-details-section">
+                        <Box className="day-details-section-heading">
                             <CheckCircleIcon
                                 color="success"
-                                sx={{
-                                    fontSize: 24,
-                                    mt: {
-                                        sm: 0.9,
-                                        md: 0.9,
-                                    },
-                                }}
+                                className="day-details-section-icon"
                             />
-                        
+
                             <Typography
                                 variant="h5"
-                                sx={{
-                                    fontWeight: 600,
-
-                                    mt: {
-                                        xs: 3,
-                                        sm: 4,
-                                    },
-
-                                    mb: 3,
-                                }}
+                                className="day-details-section-title"
                             >
                                 Completed Habits
                             </Typography>
                         </Box>
 
-                        <HabitList 
+                        <HabitList
                             habits={completedHabits}
                             status="completed"
                         />
+                    </Box>
 
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 1,
-                                pr: 1,
-                            }}
-                        >
+                    <Box className="day-details-section">
+                        <Box className="day-details-section-heading">
                             <RadioButtonUncheckedIcon
-                                sx={{
-                                    fontSize: 24,
-                                    color: "text.secondary",
-                                    mt: {
-                                        sm: 1,
-                                        md: 1,
-                                    },
-                                }}
+                                className="day-details-section-icon day-details-incomplete-icon"
                             />
                             <Typography
                                 variant="h5"
-                                sx={{
-                                    fontWeight: 600,
-
-                                    mt: {
-                                        xs: 3,
-                                        sm: 4,
-                                    },
-
-                                    mb: 3,
-                                }}
+                                className="day-details-section-title"
                             >
                                 Not Completed Habits
                             </Typography>
                         </Box>
 
-                            <HabitList 
-                                habits={incompletedHabits}
-                                status="not-completed"                    
-                            />
+                        <HabitList
+                            habits={incompletedHabits}
+                            status="not-completed"
+                        />
                     </Box>
-                )}
-            
+                </>
+            )}
         </Container>
-    )
-    
+    );
 }
 
 export default DayDetails;
