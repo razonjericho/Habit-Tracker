@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import { TextField, Box, Button, Stack, Card, CardContent, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import "./HabitInput.css";
 
 function HabitInput(props) {
     const [inputText, setInputText] = useState("");
@@ -16,7 +17,7 @@ function HabitInput(props) {
     }
 
     const handleAdd = () => {
-        if (inputText.trim() === ""){
+        if (inputText.trim() === "") {
             setError("Please enter a habit name");
             return;
         }
@@ -24,77 +25,43 @@ function HabitInput(props) {
         props.onAdd(inputText.trim());
         setInputText("");
         setError("");
-    }
+    };
 
     return (
         <Card
             elevation={0}
-            sx={{
-                borderRadius: 2,
-                border: "1px solid",
-                borderColor: "divider",
-            }}
+            className="habit-input-card"
         >
-            <CardContent>
-                <Stack
-                    spacing={2}
-                >
-                    <Box>
-                            <Box
-                                sx={{
-                                    display: "grid",
-                                    gridTemplateColumns: "auto 1fr",
-                                    gap: 2,
-                                    alignItems: "center",
-                                }}
+            <CardContent className="habit-input-content">
+                <Stack className="habit-input-stack">
+                    <Box className="habit-input-header">
+                        <Box className="habit-input-icon">
+                            <AddIcon
+                                color="primary"
+                                className="habit-input-add-icon"
+                            />
+                        </Box>
+
+                        <Box>
+                            <Typography
+                                variant="h6"
+                                className="habit-input-title"
                             >
-                                <Box
-                                    sx={{
-                                        width: 46,
-                                        height: 46,
-                                        borderRadius: "30%",
+                                Add New Habit
+                            </Typography>
 
-                                        bgcolor: "#FBECE5",
-
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-
-                                        flexShrink: 0,
-                                    }}
-                                >
-                                    <AddIcon 
-                                        color="primary"
-                                        sx={{ fontSize: 35 }}
-                                    />
-                                </Box>
-                                
-
-                                <Box>
-                                    <Typography
-                                        variant="h6"
-                                        sx={{
-                                            mt: 0.5,
-                                            fontWeight: 600,
-                                        }}
-                                    >
-                                        Add New Habit
-                                    </Typography>
-                                    <Typography
-                                        variant="body1"
-                                        sx={{
-                                            color:"text.secondary",
-                                        }}
-                                    >
-                                        Create a new habit to track
-                                    </Typography>
-                                </Box>
-                            </Box>  
+                            <Typography
+                                variant="body1"
+                                className="habit-input-description"
+                            >
+                                Create a new habit to track
+                            </Typography>
+                        </Box>
                     </Box>
-                    
-                    <TextField 
-                        placeholder="Enter habit name..." 
-                        onChange={handleChange} 
+
+                    <TextField
+                        placeholder="Enter habit name..."
+                        onChange={handleChange}
                         value={inputText}
                         error={Boolean(error)}
                         helperText={error}
@@ -103,25 +70,26 @@ function HabitInput(props) {
                                 handleAdd();
                             }
                         }}
+                        className="habit-input-field"
                     />
+
                     <Button
                         variant="contained"
                         fullWidth
                         startIcon={
-                            <AddIcon sx={{ fontSize: 20, }} />}
+                            <AddIcon className="habit-input-button-icon" />
+                        }
                         onClick={handleAdd}
-                        sx={{
-                            color: "common.white",
-                        }}
+                        className="habit-input-button"
                     >
+                        <Typography className="habit-input-button-text">
                             Add Habit
+                        </Typography>
                     </Button>
                 </Stack>
             </CardContent>
-            
         </Card>
-        
-    )
+    );
 }
 
 export default HabitInput;

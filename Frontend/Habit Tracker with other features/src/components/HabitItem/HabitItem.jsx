@@ -4,7 +4,6 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-
 import "./HabitItem.css";
 
 function HabitItem(props) {
@@ -50,7 +49,6 @@ function HabitItem(props) {
                         </Box>
                     ) : null}
 
-
                     <Stack className="habit-item-info">
 
                         <Typography
@@ -84,7 +82,6 @@ function HabitItem(props) {
 
                     </Stack>
 
-
                     {props.onDone && (
                         <Checkbox
                             checked={props.isCompleted}
@@ -101,7 +98,6 @@ function HabitItem(props) {
                             }}
                         />
                     )}
-
 
                     {props.onViewDetails && (
                         <IconButton

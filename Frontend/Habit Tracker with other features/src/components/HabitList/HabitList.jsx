@@ -1,21 +1,11 @@
 import React, { useContext } from 'react'
 import HabitItem from '../HabitItem/HabitItem';
-import { Box } from "@mui/material"
+import { Box } from "@mui/material";
+import "./HabitList.css";
 
 function HabitList(props){
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-
-                gap: {
-                    xs: 1.5,
-                    sm: 2,
-                    md: 2.5,
-                },
-            }}
-        > 
+        <Box className="habit-list">
             {props.habits.map(habit => (
                 <HabitItem 
                     key={habit.id} 
@@ -31,7 +21,7 @@ function HabitList(props){
                     onDelete={props.onDelete}
                     status={props.status}
                 />  
-             ))}
+            ))}
         </Box>
     )
 }

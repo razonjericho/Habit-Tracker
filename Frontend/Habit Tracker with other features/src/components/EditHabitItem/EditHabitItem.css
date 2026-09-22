@@ -1,0 +1,124 @@
+.edit-habit-item-row.MuiListItem-root {
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    justify-content: space-between;
+}
+
+.edit-habit-item-name.MuiTypography-root {
+    font-weight: 550;
+}
+
+.edit-habit-item-actions {
+    flex-shrink: 0;
+}
+
+.edit-habit-item-button.MuiIconButton-root {
+    color: #E07A5F;
+}
+
+.edit-habit-item-button.MuiIconButton-root:hover {
+    background-color: rgba(224, 122, 95, 0.08);
+    color: #C85F45;
+}
+
+.edit-habit-item-button.MuiIconButton-root .MuiSvgIcon-root {
+    font-size: 24px;
+}
+
+.edit-habit-item-text .MuiTypography-root {
+    font-size: 1.15rem;
+}
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .edit-habit-item-row.MuiListItem-root {
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .edit-habit-item-name.MuiTypography-root {
+        font-size: 1.05rem;
+    }
+
+    .edit-habit-item-actions {
+        gap: 4px;
+    }
+
+    .edit-habit-item-button.MuiIconButton-root {
+        padding: 9px;
+    }
+
+    .edit-habit-item-button.MuiIconButton-root .MuiSvgIcon-root {
+        font-size: 28px;
+    }
+
+    .view-details-button .MuiSvgIcon-root {
+        font-size: 28px;
+    }
+
+    .edit-habit-item-text .MuiTypography-root {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .edit-habit-item-row.MuiListItem-root {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .edit-habit-item-name.MuiTypography-root {
+        font-size: 1.1rem;
+    }
+
+    .edit-habit-item-actions {
+        gap: 8px;
+    }
+
+    .edit-habit-item-button.MuiIconButton-root {
+        padding: 10px;
+    }
+
+    .edit-habit-item-button.MuiIconButton-root .MuiSvgIcon-root {
+        font-size: 34px;
+    }
+
+    .view-details-button .MuiSvgIcon-root {
+        font-size: 34px;
+    }
+
+    .edit-habit-item-text .MuiTypography-root {
+        font-size: 1.75rem;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .edit-habit-item-row.MuiListItem-root {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .edit-habit-item-name.MuiTypography-root {
+        font-size: 1.1rem;
+    }
+
+    .edit-habit-item-actions {
+        gap: 8px;
+    }
+
+    .edit-habit-item-button.MuiIconButton-root {
+        padding: 10px;
+    }
+
+    .edit-habit-item-button.MuiIconButton-root .MuiSvgIcon-root {
+        font-size: 26px;
+    }
+}

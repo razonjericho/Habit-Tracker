@@ -1,0 +1,88 @@
+.edit-page-container {
+    padding-top: 24px;
+    padding-bottom: 80px;
+}
+
+.edit-page-content {
+    gap: 20px;
+}
+
+.edit-page-title.MuiTypography-root {
+    margin: 0;
+
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+
+/* List Icons */
+
+.edit-page-list-icon.MuiSvgIcon-root {
+    font-size: 25px;
+}
+
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .edit-page-container {
+        padding-top: 32px;
+        padding-bottom: 88px;
+    }
+
+    .edit-page-content {
+        gap: 24px;
+    }
+
+    .edit-page-title.MuiTypography-root {
+        font-size: 2.25rem;
+    }
+
+    .edit-page-list-icon.MuiSvgIcon-root {
+        font-size: 28px;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+    
+    .edit-page-container {
+        padding-top: 40px;
+        padding-bottom: 120px;
+    }
+
+    .edit-page-content {
+        gap: 28px;
+    }
+
+    .edit-page-title.MuiTypography-root {
+        font-size: 2.5rem;
+    }
+
+    .edit-page-list-icon.MuiSvgIcon-root {
+        font-size: 30px;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .edit-page-container {
+        padding-top: 40px;
+        padding-bottom: 48px;
+    }
+
+    .edit-page-content {
+        gap: 28px;
+    }
+
+    .edit-page-title.MuiTypography-root {
+        font-size: 2.5rem;
+    }
+
+    .edit-page-list-icon.MuiSvgIcon-root {
+        font-size: 30px;
+    }
+}

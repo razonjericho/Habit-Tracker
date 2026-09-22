@@ -1,0 +1,164 @@
+
+.edit-habit-list-card.MuiCard-root {
+    border-radius: 32px;
+
+    border: 1px solid;
+    border-color: #dedbd6;
+
+    background-color: #FFFFFF;
+}
+
+.edit-habit-list-content.MuiCardContent-root {
+    padding: 20px;
+}
+
+.edit-habit-list-content.MuiCardContent-root:last-child {
+    padding-bottom: 20px;
+}
+
+.edit-habit-list-header.MuiBox-root {
+    display: grid;
+
+    grid-template-columns: auto 1fr;
+
+    gap: 16px;
+
+    padding-bottom: 24px;
+
+    align-items: center;
+}
+
+.edit-habit-list-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 30%;
+
+    background-color: #FBECE5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.edit-habit-list-title.MuiTypography-root {
+    font-weight: 550;
+    font-size: 20px;
+}
+
+.edit-habit-list-description.MuiTypography-root {
+    color: #6B6B6B;
+}
+
+.edit-habit-list-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.edit-habit-list-items.MuiList-root {
+    padding: 0;
+}
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .edit-habit-list-description.MuiTypography-root {
+        font-size: 1rem;
+    }
+
+    .edit-habit-list-content.MuiCardContent-root {
+        padding: 24px;
+    }
+
+    .edit-habit-list-content.MuiCardContent-root:last-child {
+        padding-bottom: 24px;
+    }
+
+    .edit-habit-list-header {
+        gap: 18px;
+    }
+
+    .edit-habit-list-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .edit-habit-list-title.MuiTypography-root {
+        font-size: 21px;
+    }
+
+    .edit-habit-list-divider {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .edit-habit-list-content.MuiCardContent-root {
+        padding: 28px;
+    }
+
+    .edit-habit-list-content.MuiCardContent-root:last-child {
+        padding-bottom: 28px;
+    }
+
+    .edit-habit-list-header {
+        gap: 20px;
+    }
+
+    .edit-habit-list-icon {
+        width: 62px;
+        height: 62px;
+    }
+
+    .edit-habit-list-icon .MuiSvgIcon-root {
+        font-size: 2rem;
+    }
+
+    .edit-habit-list-title.MuiTypography-root {
+        font-size: 1.75rem;
+    }
+
+    .edit-habit-list-description.MuiTypography-root {
+        font-size: 1.25rem;
+    }
+
+    .edit-habit-list-divider {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .edit-habit-list-content.MuiCardContent-root {
+        padding: 28px;
+    }
+
+    .edit-habit-list-content.MuiCardContent-root:last-child {
+        padding-bottom: 28px;
+    }
+
+    .edit-habit-list-header {
+        gap: 20px;
+    }
+
+    .edit-habit-list-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .edit-habit-list-title.MuiTypography-root {
+        font-size: 22px;
+    }
+
+    .edit-habit-list-divider {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+}

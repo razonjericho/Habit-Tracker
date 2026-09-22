@@ -1,0 +1,227 @@
+
+.habit-input-card.MuiCard-root {
+    border-radius: 32px;
+
+    border: 1px solid;
+    border-color: #dedbd6;
+
+    background-color: #FFFFFF;
+}
+
+.habit-input-content.MuiCardContent-root {
+    padding: 20px;
+}
+
+.habit-input-content.MuiCardContent-root:last-child {
+    padding-bottom: 20px;
+}
+
+.habit-input-stack {
+    gap: 16px;
+}
+
+.habit-input-header {
+    display: grid;
+
+    grid-template-columns: auto 1fr;
+
+    gap: 16px;
+
+    align-items: center;
+}
+
+.habit-input-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 30%;
+
+    background-color: #FBECE5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.habit-input-add-icon.MuiSvgIcon-root {
+    font-size: 35px;
+}
+
+.habit-input-title.MuiTypography-root {
+    margin-top: 4px;
+
+    font-weight: 600;
+}
+
+.habit-input-description.MuiTypography-root {
+    color: #6B6B6B;
+}
+
+.habit-input-field {
+    width: 100%;
+}
+
+.habit-input-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #E07A5F;
+}
+
+.habit-input-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #E07A5F;
+    border-width: 2px;
+}
+
+.habit-input-button.MuiButton-root {
+    color: #FFFFFF;
+}
+
+.habit-input-button-icon.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium {
+    font-size: 20px;
+
+    margin-bottom: 3px;
+}
+
+.habit-input-button-text.MuiTypography-root {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .habit-input-content.MuiCardContent-root {
+        padding: 24px;
+    }
+
+    .habit-input-content.MuiCardContent-root:last-child {
+        padding-bottom: 24px;
+    }
+
+    .habit-input-stack {
+        gap: 20px;
+    }
+
+    .habit-input-header {
+        gap: 18px;
+    }
+
+    .habit-input-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .habit-input-add-icon.MuiSvgIcon-root {
+        font-size: 38px;
+    }
+
+    .habit-input-title.MuiTypography-root {
+        font-size: 1.35rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .habit-input-title.MuiTypography-root.MuiTypography-h6 {
+        font-size: 1.75rem;
+    }
+
+    .habit-input-description.MuiTypography-root.MuiTypography-body1 {
+        font-size: 1.2rem;
+    }
+
+    .habit-input-content.MuiCardContent-root {
+        padding: 28px;
+    }
+
+    .habit-input-content.MuiCardContent-root:last-child {
+        padding-bottom: 28px;
+    }
+
+    .habit-input-stack {
+        gap: 24px;
+    }
+
+    .habit-input-header {
+        gap: 20px;
+    }
+
+    .habit-input-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .habit-input-add-icon.MuiSvgIcon-root {
+        font-size: 40px;
+    }
+
+    .habit-input-title.MuiTypography-root {
+        font-size: 1.45rem;
+    }
+
+    .habit-input-description.MuiTypography-root {
+        font-size: 1.05rem;
+    }
+
+    .habit-input-field .MuiInputBase-root {
+        height: 60px;
+    }
+
+    .habit-input-button-icon.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium {
+        font-size: 30px;
+    }
+
+    .habit-input-button.MuiButton-root {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .habit-input-button-text.MuiTypography-root {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .habit-input-content.MuiCardContent-root {
+        padding: 28px;
+    }
+
+    .habit-input-content.MuiCardContent-root:last-child {
+        padding-bottom: 28px;
+    }
+
+    .habit-input-stack {
+        gap: 24px;
+    }
+
+    .habit-input-header {
+        gap: 20px;
+    }
+
+    .habit-input-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .habit-input-add-icon.MuiSvgIcon-root {
+        font-size: 40px;
+    }
+
+    .habit-input-title.MuiTypography-root {
+        font-size: 1.45rem;
+    }
+
+    .habit-input-description.MuiTypography-root {
+        font-size: 1.05rem;
+    }
+
+    .habit-input-button-icon.MuiSvgIcon-root {
+        font-size: 22px;
+    }
+}

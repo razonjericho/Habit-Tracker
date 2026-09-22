@@ -164,6 +164,9 @@
 }
 
 .habit-details-stat-value.MuiTypography-root {
+    display: flex;
+    justify-content: center;
+    
     color: #F97316;
 
     font-weight: 550;

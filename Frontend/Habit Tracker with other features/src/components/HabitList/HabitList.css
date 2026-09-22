@@ -1,0 +1,31 @@
+.habit-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+
+    .habit-list {
+        gap: 16px;
+    }
+}
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .habit-list {
+        gap: 20px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .habit-list {
+        gap: 20px;
+    }
+}
