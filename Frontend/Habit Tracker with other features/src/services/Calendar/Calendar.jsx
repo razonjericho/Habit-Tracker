@@ -1,6 +1,7 @@
 import React from 'react';
 import calendarGenerator from './calendarGenerator';
 import { Box, Typography } from "@mui/material";
+import "./Calendar.css";
 
 const heatColors = {
     0: "#f8f9fa",
@@ -19,15 +20,7 @@ function Calendar(props) {
         props.heatMap
     );
 
-    const weekDays = [
-        "Sun",
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat",
-    ];
+    const weekDays = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
 
     function getDayStyles(day) {
         if (!day) {
@@ -44,98 +37,72 @@ function Calendar(props) {
 
             color: day.level > 0 ? "#fff" : "text.primary",
 
-            border: "2px solid white",
-            borderRadius: "20px",
-
             cursor: "pointer",
         };
     }
 
     return (
-        <Box>
-            <Box
-                sx={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(7, 1fr)",
-                    textAlign: "center",
-                    mb: 1,
-                }}
-            >
+        <Box className="calendar">
+
+            {/* Weekday Header */}
+            <Box className="calendar-weekdays">
                 {weekDays.map((day) => (
                     <Typography
                         key={day}
                         variant="body2"
                         fontWeight={600}
                         color="text.secondary"
+                        className="calendar-weekday"
                     >
                         {day}
                     </Typography>
                 ))}
             </Box>
             
-            <Box
-                sx={{
-                    bgcolor: "background.paper",
-                }}
-            >
+            {/* Calendar */}
+            <Box className="calendar-grid">
                 {weeks.map((week, weekIndex) => (
-                <Box 
-                    key={weekIndex} 
-                    sx={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(7, 1fr)",
-                    }}
-                >
-                    {week.map((day, dayIndex) => {
-                        const isSelected = day && props.selectedDay && props.selectedDay.day === day.day;
-                        return (
-                            <Box 
-                                key={dayIndex} 
-                                onClick={() => day && props.onSelectedDay(day)}
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
+                    <Box 
+                        key={weekIndex}
+                        className="calendar-week"
+                    >
+                        {week.map((day, dayIndex) => {
+                            const isSelected =
+                                day &&
+                                props.selectedDay &&
+                                props.selectedDay.day === day.day;
+                            return (
+                                <Box 
+                                    key={dayIndex}
+                                    onClick={() =>
+                                        day && props.onSelectedDay(day)
+                                    }
+                                    className={`calendar-day ${
+                                        isSelected ? "selected" : ""
+                                    }`}
+                                    sx={{
+                                        ...getDayStyles(day),
 
-                                    minHeight: {
-                                        xs: 32,
-                                        sm: 36,
-                                        md: 40,
-                                    },
+                                        border: isSelected
+                                            ? "2px solid #EA580C"
+                                            : "2px solid white",
 
-                                    ...getDayStyles(day),
-
-                                    border: isSelected
-                                        ? "2px solid #EA580C"
-                                        : "2px solid white",
-
-                                    boxShadow: isSelected
-                                        ? "0 0 0 2px rgba(249,115,22,.25)"
-                                        : "none",
-
-                                    userSelect: "none",
-
-                                    WebkitTapHighlightColor: "transparent",
-
-                                    "&:focus": {
-                                        outline: "none",
-                                    },
-
-                                    "&:focus-visible": {
-                                        outline: "none",
-                                    },
-                                }} 
-                            >
-                                {day ? day.day.split("-")[2] : null}
-                            </Box>
-                        ) 
-                    })}
-                </Box>
-            ))}
+                                        boxShadow: isSelected
+                                            ? "0 0 0 2px rgba(249,115,22,.25)"
+                                            : "none",
+                                    }}
+                                >
+                                    {day
+                                        ? day.day.split("-")[2]
+                                        : null}
+                                </Box>
+                            );
+                        })}
+                    </Box>
+                ))}
             </Box>
         </Box>
-        
-    )
+    );
 }
 
 export default Calendar;

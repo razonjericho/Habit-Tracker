@@ -108,8 +108,12 @@
         margin-bottom: 32px;
     }
 
-    .progress-month-title.MuiTypography-root {
+    .progress-month-navigation-button .MuiSvgIcon-root {
         font-size: 2rem;
+    }
+
+    .progress-month-title.MuiTypography-root {
+        font-size: 2.2rem;
     }
 }
 

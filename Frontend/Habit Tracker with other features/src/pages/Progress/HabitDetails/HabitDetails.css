@@ -37,7 +37,6 @@
     font-weight: 700;
 }
 
-
 /* Calendar Card */
 .habit-details-calendar-card.MuiCard-root {
     margin-bottom: 0px;
@@ -56,7 +55,6 @@
     padding-bottom: 16px;
 }
 
-
 /* Month Navigation */
 .habit-details-month-navigation {
     display: flex;
@@ -73,7 +71,6 @@
     font-size: 1.5rem;
     font-weight: 600;
 }
-
 
 /* Calendar Legend */
 .habit-details-calendar-legend {
@@ -116,7 +113,6 @@
 .habit-details-legend-item.MuiStack-root {
     align-items: center;
 }
-
 
 /* Habit Statistics Card*/
 .habit-details-stats-card {
@@ -166,12 +162,11 @@
 .habit-details-stat-value.MuiTypography-root {
     display: flex;
     justify-content: center;
-    
+
     color: #F97316;
 
     font-weight: 550;
 }
-
 
 /* Tablet */
 @media (min-width: 600px) {
@@ -245,7 +240,6 @@
     }
 }
 
-
 /* iPad Pro / Large Tablet */
 @media (min-width: 900px) and (max-width: 1199px) {
 
@@ -291,8 +285,12 @@
         margin-bottom: 32px;
     }
 
-    .habit-details-month-title {
+    .progress-month-navigation-button .MuiSvgIcon-root {
         font-size: 2rem;
+    }
+
+    .habit-details-month-title.MuiTypography-root {
+        font-size: 2.2rem;
     }
 
     .habit-details-calendar-legend {
@@ -342,7 +340,6 @@
         justify-content: center;
     }
 }
-
 
 /*  Desktop */
 @media (min-width: 1200px) {

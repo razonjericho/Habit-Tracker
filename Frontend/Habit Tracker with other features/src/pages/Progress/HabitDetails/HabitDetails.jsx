@@ -104,6 +104,7 @@ function HabitDetailsPage(props) {
                             <IconButton
                                 onClick={props.previous}
                                 aria-label="Previous month"
+                                className="progress-month-navigation-button"
                             >
                                 <ChevronLeftIcon />
                             </IconButton>
@@ -118,6 +119,7 @@ function HabitDetailsPage(props) {
                             <IconButton
                                 onClick={props.next}
                                 aria-label="Next month"
+                                className="progress-month-navigation-button"
                             >
                                 <ChevronRightIcon />
                             </IconButton>
