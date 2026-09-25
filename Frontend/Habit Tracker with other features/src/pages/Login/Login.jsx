@@ -1,134 +1,73 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthenticationContext } from '../../context/AuthenticationContext';
-import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material"
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthenticationContext } from "../../context/AuthenticationContext";
+import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material";
+import "./Login.css";
 
-function Login () {
-    const [ email, setEmail ] = useState("");
-    const [ password, setPassword ] = useState("");
+function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const { login } = useContext(AuthenticationContext);
-    const [ loginError, setLoginError ]  = useState("");
-    const [ isLoggingIn, setIsLoggingIn ] = useState(false);
+    const [loginError, setLoginError] = useState("");
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+    const navigate = useNavigate();
 
     function handleChange(event) {
-    const { name, value } = event.target;
+        const { name, value } = event.target;
 
         if (name === "email") {
             setEmail(value);
         } else if (name === "password") {
             setPassword(value);
         }
+
         setLoginError("");
     }
-
-    const navigate = useNavigate();
 
     async function handleSubmit(event) {
         event.preventDefault();
 
         try {
             setIsLoggingIn(true);
+
             await login(email, password);
+
             navigate(`/`);
         } catch (err) {
             setLoginError("Invalid email or password");
-            console.error('Error, unable to log in', err);
+            console.error("Error, unable to log in", err);
         } finally {
             setIsLoggingIn(false);
         }
-    };
+    }
 
     return (
-        <Container 
-            sx={{
-                minHeight: "100vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                
-                py: {
-                    xs: 3,
-                    sm: 4,
-                    md: 6,
-                },
+        <Container className="login-container">
+            <Card className="login-card">
+                <CardContent className="login-card-content">
 
-                px: {
-                    xs: 2,
-                    sm: 3,
-                    md: 4,
-                },
-            }}
-        >
-            <Card 
-                sx={{
-                    width: "100%",
-
-                    maxWidth: {
-                        xs: 420,
-                        sm: 520,
-                        md: 640,
-                    },
-                }}
-            >
-                <CardContent
-                    sx={{
-                        p: {
-                            xs: 3,
-                            sm: 4,
-                            md: 5,
-                        },
-                    }}
-                >
-                    <Typography 
+                    <Typography
                         variant="h2"
                         align="center"
-                        gutterBottom
-                        sx={{
-                            fontSize: {
-                                xs: "2rem",
-                                sm: "2.25rem",
-                                md: "2.5rem",
-                            },
-                        }}
+                        className="login-title"
                     >
                         Welcome Back
                     </Typography>
 
-                    <Typography 
+                    <Typography
                         variant="body1"
                         align="center"
-                        gutterBottom
-                        sx={{
-                            fontSize: {
-                                xs: "0.95rem",
-                                sm: "1rem",
-                                md: "1.05rem",
-                            },
-                        }}
+                        className="login-description"
                     >
                         Sign in to continue your habit journey.
                     </Typography>
-                    <Box 
+
+                    <Box
                         component="form"
                         onSubmit={handleSubmit}
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-
-                            gap: {
-                                xs: 2,
-                                sm: 2.5,
-                                md: 3,
-                            },
-
-                            mt: {
-                                xs: 3,
-                                sm: 3.5,
-                                md: 4,
-                            },
-                        }}
+                        className="login-form"
                     >
-                        
                         <TextField
                             id="email"
                             name="email"
@@ -138,6 +77,7 @@ function Login () {
                             onChange={handleChange}
                             disabled={isLoggingIn}
                             required
+                            className="login-field"
                         />
 
                         <TextField
@@ -149,71 +89,46 @@ function Login () {
                             onChange={handleChange}
                             disabled={isLoggingIn}
                             required
-                        /> 
-                                
+                            className="login-field"
+                        />
+
                         {loginError && (
-                            <Alert severity="error">{loginError}</Alert>
+                            <Alert
+                                severity="error"
+                                className="login-error"
+                            >
+                                {loginError}
+                            </Alert>
                         )}
 
-                        <Button 
+                        <Button
                             variant="contained"
                             color="primary"
                             type="submit"
                             disabled={isLoggingIn}
-                            sx={{
-                                color: "white",
-                                py: {
-                                    xs: 1.25,
-                                    sm: 1.4,
-                                    md: 1.5,
-                                },
-                            }}
+                            className="login-button"
                         >
                             {isLoggingIn ? "Logging in..." : "Login"}
                         </Button>
                     </Box>
 
-                    <Box
-                        sx={{
-                            textAlign: "center",
-
-                            mt: {
-                                xs: 3,
-                                sm: 3.5,
-                                md: 4,
-                            },
-                        }}
-                    >
-                        <Typography 
+                    <Box className="login-register">
+                        <Typography
                             variant="body2"
-                            sx={{
-                                fontSize: {
-                                    xs: "0.85rem",
-                                    sm: "0.9rem",
-                                    md: "0.95rem",
-                                },
-                            }}
+                            className="login-register-description"
                         >
                             Don't have an account?
                         </Typography>
 
-                        <Link 
+                        <Link
                             underline="none"
                             onClick={() => navigate("/auth/register")}
-                            sx={{
-                                cursor: "pointer",
-                                fontSize: {
-                                    xs: "0.9rem",
-                                    sm: "0.95rem",
-                                    md: "1rem",
-                                },
-                            }}
+                            className="login-register-link"
                         >
-                            {"Create an account"}
+                            Create an account
                         </Link>
                     </Box>
 
-                    
                 </CardContent>
             </Card>
         </Container>
