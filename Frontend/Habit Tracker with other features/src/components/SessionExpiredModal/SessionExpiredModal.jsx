@@ -1,123 +1,60 @@
-import React from 'react';
+import React from "react";
 import { Box, Typography, Button, Dialog, DialogContent } from "@mui/material";
-import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined"
+import LockClockOutlinedIcon from "@mui/icons-material/LockClockOutlined";
+import "./SessionExpiredModal.css";
 
 function SessionExpiredModal({ isOpen, onClose }) {
 
     return (
-            <Dialog
-                open={isOpen}
-                onClose={(event, reason) => {
+        <Dialog
+            open={isOpen}
+            onClose={(event, reason) => {
 
-                    if (reason === "backdropClick" || reason === "escapeKeyDown") {
-                        return;
-                    }
+                if (
+                    reason === "backdropClick" ||
+                    reason === "escapeKeyDown"
+                ) {
+                    return;
+                }
 
-                    onClose();
-                }}
-                slotProps={{
-                    paper: {
-                        sx: {
-                            width: {
-                                xs: "92%",
-                                sm: 460,
-                            },
-                            borderRadius: 2,
-                            border: "1px solid",
-                            borderColor: "divider",
-                            boxShadow: "0px 20px 50px rgba(0,0,0,0.18)",
-                        },
-                    },
-                }}
-            >
-                <DialogContent
-                    sx={{
-                        p: {
-                            xs: 4,
-                            sm: 5,
-                        },
+                onClose();
+            }}
+            className="session-expired-dialog"
+        >
+            <DialogContent className="session-expired-content">
 
-                        "&:last-child": {
-                            pb: {
-                                xs: 4,
-                                sm: 5,
-                            },
-                        },
+                <Box className="session-expired-icon-container">
+                    <LockClockOutlinedIcon className="session-expired-icon" />
+                </Box>
 
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
+                <Typography
+                    variant="h5"
+                    className="session-expired-title"
                 >
-                    <Box
-                        sx={{
-                            width: 96,
-                            height: 96,
-                            borderRadius: "50%",
+                    Session Expired
+                </Typography>
 
-                            bgcolor: "#FBECE5",
+                <Typography
+                    variant="body1"
+                    className="session-expired-description"
+                >
+                    Your session has already expired. Please log in again
+                    to continue.
+                </Typography>
 
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
+                <Button
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                    onClick={onClose}
+                    className="session-expired-button"
+                >
+                    Log In Again
+                </Button>
 
-                            flexShrink: 0,
-                        }}
-                    >
-                        <LockClockOutlinedIcon
-                            sx={{
-                                fontSize: 48,
-                                color: "primary.main",
-                            }}
-                        />
-                    </Box>
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            mt: 3,
-                            textAlign: "center",
-                            fontWeight: 700,
-                        }}
-                    >
-                        Session Expired
-                    </Typography>
-                    <Box
-                        sx={{
-                            mt: 3,
-                        }}
-                    >
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                mt: 1,
-                                color: "text.secondary",
-                                textAlign: "center",
-                                maxWidth: 320,
-                                mx: "auto",
-                                lineHeight: 1.6,
-                            }}
-
-                        >
-                            Your session has already expired. Please log in again to continue.
-                        </Typography>
-                    </Box>
-                    
-                    <Button 
-                        variant="contained"
-                        size="large"
-                        fullWidth
-                        sx={{
-                            mt: 4,
-                            color: "white",
-                            py: 1.4,
-                            borderRadius: 3,
-                        }}
-                        onClick={onClose} >
-                            Log In Again
-                    </Button>
-                </DialogContent>
-            </Dialog>
-    )
+            </DialogContent>
+        </Dialog>
+    );
 }
 
 export default SessionExpiredModal;
