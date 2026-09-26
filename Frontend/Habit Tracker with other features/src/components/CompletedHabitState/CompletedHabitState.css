@@ -1,0 +1,170 @@
+/* Completed Habit State */
+
+.completed-habit-card.MuiCard-root {
+    margin-top: 16px;
+
+    width: 100%;
+
+    border-radius: 50px;
+
+    border: 1px solid #F4D5BF;
+
+    background-color: #FEFAF6;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.completed-habit-content.MuiCardContent-root {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    background-color: #FEFAF6;
+}
+
+.completed-habit-content.MuiCardContent-root:last-child {
+    padding-bottom: 48px;
+}
+
+.completed-habit-stack {
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* Icon */
+
+.completed-habit-icon-container {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    background-color: #EAF6E8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 4px;
+}
+
+.completed-habit-icon.MuiSvgIcon-root {
+    color: #2E7D32;
+
+    font-size: 42px;
+}
+
+
+/* Title */
+
+.completed-habit-title.MuiTypography-root {
+    font-size: 1.3rem;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* Description */
+
+.completed-habit-description.MuiTypography-root {
+    color: #6B6B6B;
+
+    max-width: 180px;
+
+    line-height: 1.7;
+
+    text-align: center;
+}
+
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .completed-habit-icon-container {
+        width: 76px;
+        height: 76px;
+    }
+
+    .completed-habit-icon.MuiSvgIcon-root {
+        font-size: 44px;
+    }
+
+    .completed-habit-title.MuiTypography-root {
+        font-size: 1.4rem;
+    }
+
+    .completed-habit-description.MuiTypography-root {
+        max-width: 220px;
+
+        font-size: 1rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .completed-habit-content.MuiCardContent-root {
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+
+    .completed-habit-content.MuiCardContent-root:last-child {
+        padding-bottom: 56px;
+    }
+
+    .completed-habit-icon-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .completed-habit-icon.MuiSvgIcon-root {
+        font-size: 52px;
+    }
+
+    .completed-habit-title.MuiTypography-root {
+        font-size: 2rem;
+    }
+
+    .completed-habit-description.MuiTypography-root {
+        max-width: 300px;
+
+        font-size: 1.4rem;
+
+        line-height: 1.7;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .completed-habit-content.MuiCardContent-root {
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+
+    .completed-habit-icon-container {
+        width: 84px;
+        height: 84px;
+    }
+
+    .completed-habit-icon.MuiSvgIcon-root {
+        font-size: 48px;
+    }
+
+    .completed-habit-title.MuiTypography-root {
+        font-size: 1.5rem;
+    }
+
+    .completed-habit-description.MuiTypography-root {
+        max-width: 220px;
+
+        font-size: 1.05rem;
+
+        line-height: 1.7;
+    }
+}
