@@ -1,0 +1,371 @@
+
+.rename-habit-dialog .MuiDialog-paper {
+    width: 92%;
+
+    max-width: 420px;
+
+    margin: 16px;
+
+    border-radius: 32px;
+
+    border: 1px solid #E0E0E0;
+
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Content */
+.rename-habit-content.MuiDialogContent-root {
+    padding-top: 40px;
+    padding-bottom: 16px;
+
+    padding-left: 32px;
+    padding-right: 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Icon */
+.rename-habit-icon-container {
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background-color: #FBECE5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.rename-habit-icon.MuiSvgIcon-root {
+    font-size: 44px;
+
+    color: #E07A5F;
+}
+
+
+/* Title */
+.rename-habit-title.MuiTypography-root {
+    margin-top: 24px;
+
+    text-align: center;
+
+    font-size: 1.5rem;
+
+    font-weight: 700;
+}
+
+
+/* Description */
+.rename-habit-description.MuiTypography-root {
+    margin-top: 12px;
+
+    color: #6B6B6B;
+
+    text-align: center;
+
+    max-width: 280px;
+
+    line-height: 1.6;
+}
+
+
+/* Input */
+.rename-habit-input-container {
+    width: 100%;
+
+    margin-top: 32px;
+}
+
+.rename-habit-label.MuiTypography-root {
+    margin-bottom: 8px;
+
+    margin-left: 4px;
+
+    font-weight: 600;
+}
+
+.rename-habit-field.MuiTextField-root {
+    width: 100%;
+}
+
+.rename-habit-field .MuiOutlinedInput-root {
+    border-radius: 16px;
+}
+
+.rename-habit-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #E07A5F;
+}
+
+.rename-habit-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #E07A5F;
+
+    border-width: 2px;
+}
+
+.rename-habit-field .MuiInputLabel-root.Mui-focused {
+    color: #E07A5F;
+}
+
+
+/* Information box */
+.rename-habit-info {
+    width: 100%;
+
+    margin-top: 24px;
+
+    box-sizing: border-box;
+
+    background-color: #FBECE5;
+
+    border-radius: 16px;
+
+    padding: 14px 16px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+.rename-habit-info-icon.MuiSvgIcon-root {
+    color: #E07A5F;
+
+    flex-shrink: 0;
+}
+
+.rename-habit-info-text.MuiTypography-root {
+    color: #6B6B6B;
+
+    line-height: 1.6;
+}
+
+
+/* Actions */
+.rename-habit-actions.MuiDialogActions-root {
+    padding-top: 16px;
+
+    padding-bottom: 32px;
+
+    padding-left: 32px;
+    padding-right: 32px;
+
+    gap: 16px;
+}
+
+
+/* Cancel */
+.rename-habit-cancel-button.MuiButton-root {
+    min-height: 54px;
+
+    border-radius: 16px;
+
+    text-transform: none;
+
+    font-weight: 600;
+}
+
+
+/* Save */
+.rename-habit-save-button.MuiButton-root {
+    min-height: 50px;
+
+    border-radius: 16px;
+
+    color: #FFFFFF;
+
+    text-transform: none;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    box-shadow: 0px 4px 12px rgba(224, 122, 95, 0.25);
+}
+
+.rename-habit-save-button.MuiButton-root:hover {
+    box-shadow: 0px 6px 16px rgba(224, 122, 95, 0.35);
+}
+
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .rename-habit-dialog .MuiDialog-paper {
+        max-width: 460px;
+    }
+
+    .rename-habit-content.MuiDialogContent-root {
+        padding-top: 48px;
+
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .rename-habit-icon-container {
+        width: 88px;
+        height: 88px;
+    }
+
+    .rename-habit-icon.MuiSvgIcon-root {
+        font-size: 48px;
+    }
+
+    .rename-habit-title.MuiTypography-root {
+        margin-top: 28px;
+
+        font-size: 1.6rem;
+    }
+
+    .rename-habit-description.MuiTypography-root {
+        font-size: 1rem;
+    }
+
+    .rename-habit-input-container {
+        margin-top: 36px;
+    }
+
+    .rename-habit-info-text.MuiTypography-root {
+        font-size: 0.95rem;
+    }
+
+    .rename-habit-actions.MuiDialogActions-root {
+        padding-left: 40px;
+        padding-right: 40px;
+
+        padding-bottom: 40px;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .rename-habit-dialog .MuiDialog-paper {
+        max-width: 560px;
+    }
+
+    .rename-habit-content.MuiDialogContent-root {
+        padding-top: 56px;
+
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    .rename-habit-icon-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .rename-habit-icon.MuiSvgIcon-root {
+        font-size: 60px;
+    }
+
+    .rename-habit-title.MuiTypography-root {
+        margin-top: 28px;
+
+        font-size: 2.2rem;
+    }
+
+    .rename-habit-description.MuiTypography-root {
+        margin-top: 14px;
+
+        font-size: 1.4rem;
+
+        max-width: 340px;
+    }
+
+    .rename-habit-input-container {
+        margin-top: 40px;
+    }
+
+    .rename-habit-label.MuiTypography-root {
+        font-size: 1.4rem;
+    }
+
+    .rename-habit-field .MuiInputBase-input {
+        font-size: 1.2rem;
+    }
+
+    .rename-habit-info {
+        margin-top: 28px;
+
+        padding: 16px 18px;
+    }
+
+    .rename-habit-info-icon.MuiSvgIcon-root {
+        font-size: 2rem;
+    }
+
+    .rename-habit-info-text.MuiTypography-root {
+        font-size: 1.2rem;
+    }
+
+    .rename-habit-actions.MuiDialogActions-root {
+        padding-left: 48px;
+        padding-right: 48px;
+
+        padding-bottom: 48px;
+    }
+
+    .rename-habit-cancel-button.MuiButton-root,
+    .rename-habit-save-button.MuiButton-root {
+        min-height: 60px;
+
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .rename-habit-dialog .MuiDialog-paper {
+        max-width: 460px;
+    }
+
+    .rename-habit-icon-container {
+        width: 96px;
+        height: 96px;
+    }
+
+    .rename-habit-icon.MuiSvgIcon-root {
+        font-size: 52px;
+    }
+
+    .rename-habit-title.MuiTypography-root {
+        margin-top: 28px;
+
+        font-size: 1.7rem;
+    }
+
+    .rename-habit-description.MuiTypography-root {
+        font-size: 1rem;
+    }
+
+    .rename-habit-input-container {
+        margin-top: 36px;
+    }
+
+    .rename-habit-info {
+        margin-top: 24px;
+    }
+
+    .rename-habit-actions.MuiDialogActions-root {
+        padding-left: 40px;
+        padding-right: 40px;
+
+        padding-bottom: 40px;
+    }
+
+    .rename-habit-cancel-button.MuiButton-root {
+        min-height: 52px;
+    }
+}
