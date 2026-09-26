@@ -3,42 +3,44 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Container, Card, CardContent, Typography, Box, TextField, Button, Link, Alert } from "@mui/material";
 import { API_URL } from '../../config';
+import "./Register.css"
 
-function Register () {
-    const [ email, setEmail ] = useState("");
-    const [ password, setPassword ] = useState("");
-    const [ confirmPassword, setConfirmPassword ] = useState("");
+function Register() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-    const [ registerError, setRegisterError ] = useState("");
-    const [ registerSuccess, setRegisterSuccess ] = useState("");
-    const [ isRegistering, setIsRegistering ] = useState(false);
+    const [registerError, setRegisterError] = useState("");
+    const [registerSuccess, setRegisterSuccess] = useState("");
+    const [isRegistering, setIsRegistering] = useState(false);
+
+    const navigate = useNavigate();
 
     function handleChange(event) {
         const { name, value } = event.target;
 
-            if (name === "email") {
-                setEmail(value);
-            } else if (name === "password") {
-                setPassword(value);
-            } else if (name === "confirmPassword") {
-                setConfirmPassword(value);
-            }
-            setRegisterError("");
-            setRegisterSuccess("");
+        if (name === "email") {
+            setEmail(value);
+        } else if (name === "password") {
+            setPassword(value);
+        } else if (name === "confirmPassword") {
+            setConfirmPassword(value);
         }
 
-        async function register(email, password) {
-            await axios.post(`${API_URL}/auth/register`, {
-                email,
-                password
-            });
-        
+        setRegisterError("");
+        setRegisterSuccess("");
     }
 
-    const navigate = useNavigate();
+    async function register(email, password) {
+        await axios.post(`${API_URL}/auth/register`, {
+            email,
+            password
+        });
+    }
 
     async function handleSubmit(event) {
         event.preventDefault();
+
         setRegisterError("");
         setRegisterSuccess("");
 
@@ -47,113 +49,55 @@ function Register () {
                 setRegisterError("Passwords do not match");
                 return;
             }
+
             setIsRegistering(true);
+
             await register(email, password);
-            setRegisterSuccess("Account created successfully! Redirecting to login...");
+
+            setRegisterSuccess(
+                "Account created successfully! Redirecting to login..."
+            );
+
             setTimeout(() => {
-                    navigate(`/auth/login`);
-                }, 2000);
+                navigate(`/auth/login`);
+            }, 2000);
+
         } catch (err) {
             setRegisterError(err.response.data.error);
             console.error(err.response.data);
+
         } finally {
             setIsRegistering(false);
         }
-    };
-
-    
+    }
 
     return (
-        <Container
-            sx={{
-            minHeight: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-
-            px: {
-                xs: 2,
-                sm: 3,
-                md: 4,
-            },
-
-            py: {
-                xs: 3,
-                sm: 4,
-                md: 6,
-            },
-        }}
-        >
-            <Card
-                sx={{
-                    width: "100%",
-
-                    maxWidth: {
-                        xs: 420,
-                        sm: 520,
-                        md: 640,
-                    },
-                }}
-            >
-                <CardContent
-                    sx={{
-                        p: {
-                            xs: 3,
-                            sm: 4,
-                            md: 5,
-                        },
-                    }}
-                >
-                    <Typography 
+        <Container className="register-container">
+            <Card className="register-card">
+                <CardContent className="register-card-content">
+                    <Typography
                         variant="h2"
                         align="center"
-                        gutterBottom
-                        sx={{
-                            fontSize: {
-                                xs: "2rem",
-                                sm: "2.25rem",
-                                md: "2.5rem",
-                            },
-                        }}
+                        className="register-title"
                     >
                         Create Your Account
                     </Typography>
 
-                    <Typography 
+                    <Typography
                         variant="body1"
                         align="center"
-                        gutterBottom
-                        sx={{
-                            fontSize: {
-                                xs: "0.95rem",
-                                sm: "1rem",
-                                md: "1.05rem",
-                            },
-                        }}
+                        className="register-description"
                     >
                         Your habit journey starts here.
                     </Typography>
+
                     <Box
                         component="form"
                         onSubmit={handleSubmit}
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-
-                            gap: {
-                                xs: 2,
-                                sm: 2.5,
-                                md: 3,
-                            },
-
-                            mt: {
-                                xs: 3,
-                                sm: 3.5,
-                                md: 4,
-                            },
-                        }}
+                        className="register-form"
                     >
-                        <TextField 
+
+                        <TextField
                             id="email"
                             name="email"
                             label="Email"
@@ -162,9 +106,10 @@ function Register () {
                             onChange={handleChange}
                             disabled={isRegistering}
                             required
+                            className="register-field"
                         />
 
-                        <TextField 
+                        <TextField
                             id="password"
                             name="password"
                             label="Password"
@@ -173,9 +118,10 @@ function Register () {
                             onChange={handleChange}
                             disabled={isRegistering}
                             required
-                        />         
+                            className="register-field"
+                        />
 
-                        <TextField 
+                        <TextField
                             id="confirmPassword"
                             name="confirmPassword"
                             label="Confirm Password"
@@ -184,14 +130,25 @@ function Register () {
                             onChange={handleChange}
                             disabled={isRegistering}
                             required
+                            className="register-field"
                         />
 
                         {registerError && (
-                            <Alert severity="error">{registerError}</Alert>
+                            <Alert
+                                severity="error"
+                                className="register-error"
+                            >
+                                {registerError}
+                            </Alert>
                         )}
 
                         {registerSuccess && (
-                            <Alert severity="success">{registerSuccess}</Alert>
+                            <Alert
+                                severity="success"
+                                className="register-success"
+                            >
+                                {registerSuccess}
+                            </Alert>
                         )}
 
                         <Button
@@ -199,62 +156,34 @@ function Register () {
                             color="primary"
                             type="submit"
                             disabled={isRegistering}
-                            sx={{
-                                color: "white",
-                                py: {
-                                    xs: 1.25,
-                                    sm: 1.4,
-                                    md: 1.5,
-                                },
-                            }}
+                            className="register-button"
                         >
-                            {isRegistering ? "Creating Account..." : "Create Account"}
+                            {isRegistering
+                                ? "Creating Account..."
+                                : "Create Account"
+                            }
                         </Button>
+
                     </Box>
 
-                    <Box
-                        sx={{
-                            textAlign: "center",
-
-                            mt: {
-                                xs: 3,
-                                sm: 3.5,
-                                md: 4,
-                            },
-                        }}
-                    >
-                        <Typography 
+                    <Box className="register-login">
+                        <Typography
                             variant="body2"
-                            sx={{
-                                fontSize: {
-                                    xs: "0.85rem",
-                                    sm: "0.9rem",
-                                    md: "0.95rem",
-                                },
-                            }}
+                            className="register-login-description"
                         >
                             Already have an account?
                         </Typography>
 
-                        <Link 
+                        <Link
                             underline="none"
                             onClick={() => navigate("/auth/login")}
-                            sx={{
-                                cursor: "pointer",
-                                fontWeight: 500,
-                                fontSize: {
-                                    xs: "0.9rem",
-                                    sm: "0.95rem",
-                                    md: "1rem",
-                                },
-                            }}
+                            className="register-login-link"
                         >
-                            {"Log in"}
+                            Log in
                         </Link>
                     </Box>
                 </CardContent>
             </Card>
-            
         </Container>
     );
 }
