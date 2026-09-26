@@ -1,0 +1,195 @@
+.empty-habit-card.MuiCard-root {
+    margin-top: 16px;
+
+    border-radius: 48px;
+
+    border: 1px solid #F4D5BF;
+
+    background-color: #FEFAF6;
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.empty-habit-card-content.MuiCardContent-root {
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+    background-color: #FEFAF6;
+}
+
+.empty-habit-card-content.MuiCardContent-root:last-child {
+    padding-bottom: 32px;
+}
+
+
+/* Content */
+
+.empty-habit-content.MuiStack-root {
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+/* Icon */
+
+.empty-habit-icon-container {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    background-color: #FFF3E8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-habit-icon.MuiSvgIcon-root {
+    color: #E07A5F;
+
+    font-size: 40px;
+}
+
+
+/* Title */
+
+.empty-habit-title.MuiTypography-root {
+    font-size: 1.3rem;
+
+    font-weight: 700;
+}
+
+
+/* Description */
+
+.empty-habit-description.MuiTypography-root {
+    color: #6B6B6B;
+
+    max-width: 220px;
+
+    line-height: 1.7;
+
+    margin-bottom: 16px;
+}
+
+
+/* Button */
+
+.empty-habit-button-container.MuiStack-root {
+    align-items: center;
+
+    gap: 12px;
+}
+
+.empty-habit-button .MuiSvgIcon-root {
+    margin-bottom: 0.2rem;
+}
+
+.empty-habit-button.MuiButton-root {
+    color: #FFFFFF;
+
+    font-weight: 600;
+
+    border-radius: 12px;
+}
+
+
+/* Tablet / iPad Mini */
+@media (min-width: 600px) and (max-width: 899px) {
+
+    .empty-habit-icon-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .empty-habit-icon.MuiSvgIcon-root {
+        font-size: 44px;
+    }
+
+    .empty-habit-title.MuiTypography-root {
+        font-size: 1.4rem;
+    }
+
+    .empty-habit-description.MuiTypography-root {
+        color: #6B6B6B;
+
+        max-width: 220px;
+
+        line-height: 1.7;
+
+        margin-bottom: 16px;
+
+        text-align: center;
+    }
+
+    .empty-habit-button .MuiSvgIcon-root {
+        margin-bottom: 0rem;
+    }
+
+    .empty-habit-button.MuiButton-root {
+        font-size: 0.95rem;
+    }
+}
+
+
+/* iPad Pro / Large Tablet */
+@media (min-width: 900px) and (max-width: 1199px) {
+
+    .empty-habit-card-content.MuiCardContent-root {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .empty-habit-icon-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .empty-habit-icon.MuiSvgIcon-root {
+        font-size: 52px;
+    }
+
+    .empty-habit-title.MuiTypography-root {
+        font-size: 2rem;
+    }
+
+    .empty-habit-description.MuiTypography-root {
+        max-width: 300px;
+
+        font-size: 1.4rem;
+    }
+
+    .empty-habit-button .MuiSvgIcon-root {
+        margin-bottom: 0rem;
+
+        font-size: 1.7rem;
+    }
+
+    .empty-habit-button.MuiButton-root {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+
+    .empty-habit-card-content.MuiCardContent-root {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .empty-habit-card-content.MuiCardContent-root:last-child {
+        padding-bottom: 40px;
+    }
+
+    .empty-habit-title.MuiTypography-root {
+        font-size: 1.4rem;
+    }
+
+    .empty-habit-description.MuiTypography-root {
+        max-width: 220px;
+    }
+}

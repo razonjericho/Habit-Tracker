@@ -3,60 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Box, Stack, Button } from "@mui/material";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import AddIcon from "@mui/icons-material/Add";
+import "./EmptyHabitState.css";
 
-function EmptyHabitState(){
-const navigate = useNavigate();
+function EmptyHabitState() {
+    const navigate = useNavigate();
 
     return (
-        <Card
-            elevation={0}
-            sx={{
-                mt: 2,
-
-                borderRadius: 3,
-
-                border: "1px solid",
-                borderColor: "#F4D5BF",
-            }}
-        >
-            <CardContent
-                sx={{
-                    py: 4,
-                    bgcolor: "#FEFAF6",
-                }}
-            >
-                <Stack
-                    spacing={2}
-                    sx={{
-                       alignItems:"center",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            width: 72,
-                            height: 72,
-                            borderRadius: "50%",
-
-                            bgcolor: "#FFF3E8",
-
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-                        <AssignmentRoundedIcon
-                            sx={{
-                                color: "primary.main",
-                                fontSize: 40,
-                            }}
-                        />
+        <Card className="empty-habit-card">
+            <CardContent className="empty-habit-card-content">
+                <Stack className="empty-habit-content">
+                    <Box className="empty-habit-icon-container">
+                        <AssignmentRoundedIcon className="empty-habit-icon" />
                     </Box>
+
                     <Typography
                         variant="h6"
-                        sx={{
-                            fontSize: "1.3rem",
-                            fontWeight: 700,
-                        }}
+                        className="empty-habit-title"
                     >
                         No habits yet
                     </Typography>
@@ -64,38 +26,27 @@ const navigate = useNavigate();
                     <Typography
                         variant="body2"
                         align="center"
-                        sx={{
-                            color: "text.secondary",
-                            maxWidth: 220,
-                            lineHeight: 1.7,
-                            mb: 2,
-                        }}
+                        className="empty-habit-description"
                     >
-                        Create your first habit to start building your daily routine.
+                        Create your first habit to start building your daily
+                        routine.
                     </Typography>
+
                 </Stack>
 
-                <Stack
-                    spacing={1.5}
-                    sx={{
-                        alignItems:"center",
-                        mt: 2,
-                    }}
-                >
+                <Stack className="empty-habit-button-container">
                     <Button
                         variant="contained"
                         onClick={() => navigate("/edit")}
                         startIcon={<AddIcon />}
-                        sx={{
-                            color: "white",
-                        }}
+                        className="empty-habit-button"
                     >
-                            Create Habit
+                        Create Habit
                     </Button>
                 </Stack>
             </CardContent>
         </Card>
-    )
+    );
 }
 
 export default EmptyHabitState;
